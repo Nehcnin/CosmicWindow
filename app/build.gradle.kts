@@ -52,4 +52,19 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    // Retrofit
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlinx)
+
+    // OkHttp
+    implementation(libs.okhttp.core)
+    implementation(libs.okhttp.logging)
+
+    // Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
+
+    // Kotlin Serialization
+    implementation(libs.kotlinx.serialization.json)
 }
