@@ -57,23 +57,11 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun CosmicWindowTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> CosmicDarkColorScheme
-        else -> CosmicDarkColorScheme
-    }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = CosmicDarkColorScheme,
         typography = CosmicTypography,
         content = content
     )
