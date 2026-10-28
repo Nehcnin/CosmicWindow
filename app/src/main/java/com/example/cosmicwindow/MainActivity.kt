@@ -13,6 +13,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.cosmicwindow.core.navigation.CosmicNavigation
 import com.example.cosmicwindow.core.ui.theme.CosmicWindowTheme
 import com.example.cosmicwindow.core.util.SplashScreen
 import com.example.cosmicwindow.feature.today.presentation.TodayScreen
