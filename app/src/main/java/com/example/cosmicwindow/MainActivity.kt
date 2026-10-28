@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.cosmicwindow.core.navigation.CosmicNavigation
 import com.example.cosmicwindow.core.ui.theme.CosmicWindowTheme
 import com.example.cosmicwindow.core.util.SplashScreen
+import com.example.cosmicwindow.feature.today.presentation.TodayScreen
 import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +35,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            var showSplash by remember {
+            var showSplash by rememberSaveable {
                 mutableStateOf(true)
             }
 
@@ -47,32 +50,9 @@ class MainActivity : ComponentActivity() {
                 if (showSplash) {
                     SplashScreen()
                 } else {
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize()
-                    ) { innerPadding ->
-                        Greeting(
-                            name = "Android",
-                            modifier = Modifier.padding(innerPadding)
-                        )
-                    }
+                    TodayScreen()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CosmicWindowTheme {
-        Greeting("Android")
     }
 }
