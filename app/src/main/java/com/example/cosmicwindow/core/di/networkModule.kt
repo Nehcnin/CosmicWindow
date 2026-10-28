@@ -5,7 +5,7 @@ import org.koin.dsl.module
 
 val networkModule = module {
     single {
-        Json{
+        Json {
             ignoreUnknownKeys = true
         }
     }
