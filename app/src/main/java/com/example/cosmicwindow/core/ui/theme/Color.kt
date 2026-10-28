@@ -23,3 +23,10 @@ val CosmicOnPrimary = Color(0xFF0B1120)
 val CosmicOutline = Color(0xFF51576B)
 
 val CosmicError = Color(0xFFF2A6A0)
+
+val CosmicIconGray = Color(0xFFBDC8D1)
+
+val CosmicIconSelected = Color(0xFF004965)
+val CosmicNavTextSelected = Color(0xFF8ED5FF)
+
+val CosmicTitleColor = Color(0xFFDDE2F8)
