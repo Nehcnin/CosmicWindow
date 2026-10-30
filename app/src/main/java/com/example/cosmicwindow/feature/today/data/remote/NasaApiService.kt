@@ -16,8 +16,8 @@ interface NasaApiService {
 
     @GET("apod-basic/")
     suspend fun getRange(
-        @Query("start_date") startDate: String,
-        @Query("end_date") endDate: String
+        @Query("date_from") startDate: String,
+        @Query("date_to") endDate: String
     ): List<ApodDto>
 
     @GET("apod-basic/")

@@ -1,5 +1,6 @@
 package com.example.cosmicwindow.feature.today.data.dto
 
+import androidx.core.text.HtmlCompat
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -16,6 +17,9 @@ data class ApodDto(
     @SerialName("post_id")
     val postId: Long? = null,
 
+    @SerialName("basic_html")
+    val basicHtml: String? = null,
+
     val permalink: String? = null,
     val url: String? = null,
     val hdurl: String? = null,
@@ -24,14 +28,37 @@ data class ApodDto(
     val alt: String? = null
 )
 
+private fun decodeHtml(html: String?): String? {
+    return html?.let {
+        HtmlCompat.fromHtml(
+            it,
+            HtmlCompat.FROM_HTML_MODE_COMPACT
+        ).toString().trim()
+    }
+}
+
 fun ApodDto.toDomain(): Apod = Apod(
     date = date,
-    title = title,
-    explanation = explanation,
+    title = decodeHtml(title).orEmpty(),
+    explanation = decodeHtml(explanation).orEmpty(),
     mediaType = mediaType,
     imgUrl = hdurl,
     articleUrl = permalink ?: url,
-    copyright = copyright,
-    credit = credit,
-    alt = alt
+    copyright = decodeHtml(copyright),
+    credit = decodeHtml(credit),
+    alt = decodeHtml(alt),
+    videoUrl = if (mediaType == "video") {
+        extractVideoUrl(basicHtml)
+    } else {
+        null
+    }
 )
+
+private fun extractVideoUrl(html: String?): String? {
+    if (html.isNullOrBlank()) return null
+
+    return Regex(
+        """<source[^>]*src=["']([^"']+)["']""",
+        RegexOption.IGNORE_CASE
+    ).find(html)?.groupValues?.get(1)
+}
