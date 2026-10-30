@@ -18,7 +18,7 @@ fun TodayContent(
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        TodayHeader()
+        TodayHeader(viewModel)
         TodayMainComponent(viewModel)
     }
 }

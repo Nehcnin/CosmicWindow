@@ -47,18 +47,20 @@ val CosmicTypography = Typography(
         fontFamily = SpaceGrotesk,
         fontWeight = FontWeight.Normal,
         fontSize = 28.sp,
-        lineHeight = 36.sp
+        lineHeight = 36.sp,
+        color = CosmicTitleColor
     ),
     headlineSmall = TextStyle(
         fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
-        lineHeight = 32.sp
+        lineHeight = 32.sp,
+        color = CosmicTitleColor
     ),
 
     titleLarge = TextStyle(
         fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 22.sp,
         lineHeight = 28.sp,
         color = CosmicTitleColor
@@ -81,33 +83,38 @@ val CosmicTypography = Typography(
         fontFamily = Inter,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        lineHeight = 24.sp
+        lineHeight = 24.sp,
+        color = CosmicIconGray
     ),
     bodyMedium = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        lineHeight = 20.sp
+        lineHeight = 20.sp,
+        color = CosmicIconGray
     ),
     bodySmall = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
-        lineHeight = 16.sp
+        lineHeight = 16.sp,
+        color = CosmicIconGray
     ),
 
     labelLarge = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
-        lineHeight = 20.sp
+        lineHeight = 20.sp,
+        color = CosmicTitleColor
     ),
     labelMedium = TextStyle(
         fontFamily = Inter,
         fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp,
         lineHeight = 16.sp,
-        color = CosmicIconGray
+        color = CosmicIconGray,
+        letterSpacing = 1.5.sp
     ),
     labelSmall = TextStyle(
         fontFamily = Inter,

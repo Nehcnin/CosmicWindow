@@ -17,19 +17,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
 @Composable
-fun TodayDateComponent(date: Date){
+fun TodayDateComponent(date: LocalDate?, modifier: Modifier = Modifier){
 
-    val formattedDate = SimpleDateFormat(
-        "MMM dd, yyyy",
-        Locale.ENGLISH
-    ).format(date)
+
+    val formattedDate = date?.format(
+        DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH)
+    )?.uppercase(Locale.ENGLISH)
+
 
     Row(
-        Modifier.fillMaxWidth().padding(horizontal = 16.dp).height(32.dp),
+        modifier.fillMaxWidth().padding(horizontal = 16.dp).height(32.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
@@ -41,15 +44,11 @@ fun TodayDateComponent(date: Date){
                     shape = CircleShape
                 )
         )
-        Text(
-            text = "Today in Space • $formattedDate",
-            style = MaterialTheme.typography.bodyLarge
-        )
+        if(formattedDate != null) {
+            Text(
+                text = "Today in Space • $formattedDate",
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
     }
-}
-
-@Preview
-@Composable
-fun DatePreview(){
-    TodayDateComponent(Date(System.currentTimeMillis()))
 }

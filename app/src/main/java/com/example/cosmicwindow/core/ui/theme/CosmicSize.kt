@@ -14,6 +14,17 @@ object CosmicSize {
     val largeS = 32.dp
     val large = 48.dp
     val largeL = 56.dp
+    val largeXL = 64.dp
+
+    val cardXXS = 80.dp
+    val cardXS = 96.dp
+    val cardSS = 112.dp
+    val cardS = 128.dp
+    val card = 160.dp
+    val cardL = 192.dp
+    val cardXL = 256.dp
+    val cardXXL = 440.dp
+
 
     val iconS = 16.dp
     val iconM = 20.dp
@@ -26,5 +37,5 @@ object CosmicSize {
     val radiusXL = 16.dp
     val radiusXXL = 28.dp
 
-
+    val radiusRound = 9999.dp
 }
