@@ -14,14 +14,8 @@ import org.koin.androidx.compose.koinViewModel
 fun TodayScreen(
     viewModel: TodayViewModel = koinViewModel()
 ) {
-    Scaffold(
+    TodayContent(
         modifier = Modifier.fillMaxSize(),
-        bottomBar = { CosmicBottomBar() }
-    ) { innerPadding ->
-        TodayContent(
-            modifier = Modifier
-                .padding(innerPadding),
-            viewModel = viewModel
-        )
-    }
+        viewModel = viewModel
+    )
 }

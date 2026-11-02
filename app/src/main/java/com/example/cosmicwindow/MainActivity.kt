@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                 if (showSplash) {
                     SplashScreen()
                 } else {
-                    TodayScreen()
+                    CosmicNavigation()
                 }
             }
         }

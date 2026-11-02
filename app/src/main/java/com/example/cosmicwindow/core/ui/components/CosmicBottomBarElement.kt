@@ -61,9 +61,3 @@ fun CosmicBottomBarElement(
         )
     }
 }
-
-@Preview
-@Composable
-fun CosmicBottomBarElementPreview(){
-    CosmicBottomBar()
-}

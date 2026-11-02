@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.Color
@@ -21,13 +22,21 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
+import com.example.cosmicwindow.core.navigation.TodayRoute
 
 @Composable
 fun CosmicBottomBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController : NavController
 ) {
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val destination = currentBackStackEntry?.destination
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,7 +50,8 @@ fun CosmicBottomBar(
         CosmicBottomBarElement(
             text = "Today",
             description = "nav_today",
-            icon = R.drawable.ic_nav_today
+            icon = R.drawable.ic_nav_today,
+            selected = destination?.hasRoute<TodayRoute>() == true
         )
 
         CosmicBottomBarElement(
@@ -53,24 +63,15 @@ fun CosmicBottomBar(
         CosmicBottomBarElement(
             text = "Explore",
             description = "nav_explore",
-            icon = R.drawable.ic_nav_explore,
-            selected = true
+            icon = R.drawable.ic_nav_explore
         )
 
         CosmicBottomBarElement(
             text = "Saved",
             description = "nav_saved",
-            icon = R.drawable.ic_nav_saved,
-            selected = true
+            icon = R.drawable.ic_nav_saved
         )
 
 
     }
 }
-
-@Composable
-@Preview
-fun CosmicBottomBarPreview(){
-    CosmicBottomBar()
-}
-
