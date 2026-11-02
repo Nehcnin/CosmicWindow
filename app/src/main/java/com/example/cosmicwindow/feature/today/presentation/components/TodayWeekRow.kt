@@ -2,6 +2,7 @@ package com.example.cosmicwindow.feature.today.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -63,18 +64,19 @@ fun TodayWeekRow(
             )
         }
         LazyRow(
-            modifier = Modifier.padding(start = CosmicSize.medium),
-            horizontalArrangement = Arrangement.spacedBy(CosmicSize.smallL)
+            //modifier = Modifier.padding(start = CosmicSize.medium),
+            horizontalArrangement = Arrangement.spacedBy(CosmicSize.smallL),
+            contentPadding = PaddingValues(
+                horizontal = CosmicSize.medium
+            )
         ) {
 
-            itemsIndexed(viewModel.apods) { index, apod ->
-                if (index > 0) {
-                    val dayText = if (index == 1) "Yesterday" else "$index days ago"
-                    TodayWeekCard(
-                        apod = apod,
-                        dayText = dayText
-                    )
-                }
+            itemsIndexed(viewModel.apods.drop(1)) { index, apod ->
+                val dayText = if (index == 0) "Yesterday" else "$index days ago"
+                TodayWeekCard(
+                    apod = apod,
+                    dayText = dayText
+                )
             }
         }
     }
