@@ -13,7 +13,7 @@ class ApodRepositoryImpl(
     }
 
     override suspend fun getByDate(date: String): Apod {
-        return api.getByDate(date).first().toDomain()
+        return api.getByDate(date).toDomain()
     }
 
     override suspend fun getRange(
