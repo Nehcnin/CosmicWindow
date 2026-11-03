@@ -6,3 +6,8 @@ import kotlinx.serialization.Serializable
 data object TodayRoute{
 
 }
+
+@Serializable
+data class DetailRoute(
+    val date: String
+)

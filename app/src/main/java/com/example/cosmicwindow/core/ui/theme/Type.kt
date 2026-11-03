@@ -39,9 +39,10 @@ val CosmicTypography = Typography(
 
     headlineLarge = TextStyle(
         fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
-        lineHeight = 40.sp
+        lineHeight = 40.sp,
+        color = CosmicTitleColor
     ),
     headlineMedium = TextStyle(
         fontFamily = SpaceGrotesk,

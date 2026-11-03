@@ -40,7 +40,7 @@ private fun decodeHtml(html: String?): String? {
 fun ApodDto.toDomain(): Apod = Apod(
     date = date,
     title = decodeHtml(title).orEmpty(),
-    explanation = decodeHtml(explanation).orEmpty(),
+    explanation = explanation,
     mediaType = mediaType,
     imgUrl = hdurl,
     articleUrl = permalink ?: url,

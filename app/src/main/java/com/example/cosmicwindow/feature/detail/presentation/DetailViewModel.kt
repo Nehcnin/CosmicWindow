@@ -8,6 +8,8 @@ import com.example.cosmicwindow.feature.today.domain.model.Apod
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class DetailViewModel(
     private val repository: ApodRepository
@@ -21,13 +23,17 @@ class DetailViewModel(
     private val _error = MutableStateFlow<String?>(null)
     val error = _error.asStateFlow()
 
+    private val apiDateFormatter = DateTimeFormatter.ofPattern("yyMMdd")
+
     fun loadApod(date: String){
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
 
+            val formattedDate = LocalDate.parse(date).format(apiDateFormatter)
+
             try{
-                _apod.value = repository.getByDate(date)
+                _apod.value = repository.getByDate(formattedDate)
                 Log.d("DETAIL", "APOD LOADED")
             } catch (e: Exception){
                 _error.value = e.message ?: "Failed to load APOD"

@@ -12,13 +12,14 @@ import com.example.cosmicwindow.feature.today.presentation.components.TodayMainC
 @Composable
 fun TodayContent(
     modifier: Modifier = Modifier,
-    viewModel: TodayViewModel
+    viewModel: TodayViewModel,
+    onReadStory: (String) -> Unit
 ) {
 
     Column(
         modifier = modifier.fillMaxSize()
     ) {
         TodayHeader(viewModel)
-        TodayMainComponent(viewModel)
+        TodayMainComponent(viewModel, onReadStory = onReadStory)
     }
 }
