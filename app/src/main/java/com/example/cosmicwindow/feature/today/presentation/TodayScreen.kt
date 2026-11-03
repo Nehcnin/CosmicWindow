@@ -12,10 +12,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TodayScreen(
-    viewModel: TodayViewModel = koinViewModel()
+    viewModel: TodayViewModel = koinViewModel(),
+    onReadStory: (String) -> Unit
 ) {
     TodayContent(
         modifier = Modifier.fillMaxSize(),
-        viewModel = viewModel
+        viewModel = viewModel,
+        onReadStory = onReadStory
     )
 }

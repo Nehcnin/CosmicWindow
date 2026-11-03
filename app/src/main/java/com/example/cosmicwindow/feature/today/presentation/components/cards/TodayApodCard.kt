@@ -2,6 +2,7 @@ package com.example.cosmicwindow.feature.today.presentation.components.cards
 
 import android.content.Intent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,7 +44,11 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 @Composable
-fun TodayApodCard(apod: Apod, modifier: Modifier = Modifier) {
+fun TodayApodCard(
+    apod: Apod,
+    modifier: Modifier = Modifier,
+    onReadStory: () -> Unit = {}
+) {
 
     val context = LocalContext.current
 
@@ -152,7 +157,8 @@ fun TodayApodCard(apod: Apod, modifier: Modifier = Modifier) {
                             )
                             .padding(
                                 horizontal = CosmicSize.mediumL
-                            ),
+                            )
+                            .clickable(onClick = onReadStory),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {

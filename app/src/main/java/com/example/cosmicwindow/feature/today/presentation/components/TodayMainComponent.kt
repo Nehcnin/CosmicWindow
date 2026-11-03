@@ -12,7 +12,7 @@ import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 
 @Composable
-fun TodayMainComponent(viewModel: TodayViewModel) {
+fun TodayMainComponent(viewModel: TodayViewModel, onReadStory: (String) -> Unit) {
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -28,7 +28,7 @@ fun TodayMainComponent(viewModel: TodayViewModel) {
                 CosmicErrorCard(callback = {viewModel.loadToday()})
             }
             else{
-                TodayScrollableContent(viewModel = viewModel)
+                TodayScrollableContent(viewModel = viewModel, onReadStory = onReadStory)
             }
         }
     }

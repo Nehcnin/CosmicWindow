@@ -16,7 +16,8 @@ import com.example.cosmicwindow.feature.today.presentation.components.cards.Toda
 @Composable
 fun TodayScrollableContent(
     modifier: Modifier = Modifier,
-    viewModel: TodayViewModel
+    viewModel: TodayViewModel,
+    onReadStory: (String) -> Unit
 ){
 
     val apod: Apod? = viewModel.apod
@@ -35,7 +36,8 @@ fun TodayScrollableContent(
                 TodayApodCard(
                     apod,
                     modifier = Modifier
-                        .padding(horizontal = CosmicSize.medium)
+                        .padding(horizontal = CosmicSize.medium),
+                    onReadStory = {onReadStory(apod.date)}
                 )
             }
             item{
