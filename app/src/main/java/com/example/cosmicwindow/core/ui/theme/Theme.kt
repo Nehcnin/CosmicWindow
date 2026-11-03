@@ -31,6 +31,7 @@ private val CosmicDarkColorScheme = darkColorScheme(
 
     outline = CosmicOutline,
     error = CosmicError
+
 )
 
 private val DarkColorScheme = darkColorScheme(
