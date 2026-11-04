@@ -26,34 +26,34 @@ import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import com.example.cosmicwindow.feature.today.presentation.components.cards.TodayWeekCard
 
 @Composable
-fun TodayWeekRow(
-    viewModel: TodayViewModel,
-    modifier: Modifier = Modifier
-){
+fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(256.dp)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(256.dp),
     ) {
         Row(
-            modifier = Modifier
-                .padding(horizontal = CosmicSize.medium)
-                .padding(bottom = CosmicSize.mediumS)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            modifier =
+                Modifier
+                    .padding(horizontal = CosmicSize.medium)
+                    .padding(bottom = CosmicSize.mediumS)
+                    .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_bars),
                 tint = CosmicNavTextSelected,
                 contentDescription = "",
-                modifier = Modifier
-                    .padding(end = CosmicSize.smallL)
-                    .size(CosmicSize.iconM)
+                modifier =
+                    Modifier
+                        .padding(end = CosmicSize.smallL)
+                        .size(CosmicSize.iconM),
             )
 
             Text(
                 text = "Previous 7 Days",
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -64,18 +64,18 @@ fun TodayWeekRow(
             )
         }
         LazyRow(
-            //modifier = Modifier.padding(start = CosmicSize.medium),
+            // modifier = Modifier.padding(start = CosmicSize.medium),
             horizontalArrangement = Arrangement.spacedBy(CosmicSize.smallL),
-            contentPadding = PaddingValues(
-                horizontal = CosmicSize.medium
-            )
+            contentPadding =
+                PaddingValues(
+                    horizontal = CosmicSize.medium,
+                ),
         ) {
-
             itemsIndexed(viewModel.apods.drop(1)) { index, apod ->
                 val dayText = if (index == 0) "Yesterday" else "$index days ago"
                 TodayWeekCard(
                     apod = apod,
-                    dayText = dayText
+                    dayText = dayText,
                 )
             }
         }

@@ -39,5 +39,5 @@ val CosmicButtonGray = Color(0xFF242A3A)
 
 val CosmicSurfaceBorder = Color(0x4D3E484F)
 
-val CosmicYellow= Color(0xFFFFB95F)
+val CosmicYellow = Color(0xFFFFB95F)
 val CosmicOnYellow = Color(0x4DEE9800)

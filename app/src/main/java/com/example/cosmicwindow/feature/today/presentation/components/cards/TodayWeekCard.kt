@@ -21,7 +21,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
@@ -34,50 +33,51 @@ import java.util.Locale
 
 @Composable
 fun TodayWeekCard(apod: Apod, dayText: String) {
-
     Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .width(CosmicSize.cardL)
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(CosmicSize.radiusXL)
-            )
-            .border(
-                width = 1.dp,
-                color = CosmicSurfaceBorder,
-                shape = RoundedCornerShape(CosmicSize.radiusXL)
-            )
-            .padding(CosmicSize.mediumS),
-        verticalArrangement = Arrangement.SpaceBetween
-
+        modifier =
+            Modifier
+                .fillMaxHeight()
+                .width(CosmicSize.cardL)
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(CosmicSize.radiusXL),
+                ).border(
+                    width = 1.dp,
+                    color = CosmicSurfaceBorder,
+                    shape = RoundedCornerShape(CosmicSize.radiusXL),
+                ).padding(CosmicSize.mediumS),
+        verticalArrangement = Arrangement.SpaceBetween,
     ) {
         Box(
-            modifier = Modifier
-                .height(CosmicSize.cardS)
-                .clip(shape = RoundedCornerShape(CosmicSize.mediumS))
+            modifier =
+                Modifier
+                    .height(CosmicSize.cardS)
+                    .clip(shape = RoundedCornerShape(CosmicSize.mediumS)),
         ) {
             AsyncImage(
                 model = apod.imgUrl,
                 contentDescription = "",
-                modifier = Modifier
-                    .height(CosmicSize.cardS)
-                    .clip(shape = RoundedCornerShape(CosmicSize.mediumS)),
-                contentScale = ContentScale.Crop
+                modifier =
+                    Modifier
+                        .height(CosmicSize.cardS)
+                        .clip(shape = RoundedCornerShape(CosmicSize.mediumS)),
+                contentScale = ContentScale.Crop,
             )
 
             Text(
-                text = LocalDate.parse(apod.date)
-                    .format(DateTimeFormatter.ofPattern("MMM dd", Locale.ENGLISH)),
-                modifier = Modifier
-                    .padding(CosmicSize.smallL)
-                    .align(Alignment.TopStart)
-                    .background(
-                        color = CosmicCardGradient,
-                        shape = RoundedCornerShape(CosmicSize.radiusRound)
-                    )
-                    .padding(CosmicSize.mediumS),
-                style = MaterialTheme.typography.bodyMedium
+                text =
+                    LocalDate
+                        .parse(apod.date)
+                        .format(DateTimeFormatter.ofPattern("MMM dd", Locale.ENGLISH)),
+                modifier =
+                    Modifier
+                        .padding(CosmicSize.smallL)
+                        .align(Alignment.TopStart)
+                        .background(
+                            color = CosmicCardGradient,
+                            shape = RoundedCornerShape(CosmicSize.radiusRound),
+                        ).padding(CosmicSize.mediumS),
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
         Text(
@@ -85,19 +85,19 @@ fun TodayWeekCard(apod: Apod, dayText: String) {
             style = MaterialTheme.typography.bodyMedium,
         )
         Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .basicMarquee(
-                    initialDelayMillis = 8000,
-                    repeatDelayMillis = 8000
-
-                ),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .basicMarquee(
+                        initialDelayMillis = 8000,
+                        repeatDelayMillis = 8000,
+                    ),
             text = apod.title,
             style = MaterialTheme.typography.bodyLarge,
             overflow = TextOverflow.Clip,
             maxLines = 1,
             softWrap = false,
-            color = CosmicTitleColor
+            color = CosmicTitleColor,
         )
     }
 }

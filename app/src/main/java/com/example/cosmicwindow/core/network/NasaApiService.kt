@@ -1,4 +1,4 @@
-package com.example.cosmicwindow.feature.today.data.remote
+package com.example.cosmicwindow.core.network
 
 import com.example.cosmicwindow.feature.today.data.dto.ApodDto
 import retrofit2.http.GET
@@ -6,23 +6,22 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NasaApiService {
-
     @GET("apod-basic/")
     suspend fun getToday(): List<ApodDto>
 
     @GET("apod-basic/{date}")
     suspend fun getByDate(
-        @Path("date") date: String
+        @Path("date") date: String,
     ): ApodDto
 
     @GET("apod-basic/")
     suspend fun getRange(
         @Query("date_from") startDate: String,
-        @Query("date_to") endDate: String
+        @Query("date_to") endDate: String,
     ): List<ApodDto>
 
     @GET("apod-basic/")
     suspend fun getRandom(
-        @Query("count") count: Int
+        @Query("count") count: Int,
     ): List<ApodDto>
 }

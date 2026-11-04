@@ -26,78 +26,80 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 fun DetailHeader(
     onBack: () -> Unit,
     context: Context,
-    url: String?
-){
+    url: String?,
+) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = CosmicSize.medium),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = CosmicSize.medium),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         IconButton(
-            modifier = Modifier
-                .padding(end = CosmicSize.medium)
-                .size(CosmicSize.iconS),
-            onClick = onBack
+            modifier =
+                Modifier
+                    .padding(end = CosmicSize.medium)
+                    .size(CosmicSize.iconS),
+            onClick = onBack,
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_button_rarrow),
                 tint = CosmicTitleColor,
                 contentDescription = "backButton",
-                modifier = Modifier
-                    .size(CosmicSize.iconS)
-                    .rotate(180f)
+                modifier =
+                    Modifier
+                        .size(CosmicSize.iconS)
+                        .rotate(180f),
             )
         }
 
         Text(
             text = "APOD Story Detail",
-            style = MaterialTheme.typography.headlineSmall
+            style = MaterialTheme.typography.headlineSmall,
         )
 
         Spacer(modifier = Modifier.weight(1f))
 
         IconButton(
             onClick = {},
-            modifier = Modifier
-                .size(CosmicSize.largeL)
+            modifier =
+                Modifier
+                    .size(CosmicSize.largeL),
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_nav_saved),
                 contentDescription = "",
                 tint = CosmicIconGray,
-                modifier = Modifier.size(CosmicSize.iconM)
+                modifier = Modifier.size(CosmicSize.iconM),
             )
         }
 
         IconButton(
             onClick = {
-                val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                    type = "text/plain"
-                    putExtra(
-                        Intent.EXTRA_TEXT,
-                        url
-                    )
-                }
+                val shareIntent =
+                    Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            url,
+                        )
+                    }
 
                 context.startActivity(
-                    Intent.createChooser(shareIntent, "Share APOD")
+                    Intent.createChooser(shareIntent, "Share APOD"),
                 )
-
             },
-            modifier = Modifier
-                .size(CosmicSize.largeL)
+            modifier =
+                Modifier
+                    .size(CosmicSize.largeL),
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_share),
                 contentDescription = "",
                 tint = CosmicIconGray,
-                modifier = Modifier.size(CosmicSize.iconM)
-
+                modifier = Modifier.size(CosmicSize.iconM),
             )
         }
-
     }
-
 }

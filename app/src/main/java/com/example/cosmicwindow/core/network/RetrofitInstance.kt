@@ -10,16 +10,15 @@ object RetrofitInstance {
     fun create(
         baseUrl: String,
         client: OkHttpClient,
-        json: Json
-    ): Retrofit{
-        return Retrofit.Builder()
+        json: Json,
+    ): Retrofit =
+        Retrofit
+            .Builder()
             .baseUrl(baseUrl)
             .client(client)
             .addConverterFactory(
                 json.asConverterFactory(
-                    "applicaion/json".toMediaType()
-                )
-            )
-            .build()
-    }
+                    "applicaion/json".toMediaType(),
+                ),
+            ).build()
 }

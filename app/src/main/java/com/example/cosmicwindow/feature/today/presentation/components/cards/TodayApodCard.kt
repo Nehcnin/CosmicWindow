@@ -30,7 +30,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicButtonGray
@@ -47,62 +46,68 @@ import java.util.Locale
 fun TodayApodCard(
     apod: Apod,
     modifier: Modifier = Modifier,
-    onReadStory: () -> Unit = {}
+    onReadStory: () -> Unit = {},
 ) {
-
     val context = LocalContext.current
 
     val date = LocalDate.parse(apod.date)
 
-    val formattedDate = date.format(
-        DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH)
-    ).uppercase(Locale.ENGLISH)
+    val formattedDate =
+        date
+            .format(
+                DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH),
+            ).uppercase(Locale.ENGLISH)
 
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(CosmicSize.cardXXL),
-        shape = RoundedCornerShape(CosmicSize.radiusXL)
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(CosmicSize.cardXXL),
+        shape = RoundedCornerShape(CosmicSize.radiusXL),
     ) {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         ) {
             AsyncImage(
                 model = apod.imgUrl,
                 contentDescription = "",
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentScale = ContentScale.Crop
+                modifier =
+                    Modifier
+                        .fillMaxSize(),
+                contentScale = ContentScale.Crop,
             )
 
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colorStops = arrayOf(
-                                0.0f to Color.Transparent,
-                                1f to CosmicCardGradient
-                            )
-                        )
-                    )
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .background(
+                            Brush.verticalGradient(
+                                colorStops =
+                                    arrayOf(
+                                        0.0f to Color.Transparent,
+                                        1f to CosmicCardGradient,
+                                    ),
+                            ),
+                        ),
             )
 
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.BottomStart)
-                    .padding(CosmicSize.medium)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.BottomStart)
+                        .padding(CosmicSize.medium),
             ) {
                 Row(
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
                         text = formattedDate,
                         style = MaterialTheme.typography.labelMedium,
                         color = CosmicNavTextSelected,
                     )
-                    if(apod.credit != null) {
+                    if (apod.credit != null) {
                         Text(
                             modifier = Modifier.padding(horizontal = CosmicSize.smallL),
                             text = "•",
@@ -113,7 +118,7 @@ fun TodayApodCard(
                             painter = painterResource(R.drawable.ic_camera),
                             modifier = Modifier.size(CosmicSize.mediumS),
                             contentDescription = "",
-                            tint = CosmicIconGray
+                            tint = CosmicIconGray,
                         )
                         Text(
                             modifier = Modifier.padding(horizontal = CosmicSize.smallL),
@@ -127,7 +132,7 @@ fun TodayApodCard(
                 Text(
                     text = apod.title,
                     style = MaterialTheme.typography.headlineSmall,
-                    modifier = Modifier.padding(vertical = CosmicSize.smallL)
+                    modifier = Modifier.padding(vertical = CosmicSize.smallL),
                 )
 
                 if (apod.alt != null) {
@@ -136,97 +141,97 @@ fun TodayApodCard(
                         style = MaterialTheme.typography.bodyLarge,
                         maxLines = 3,
                         softWrap = true,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
                     )
                 }
                 Row(
-                    modifier = Modifier
-                        .padding(top = CosmicSize.medium)
-                        .fillMaxWidth()
-                        .height(CosmicSize.largeL),
+                    modifier =
+                        Modifier
+                            .padding(top = CosmicSize.medium)
+                            .fillMaxWidth()
+                            .height(CosmicSize.largeL),
                     horizontalArrangement = Arrangement.spacedBy(CosmicSize.smallL),
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Row(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .weight(1f)
-                            .background(
-                                color = MaterialTheme.colorScheme.primary,
-                                shape = RoundedCornerShape(9999.dp)
-                            )
-                            .padding(
-                                horizontal = CosmicSize.mediumL
-                            )
-                            .clickable(onClick = onReadStory),
+                        modifier =
+                            Modifier
+                                .fillMaxHeight()
+                                .weight(1f)
+                                .background(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    shape = RoundedCornerShape(9999.dp),
+                                ).padding(
+                                    horizontal = CosmicSize.mediumL,
+                                ).clickable(onClick = onReadStory),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                        horizontalArrangement = Arrangement.Center,
                     ) {
                         Text(
                             text = "Read Cosmic Story",
                             style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onPrimary
+                            color = MaterialTheme.colorScheme.onPrimary,
                         )
                         Icon(
                             painter = painterResource(R.drawable.ic_button_rarrow),
                             tint = MaterialTheme.colorScheme.onPrimary,
                             contentDescription = "",
-                            modifier = Modifier
-                                .padding(start = CosmicSize.smallL)
-                                .size(CosmicSize.mediumS)
+                            modifier =
+                                Modifier
+                                    .padding(start = CosmicSize.smallL)
+                                    .size(CosmicSize.mediumS),
                         )
                     }
                     IconButton(
                         onClick = {},
-                        modifier = Modifier
-                            .size(CosmicSize.largeL)
-                            .background(
-                                color = CosmicButtonGray,
-                                shape = CircleShape
-                            )
+                        modifier =
+                            Modifier
+                                .size(CosmicSize.largeL)
+                                .background(
+                                    color = CosmicButtonGray,
+                                    shape = CircleShape,
+                                ),
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_nav_saved),
                             contentDescription = "",
                             tint = CosmicIconGray,
-                            modifier = Modifier.size(CosmicSize.iconM)
+                            modifier = Modifier.size(CosmicSize.iconM),
                         )
                     }
 
                     IconButton(
                         onClick = {
-                            val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                                type = "text/plain"
-                                putExtra(
-                                    Intent.EXTRA_TEXT,
-                                    apod.articleUrl
-                                )
-                            }
+                            val shareIntent =
+                                Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(
+                                        Intent.EXTRA_TEXT,
+                                        apod.articleUrl,
+                                    )
+                                }
 
                             context.startActivity(
-                                Intent.createChooser(shareIntent, "Share APOD")
+                                Intent.createChooser(shareIntent, "Share APOD"),
                             )
-
                         },
-                        modifier = Modifier
-                            .size(CosmicSize.largeL)
-                            .background(
-                                color = CosmicButtonGray,
-                                shape = CircleShape
-                            )
+                        modifier =
+                            Modifier
+                                .size(CosmicSize.largeL)
+                                .background(
+                                    color = CosmicButtonGray,
+                                    shape = CircleShape,
+                                ),
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_share),
                             contentDescription = "",
                             tint = CosmicIconGray,
-                            modifier = Modifier.size(CosmicSize.iconM)
-
+                            modifier = Modifier.size(CosmicSize.iconM),
                         )
                     }
                 }
             }
         }
-
     }
-
 }

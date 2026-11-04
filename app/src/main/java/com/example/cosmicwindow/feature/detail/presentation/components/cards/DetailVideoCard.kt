@@ -36,45 +36,48 @@ import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 
 @Composable
-fun DetailVideoCard(loadedApod: Apod, context: Context){
+fun DetailVideoCard(loadedApod: Apod, context: Context) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(CosmicSize.medium)
-            .height(CosmicSize.cardXXS)
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(CosmicSize.radiusL)
-            )
-            .border(
-                width = 1.dp,
-                shape = RoundedCornerShape(CosmicSize.radiusL),
-                color = CosmicSurfaceBorder
-            ),
-        verticalAlignment = Alignment.CenterVertically
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(CosmicSize.medium)
+                .height(CosmicSize.cardXXS)
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(CosmicSize.radiusL),
+                ).border(
+                    width = 1.dp,
+                    shape = RoundedCornerShape(CosmicSize.radiusL),
+                    color = CosmicSurfaceBorder,
+                ),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
-            modifier =  Modifier
-                .padding(start = CosmicSize.medium)
-                .background(
-                    color = CosmicButtonGray,
-                    shape = CircleShape
-                )
+            modifier =
+                Modifier
+                    .padding(start = CosmicSize.medium)
+                    .background(
+                        color = CosmicButtonGray,
+                        shape = CircleShape,
+                    ),
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_video_play),
                 tint = CosmicNavTextSelected,
-                modifier = Modifier
-                    .padding(CosmicSize.mediumS)
-                    .size(CosmicSize.iconM),
-                contentDescription = ""
+                modifier =
+                    Modifier
+                        .padding(CosmicSize.mediumS)
+                        .size(CosmicSize.iconM),
+                contentDescription = "",
             )
         }
 
         Column(
-            modifier = Modifier
-                .padding(start = CosmicSize.smallL),
-            verticalArrangement = Arrangement.spacedBy(CosmicSize.small)
+            modifier =
+                Modifier
+                    .padding(start = CosmicSize.smallL),
+            verticalArrangement = Arrangement.spacedBy(CosmicSize.small),
         ) {
             Text(
                 text = "Video Version Available",
@@ -83,11 +86,12 @@ fun DetailVideoCard(loadedApod: Apod, context: Context){
                 maxLines = 1,
                 softWrap = false,
                 overflow = TextOverflow.Clip,
-                modifier = Modifier.basicMarquee(
-                    iterations = Int.MAX_VALUE,
-                    initialDelayMillis = 5000,
-                    repeatDelayMillis = 5000
-                )
+                modifier =
+                    Modifier.basicMarquee(
+                        iterations = Int.MAX_VALUE,
+                        initialDelayMillis = 5000,
+                        repeatDelayMillis = 5000,
+                    ),
             )
             Text(
                 text = "External host",
@@ -96,52 +100,52 @@ fun DetailVideoCard(loadedApod: Apod, context: Context){
                 maxLines = 1,
                 softWrap = false,
                 overflow = TextOverflow.Clip,
-                modifier = Modifier.basicMarquee(
-                    iterations = Int.MAX_VALUE,
-                    initialDelayMillis = 5000,
-                    repeatDelayMillis = 5000
-                )
+                modifier =
+                    Modifier.basicMarquee(
+                        iterations = Int.MAX_VALUE,
+                        initialDelayMillis = 5000,
+                        repeatDelayMillis = 5000,
+                    ),
             )
         }
         Spacer(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
         )
         Row(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                // .height(CosmicSize.largeS)
-                .background(
-                    color = CosmicButtonGray,
-                    shape = RoundedCornerShape(CosmicSize.radiusM)
-                )
-                .padding(horizontal = CosmicSize.medium)
-                .padding(vertical = CosmicSize.mediumS)
-                .clickable(
-                    onClick = {
-                        loadedApod.videoUrl?.let { url ->
-                            context.startActivity(
-                                Intent(Intent.ACTION_VIEW, url.toUri())
-                            )
-                        }
-                    }
-                ),
-            verticalAlignment = Alignment.CenterVertically
+            modifier =
+                Modifier
+                    .padding(horizontal = 16.dp)
+                    // .height(CosmicSize.largeS)
+                    .background(
+                        color = CosmicButtonGray,
+                        shape = RoundedCornerShape(CosmicSize.radiusM),
+                    ).padding(horizontal = CosmicSize.medium)
+                    .padding(vertical = CosmicSize.mediumS)
+                    .clickable(
+                        onClick = {
+                            loadedApod.videoUrl?.let { url ->
+                                context.startActivity(
+                                    Intent(Intent.ACTION_VIEW, url.toUri()),
+                                )
+                            }
+                        },
+                    ),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = "Open video",
                 style = MaterialTheme.typography.labelLarge,
-                color = CosmicNavTextSelected
+                color = CosmicNavTextSelected,
             )
             Icon(
                 painter = painterResource(R.drawable.ic_external),
                 tint = CosmicNavTextSelected,
-                modifier = Modifier
-                    .padding(start = CosmicSize.small)
-                    .size(CosmicSize.iconS),
-                contentDescription = ""
-
+                modifier =
+                    Modifier
+                        .padding(start = CosmicSize.small)
+                        .size(CosmicSize.iconS),
+                contentDescription = "",
             )
         }
     }
-
 }

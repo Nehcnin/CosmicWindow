@@ -13,41 +13,38 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Date
 import java.util.Locale
 
 @Composable
-fun TodayDateComponent(date: LocalDate?, modifier: Modifier = Modifier){
-
-
-    val formattedDate = date?.format(
-        DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH)
-    )?.uppercase(Locale.ENGLISH)
-
+fun TodayDateComponent(date: LocalDate?, modifier: Modifier = Modifier) {
+    val formattedDate =
+        date
+            ?.format(
+                DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH),
+            )?.uppercase(Locale.ENGLISH)
 
     Row(
         modifier.fillMaxWidth().padding(horizontal = 16.dp).height(32.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
-            modifier = Modifier
-                .padding(end = 8.dp)
-                .size(8.dp)
-                .background(
-                    color = CosmicNavTextSelected,
-                    shape = CircleShape
-                )
+            modifier =
+                Modifier
+                    .padding(end = 8.dp)
+                    .size(8.dp)
+                    .background(
+                        color = CosmicNavTextSelected,
+                        shape = CircleShape,
+                    ),
         )
-        if(formattedDate != null) {
+        if (formattedDate != null) {
             Text(
                 text = "Today in Space • $formattedDate",
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodyLarge,
             )
         }
     }

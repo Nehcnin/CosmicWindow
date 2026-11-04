@@ -13,21 +13,18 @@ import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 
 @Composable
 fun TodayMainComponent(viewModel: TodayViewModel, onReadStory: (String) -> Unit) {
-
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(CosmicSize.mediumS)
+        verticalArrangement = Arrangement.spacedBy(CosmicSize.mediumS),
     ) {
         TodayDateComponent(viewModel.date)
         if (viewModel.isLoading) {
             CircularProgressIndicator()
-
         } else {
             if (viewModel.error != null) {
-                CosmicErrorCard(callback = {viewModel.loadToday()})
-            }
-            else{
+                CosmicErrorCard(callback = { viewModel.loadToday() })
+            } else {
                 TodayScrollableContent(viewModel = viewModel, onReadStory = onReadStory)
             }
         }

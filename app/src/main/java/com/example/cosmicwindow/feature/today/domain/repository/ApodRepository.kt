@@ -1,4 +1,4 @@
-package com.example.cosmicwindow.feature.today.domain
+package com.example.cosmicwindow.feature.today.domain.repository
 
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 

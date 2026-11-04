@@ -4,17 +4,20 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
-val env = Properties().apply {
-    val envFile = rootProject.file(".env")
-    if (envFile.exists()) {
-        envFile.inputStream().use { load(it) }
+val env =
+    Properties().apply {
+        val envFile = rootProject.file(".env")
+        if (envFile.exists()) {
+            envFile.inputStream().use { load(it) }
+        }
     }
-}
 
-val nasaApiKey = env.getProperty("NASA_API_KEY")
-    ?: error("NASA_API_KEY missing from .env")
+val nasaApiKey =
+    env.getProperty("NASA_API_KEY")
+        ?: error("NASA_API_KEY missing from .env")
 
 android {
     namespace = "com.example.cosmicwindow"
@@ -34,7 +37,7 @@ android {
         buildConfigField(
             "String",
             "NASA_API_KEY",
-            "\"$nasaApiKey\""
+            "\"$nasaApiKey\"",
         )
     }
 
@@ -63,6 +66,7 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.ui.unit)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.material3)
@@ -89,17 +93,17 @@ dependencies {
     // Kotlin Serialization
     implementation(libs.kotlinx.serialization.json)
 
-    //Splash Screen
+    // Splash Screen
     implementation(libs.androidx.core.splashscreen)
 
-    //Navigation
+    // Navigation
     implementation(libs.androidx.navigation.compose)
 
-    //Coil
+    // Coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
-    //exoplayer
+    // exoplayer
     implementation("androidx.media3:media3-exoplayer:1.11.1")
     implementation("androidx.media3:media3-ui:1.11.1")
 }

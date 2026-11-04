@@ -28,55 +28,53 @@ import com.example.cosmicwindow.core.ui.theme.CosmicErrorIcon
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 
 @Composable
-fun CosmicErrorCard(
-    modifier: Modifier = Modifier,
-    callback: () -> Unit
-)
-{
-
+fun CosmicErrorCard(modifier: Modifier = Modifier, callback: () -> Unit) {
     Box(
-        modifier = Modifier
-            .padding(horizontal = CosmicSize.medium)
-            .height(CosmicSize.cardXXS)
-            .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(CosmicSize.radiusXL)
-            )
-            .border(
-                width = 1.dp,
-                color = CosmicErrorBackground,
-                shape = RoundedCornerShape(CosmicSize.radiusXL)
-            )
+        modifier =
+            Modifier
+                .padding(horizontal = CosmicSize.medium)
+                .height(CosmicSize.cardXXS)
+                .fillMaxWidth()
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(CosmicSize.radiusXL),
+                ).border(
+                    width = 1.dp,
+                    color = CosmicErrorBackground,
+                    shape = RoundedCornerShape(CosmicSize.radiusXL),
+                ),
     ) {
         Row(
-            modifier = modifier
-                .padding(horizontal = CosmicSize.medium)
-                .fillMaxSize(),
+            modifier =
+                modifier
+                    .padding(horizontal = CosmicSize.medium)
+                    .fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(CosmicSize.small)
+            horizontalArrangement = Arrangement.spacedBy(CosmicSize.small),
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_error_cloud),
                 contentDescription = "",
                 tint = CosmicErrorIcon,
-                modifier = Modifier
-                    .size(CosmicSize.iconM)
+                modifier =
+                    Modifier
+                        .size(CosmicSize.iconM),
             )
             Text(
                 text = "Unable to reach NASA archive. Check connection.",
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = CosmicSize.smallL)
-                    .basicMarquee(
-                        iterations = Int.MAX_VALUE,
-                        initialDelayMillis = 2000,
-                        velocity = 30.dp
-                    ),
+                modifier =
+                    Modifier
+                        .weight(1f)
+                        .padding(horizontal = CosmicSize.smallL)
+                        .basicMarquee(
+                            iterations = Int.MAX_VALUE,
+                            initialDelayMillis = 2000,
+                            velocity = 30.dp,
+                        ),
                 softWrap = false,
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
 
             CosmicIconButton(
@@ -84,7 +82,7 @@ fun CosmicErrorCard(
                 text = "Retry",
                 color = CosmicErrorBackground,
                 textColor = CosmicErrorIcon,
-                callback = callback
+                callback = callback,
             )
         }
     }

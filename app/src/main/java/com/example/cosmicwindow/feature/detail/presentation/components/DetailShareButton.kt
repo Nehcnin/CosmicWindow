@@ -25,52 +25,51 @@ import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
 
 @Composable
-fun DetailShareButton(
-    context: Context,
-    url: String
-){
+fun DetailShareButton(context: Context, url: String) {
     Box(
-        modifier = Modifier
-            .padding(CosmicSize.medium)
-            .fillMaxWidth()
-            .height(CosmicSize.cardXXS)
-            .clip(shape = RoundedCornerShape(CosmicSize.radiusRound))
-            .background(CosmicButtonGray)
-            .border(
-                width = 1.dp,
-                color = CosmicSurfaceBorder,
-                shape = RoundedCornerShape(CosmicSize.radiusRound)
-            )
-            .clickable(
-                onClick = {
-                    val shareIntent = Intent(Intent.ACTION_SEND).apply {
-                        type = "text/plain"
-                        putExtra(
-                            Intent.EXTRA_TEXT,
-                            url
-                        )
-                    }
-
-                    context.startActivity(
-                        Intent.createChooser(shareIntent, "Share APOD")
-                    )
-                }
-            )
-    ){
-        Box(
-            modifier = Modifier
-                .padding(CosmicSize.smallL)
-                .fillMaxSize()
+        modifier =
+            Modifier
+                .padding(CosmicSize.medium)
+                .fillMaxWidth()
+                .height(CosmicSize.cardXXS)
                 .clip(shape = RoundedCornerShape(CosmicSize.radiusRound))
-                .background(MaterialTheme.colorScheme.primary),
-            contentAlignment = Alignment.Center
-        ){
+                .background(CosmicButtonGray)
+                .border(
+                    width = 1.dp,
+                    color = CosmicSurfaceBorder,
+                    shape = RoundedCornerShape(CosmicSize.radiusRound),
+                ).clickable(
+                    onClick = {
+                        val shareIntent =
+                            Intent(Intent.ACTION_SEND).apply {
+                                type = "text/plain"
+                                putExtra(
+                                    Intent.EXTRA_TEXT,
+                                    url,
+                                )
+                            }
+
+                        context.startActivity(
+                            Intent.createChooser(shareIntent, "Share APOD"),
+                        )
+                    },
+                ),
+    ) {
+        Box(
+            modifier =
+                Modifier
+                    .padding(CosmicSize.smallL)
+                    .fillMaxSize()
+                    .clip(shape = RoundedCornerShape(CosmicSize.radiusRound))
+                    .background(MaterialTheme.colorScheme.primary),
+            contentAlignment = Alignment.Center,
+        ) {
             Text(
                 text = "Share Story",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onPrimary,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 16.sp
+                fontSize = 16.sp,
             )
         }
     }

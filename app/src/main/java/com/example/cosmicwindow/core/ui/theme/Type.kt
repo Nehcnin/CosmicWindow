@@ -4,123 +4,144 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cosmicwindow.R
 
-val SpaceGrotesk = FontFamily(
-    Font(R.font.space_grotesk_regular)
-)
-val Inter = FontFamily(
-    Font(R.font.inter_regular)
-)
-
-val CosmicTypography = Typography(
-    displayLarge = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Normal,
-        fontSize = 57.sp,
-        lineHeight = 64.sp
-    ),
-    displayMedium = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Normal,
-        fontSize = 45.sp,
-        lineHeight = 52.sp
-    ),
-    displaySmall = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Normal,
-        fontSize = 36.sp,
-        lineHeight = 44.sp
-    ),
-
-    headlineLarge = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Bold,
-        fontSize = 32.sp,
-        lineHeight = 40.sp,
-        color = CosmicTitleColor
-    ),
-    headlineMedium = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Normal,
-        fontSize = 28.sp,
-        lineHeight = 36.sp,
-        color = CosmicTitleColor
-    ),
-    headlineSmall = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 24.sp,
-        lineHeight = 32.sp,
-        color = CosmicTitleColor
-    ),
-
-    titleLarge = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        color = CosmicTitleColor
-    ),
-    titleMedium = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        color = CosmicIconGray
-    ),
-    titleSmall = TextStyle(
-        fontFamily = SpaceGrotesk,
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        lineHeight = 20.sp
-    ),
-
-    bodyLarge = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        color = CosmicIconGray
-    ),
-    bodyMedium = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
-        color = CosmicIconGray
-    ),
-    bodySmall = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
-        color = CosmicIconGray
-    ),
-
-    labelLarge = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
-        lineHeight = 20.sp,
-        color = CosmicTitleColor
-    ),
-    labelMedium = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
-        color = CosmicIconGray,
-        letterSpacing = 1.5.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = Inter,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp
+val SpaceGrotesk =
+    FontFamily(
+        Font(R.font.space_grotesk_regular),
     )
-)
+val Inter =
+    FontFamily(
+        Font(R.font.inter_regular),
+    )
+
+val ABeeZee =
+    FontFamily(
+        Font(R.font.abeezee_regular),
+    )
+
+val LiberationMono =
+    FontFamily(
+        Font(R.font.liberationmono_regular),
+    )
+val CosmicTypography =
+    Typography(
+        displayLarge =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.Normal,
+                fontSize = 57.sp,
+                lineHeight = 64.sp,
+            ),
+        displayMedium =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.Normal,
+                fontSize = 45.sp,
+                lineHeight = 52.sp,
+            ),
+        displaySmall =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.Normal,
+                fontSize = 36.sp,
+                lineHeight = 44.sp,
+            ),
+        headlineLarge =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.Bold,
+                fontSize = 32.sp,
+                lineHeight = 40.sp,
+                color = CosmicTitleColor,
+            ),
+        headlineMedium =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.Normal,
+                fontSize = 28.sp,
+                lineHeight = 36.sp,
+                color = CosmicTitleColor,
+            ),
+        headlineSmall =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 24.sp,
+                lineHeight = 32.sp,
+                color = CosmicTitleColor,
+            ),
+        titleLarge =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 22.sp,
+                lineHeight = 28.sp,
+                color = CosmicTitleColor,
+            ),
+        titleMedium =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp,
+                lineHeight = 24.sp,
+                color = CosmicIconGray,
+            ),
+        titleSmall =
+            TextStyle(
+                fontFamily = SpaceGrotesk,
+                fontWeight = FontWeight.Normal,
+                fontSize = 14.sp,
+                lineHeight = 20.sp,
+            ),
+        bodyLarge =
+            TextStyle(
+                fontFamily = Inter,
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp,
+                lineHeight = 24.sp,
+                color = CosmicIconGray,
+            ),
+        bodyMedium =
+            TextStyle(
+                fontFamily = Inter,
+                fontWeight = FontWeight.Normal,
+                fontSize = 14.sp,
+                lineHeight = 20.sp,
+                color = CosmicIconGray,
+            ),
+        bodySmall =
+            TextStyle(
+                fontFamily = Inter,
+                fontWeight = FontWeight.Normal,
+                fontSize = 12.sp,
+                lineHeight = 16.sp,
+                color = CosmicIconGray,
+            ),
+        labelLarge =
+            TextStyle(
+                fontFamily = Inter,
+                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp,
+                lineHeight = 20.sp,
+                color = CosmicTitleColor,
+            ),
+        labelMedium =
+            TextStyle(
+                fontFamily = Inter,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp,
+                lineHeight = 16.sp,
+                color = CosmicIconGray,
+                letterSpacing = 1.5.sp,
+            ),
+        labelSmall =
+            TextStyle(
+                fontFamily = Inter,
+                fontWeight = FontWeight.Medium,
+                fontSize = 11.sp,
+                lineHeight = 16.sp,
+            ),
+    )

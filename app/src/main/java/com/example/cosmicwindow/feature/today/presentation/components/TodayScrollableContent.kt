@@ -17,39 +17,37 @@ import com.example.cosmicwindow.feature.today.presentation.components.cards.Toda
 fun TodayScrollableContent(
     modifier: Modifier = Modifier,
     viewModel: TodayViewModel,
-    onReadStory: (String) -> Unit
-){
-
+    onReadStory: (String) -> Unit,
+) {
     val apod: Apod? = viewModel.apod
 
-
-
-    if(apod != null) {
-
+    if (apod != null) {
         LazyColumn(
-            modifier = modifier
-                //.padding(horizontal = CosmicSize.medium)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(CosmicSize.medium)
+            modifier =
+                modifier
+                    // .padding(horizontal = CosmicSize.medium)
+                    .fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(CosmicSize.medium),
         ) {
             item {
                 TodayApodCard(
                     apod,
-                    modifier = Modifier
-                        .padding(horizontal = CosmicSize.medium),
-                    onReadStory = {onReadStory(apod.date)}
+                    modifier =
+                        Modifier
+                            .padding(horizontal = CosmicSize.medium),
+                    onReadStory = { onReadStory(apod.date) },
                 )
             }
-            item{
+            item {
                 TodayWeekRow(
-                    viewModel
+                    viewModel,
                 )
             }
-            if(apod.videoUrl != null) {
+            if (apod.videoUrl != null) {
                 item {
                     TodayVideoCard(
                         apod,
-                        modifier = Modifier.padding(horizontal = CosmicSize.medium)
+                        modifier = Modifier.padding(horizontal = CosmicSize.medium),
                     )
                 }
             }
@@ -57,7 +55,7 @@ fun TodayScrollableContent(
                 TodayCopyrightCard(
                     credit = apod.credit ?: "NASA",
                     copyright = apod.copyright ?: "NASA",
-                    modifier = Modifier.padding(horizontal = CosmicSize.medium)
+                    modifier = Modifier.padding(horizontal = CosmicSize.medium),
                 )
             }
         }

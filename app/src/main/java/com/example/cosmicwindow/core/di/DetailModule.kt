@@ -4,8 +4,9 @@ import com.example.cosmicwindow.feature.detail.presentation.DetailViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
-val detailModule = module {
-    viewModel {
-        DetailViewModel(get())
+val DetailModule =
+    module {
+        viewModel {
+            DetailViewModel(get())
+        }
     }
-}

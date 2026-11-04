@@ -14,30 +14,34 @@ import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 
 @Composable
-fun DetailExplanation(explanation: String){
+fun DetailExplanation(explanation: String) {
     Text(
         text = "Explanation",
         style = MaterialTheme.typography.titleLarge,
-        modifier = Modifier.padding(horizontal = CosmicSize.medium)
+        modifier = Modifier.padding(horizontal = CosmicSize.medium),
     )
     Text(
-        text = AnnotatedString.fromHtml(
-            htmlString = explanation.replaceFirst(
-                Regex(
-                    """^(?:\s|<[^>]+>)*Explanation\s*:\s*""",
-                    RegexOption.IGNORE_CASE
-                ),
-                ""
+        text =
+            AnnotatedString.fromHtml(
+                htmlString =
+                    explanation.replaceFirst(
+                        Regex(
+                            """^(?:\s|<[^>]+>)*Explanation\s*:\s*""",
+                            RegexOption.IGNORE_CASE,
+                        ),
+                        "",
+                    ),
+                linkStyles =
+                    TextLinkStyles(
+                        style =
+                            SpanStyle(
+                                color = MaterialTheme.colorScheme.primary,
+                                textDecoration = TextDecoration.Underline,
+                            ),
+                    ),
             ),
-            linkStyles = TextLinkStyles(
-                style = SpanStyle(
-                    color = MaterialTheme.colorScheme.primary,
-                    textDecoration = TextDecoration.Underline
-                )
-            )
-        ),
         style = MaterialTheme.typography.bodyLarge,
         color = CosmicTitleColor,
-        modifier = Modifier.padding(CosmicSize.medium)
+        modifier = Modifier.padding(CosmicSize.medium),
     )
 }

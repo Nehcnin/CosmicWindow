@@ -6,13 +6,18 @@ import androidx.annotation.OptIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,7 +40,7 @@ import com.example.cosmicwindow.core.ui.theme.CosmicSize
 fun TodayVideoPlayer(
     videoUrl: String,
     thumbnailUrl: String?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
 
@@ -43,12 +48,13 @@ fun TodayVideoPlayer(
         mutableStateOf(false)
     }
 
-    val player = remember(context, videoUrl) {
-        ExoPlayer.Builder(context).build().apply {
-            setMediaItem(MediaItem.fromUri(videoUrl))
-            playWhenReady = false
+    val player =
+        remember(context, videoUrl) {
+            ExoPlayer.Builder(context).build().apply {
+                setMediaItem(MediaItem.fromUri(videoUrl))
+                playWhenReady = false
+            }
         }
-    }
 
     DisposableEffect(player) {
         onDispose {
@@ -57,12 +63,12 @@ fun TodayVideoPlayer(
     }
 
     Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(CosmicSize.medium))
-            .background(androidx.compose.ui.graphics.Color.Black),
-        contentAlignment = Alignment.Center
+        modifier =
+            modifier
+                .clip(RoundedCornerShape(CosmicSize.medium))
+                .background(androidx.compose.ui.graphics.Color.Black),
+        contentAlignment = Alignment.Center,
     ) {
-
         if (started) {
             AndroidView(
                 modifier = Modifier.fillMaxSize(),
@@ -76,20 +82,21 @@ fun TodayVideoPlayer(
                         controllerHideOnTouch = true
 
                         // Kék Play/Pause ikon
-                        val blueTint = ColorStateList.valueOf(
-                            CosmicPrimary.toArgb()
-                        )
+                        val blueTint =
+                            ColorStateList.valueOf(
+                                CosmicPrimary.toArgb(),
+                            )
 
                         findViewById<ImageView>(
-                            androidx.media3.ui.R.id.exo_play_pause
+                            androidx.media3.ui.R.id.exo_play_pause,
                         )?.imageTintList = blueTint
 
                         findViewById<ImageView>(
-                            androidx.media3.ui.R.id.exo_play
+                            androidx.media3.ui.R.id.exo_play,
                         )?.imageTintList = blueTint
 
                         findViewById<ImageView>(
-                            androidx.media3.ui.R.id.exo_pause
+                            androidx.media3.ui.R.id.exo_pause,
                         )?.imageTintList = blueTint
                     }
                 },
@@ -97,14 +104,14 @@ fun TodayVideoPlayer(
                     if (view.player !== player) {
                         view.player = player
                     }
-                }
+                },
             )
         } else {
             AsyncImage(
                 model = thumbnailUrl,
                 contentDescription = "Video thumbnail",
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
 
             IconButton(
@@ -113,16 +120,17 @@ fun TodayVideoPlayer(
                     player.prepare()
                     player.play()
                 },
-                modifier = Modifier
-                    .size(CosmicSize.largeXL)
-                    .clip(CircleShape)
-                    .background(CosmicPrimary)
+                modifier =
+                    Modifier
+                        .size(CosmicSize.largeXL)
+                        .clip(CircleShape)
+                        .background(CosmicPrimary),
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_play),
                     contentDescription = "Play video",
                     modifier = Modifier.size(CosmicSize.iconM),
-                    tint = MaterialTheme.colorScheme.onPrimary
+                    tint = MaterialTheme.colorScheme.onPrimary,
                 )
             }
         }
