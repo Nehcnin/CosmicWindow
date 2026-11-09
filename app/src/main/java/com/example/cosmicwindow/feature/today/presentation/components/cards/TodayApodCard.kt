@@ -37,6 +37,7 @@ import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -104,44 +105,46 @@ fun TodayApodCard(
                 ) {
                     Text(
                         text = formattedDate,
-                        style = MaterialTheme.typography.labelMedium,
-                        color = CosmicNavTextSelected,
+                        style = CosmicTheme.typography.bodySmallBold,
+                        color = CosmicTheme.colors.selected,
                     )
                     if (apod.credit != null) {
                         Text(
                             modifier = Modifier.padding(horizontal = CosmicSize.smallL),
                             text = "•",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = CosmicIconGray,
+                            style = CosmicTheme.typography.bodySmallBold,
+                            color = CosmicTheme.colors.bodyGray,
                         )
                         Icon(
                             painter = painterResource(R.drawable.ic_camera),
                             modifier = Modifier.size(CosmicSize.mediumS),
                             contentDescription = "",
-                            tint = CosmicIconGray,
+                            tint = CosmicTheme.colors.bodyGray,
                         )
                         Text(
                             modifier = Modifier.padding(horizontal = CosmicSize.smallL),
                             text = apod.credit,
-                            style = MaterialTheme.typography.labelMedium,
-                            color = CosmicIconGray,
+                            style = CosmicTheme.typography.bodySmall,
+                            color = CosmicTheme.colors.bodyGray,
                         )
                     }
                 }
 
                 Text(
                     text = apod.title,
-                    style = MaterialTheme.typography.headlineSmall,
+                    style = CosmicTheme.typography.titleMedium,
                     modifier = Modifier.padding(vertical = CosmicSize.smallL),
+                    color = CosmicTheme.colors.whitePrimary
                 )
 
                 if (apod.alt != null) {
                     Text(
                         text = apod.alt,
-                        style = MaterialTheme.typography.bodyLarge,
+                        style = CosmicTheme.typography.bodyMedium,
                         maxLines = 3,
                         softWrap = true,
                         overflow = TextOverflow.Ellipsis,
+                        color = CosmicTheme.colors.bodyGray
                     )
                 }
                 Row(
@@ -159,7 +162,7 @@ fun TodayApodCard(
                                 .fillMaxHeight()
                                 .weight(1f)
                                 .background(
-                                    color = MaterialTheme.colorScheme.primary,
+                                    color = CosmicTheme.colors.primary,
                                     shape = RoundedCornerShape(9999.dp),
                                 ).padding(
                                     horizontal = CosmicSize.mediumL,
@@ -169,12 +172,12 @@ fun TodayApodCard(
                     ) {
                         Text(
                             text = "Read Cosmic Story",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onPrimary,
+                            style = CosmicTheme.typography.bodyMedium,
+                            color = CosmicTheme.colors.onPrimary,
                         )
                         Icon(
                             painter = painterResource(R.drawable.ic_button_rarrow),
-                            tint = MaterialTheme.colorScheme.onPrimary,
+                            tint = CosmicTheme.colors.onPrimary,
                             contentDescription = "",
                             modifier =
                                 Modifier

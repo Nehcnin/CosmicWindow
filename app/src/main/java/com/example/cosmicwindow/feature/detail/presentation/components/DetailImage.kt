@@ -27,6 +27,7 @@ import coil3.compose.AsyncImage
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 
 @Composable
@@ -57,7 +58,7 @@ fun DetailImage(url: String?) {
                             colorStops =
                                 arrayOf(
                                     0.4f to Color.Transparent,
-                                    1f to CosmicCardGradient,
+                                    1f to CosmicTheme.colors.backgroundVariant,
                                 ),
                         ),
                     ),
@@ -73,7 +74,7 @@ fun DetailImage(url: String?) {
                     .padding(CosmicSize.medium)
                     .size(CosmicSize.largeL)
                     .background(
-                        color = CosmicCardGradient,
+                        color = CosmicTheme.colors.backgroundVariant,
                         shape = CircleShape,
                     ),
         ) {
@@ -81,7 +82,7 @@ fun DetailImage(url: String?) {
                 painter = painterResource(R.drawable.ic_fullscreen),
                 contentDescription = "Fullscreen",
                 modifier = Modifier.size(CosmicSize.iconS),
-                tint = CosmicTitleColor,
+                tint = CosmicTheme.colors.whitePrimary,
             )
         }
 
@@ -115,14 +116,14 @@ fun DetailImage(url: String?) {
                                 .padding(top = CosmicSize.large, end = CosmicSize.medium)
                                 .align(Alignment.TopEnd)
                                 .background(
-                                    color = CosmicCardGradient,
+                                    color = CosmicTheme.colors.backgroundVariant,
                                     shape = CircleShape,
                                 ).size(CosmicSize.large),
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_close),
                             contentDescription = "Close",
-                            tint = CosmicTitleColor,
+                            tint = CosmicTheme.colors.whitePrimary,
                             modifier =
                                 Modifier
                                     .size(CosmicSize.iconS),

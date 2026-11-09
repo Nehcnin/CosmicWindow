@@ -33,6 +33,7 @@ import com.example.cosmicwindow.core.ui.theme.CosmicButtonGray
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 
 @Composable
@@ -44,7 +45,7 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
                 .padding(CosmicSize.medium)
                 .height(CosmicSize.cardXXS)
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = CosmicTheme.colors.surface,
                     shape = RoundedCornerShape(CosmicSize.radiusL),
                 ).border(
                     width = 1.dp,
@@ -81,7 +82,7 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
         ) {
             Text(
                 text = "Video Version Available",
-                style = MaterialTheme.typography.labelLarge,
+                style = CosmicTheme.typography.bodyMediumSemi,
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 1,
                 softWrap = false,
@@ -92,10 +93,11 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
                         initialDelayMillis = 5000,
                         repeatDelayMillis = 5000,
                     ),
+                color = CosmicTheme.colors.whitePrimary
             )
             Text(
                 text = "External host",
-                style = MaterialTheme.typography.labelMedium,
+                style = CosmicTheme.typography.bodySmall,
                 fontWeight = FontWeight.Normal,
                 maxLines = 1,
                 softWrap = false,
@@ -106,6 +108,7 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
                         initialDelayMillis = 5000,
                         repeatDelayMillis = 5000,
                     ),
+                color = CosmicTheme.colors.bodyGray
             )
         }
         Spacer(
@@ -115,7 +118,6 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
             modifier =
                 Modifier
                     .padding(horizontal = 16.dp)
-                    // .height(CosmicSize.largeS)
                     .background(
                         color = CosmicButtonGray,
                         shape = RoundedCornerShape(CosmicSize.radiusM),
@@ -134,12 +136,12 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
         ) {
             Text(
                 text = "Open video",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicNavTextSelected,
+                style = CosmicTheme.typography.bodySmallBold,
+                color = CosmicTheme.colors.selected,
             )
             Icon(
                 painter = painterResource(R.drawable.ic_external),
-                tint = CosmicNavTextSelected,
+                tint = CosmicTheme.colors.selected,
                 modifier =
                     Modifier
                         .padding(start = CosmicSize.small)

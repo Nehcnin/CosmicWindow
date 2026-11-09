@@ -25,7 +25,6 @@ fun TodayScrollableContent(
         LazyColumn(
             modifier =
                 modifier
-                    // .padding(horizontal = CosmicSize.medium)
                     .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(CosmicSize.medium),
         ) {

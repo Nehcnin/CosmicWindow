@@ -3,6 +3,7 @@ package com.example.cosmicwindow.core.ui.components
 import android.app.DatePickerDialog
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -26,6 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import java.time.LocalDate
 
 @Composable
@@ -65,13 +68,15 @@ fun CosmicHeader(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleLarge,
+                style = CosmicTheme.typography.headerTitle,
                 modifier = Modifier.padding(bottom = 4.dp),
+                color = CosmicTheme.colors.whitePrimary
             )
 
             Text(
                 text = subtitle,
-                style = MaterialTheme.typography.labelMedium,
+                style = CosmicTheme.typography.headerBody,
+                color = CosmicTheme.colors.bodyGray
             )
         }
 

@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -44,7 +45,8 @@ fun TodayDateComponent(date: LocalDate?, modifier: Modifier = Modifier) {
         if (formattedDate != null) {
             Text(
                 text = "Today in Space • $formattedDate",
-                style = MaterialTheme.typography.bodyLarge,
+                style = CosmicTheme.typography.bodyMedium,
+                color = CosmicTheme.colors.bodyGray
             )
         }
     }

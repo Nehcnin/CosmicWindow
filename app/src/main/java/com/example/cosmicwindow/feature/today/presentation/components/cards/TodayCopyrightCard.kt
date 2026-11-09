@@ -23,6 +23,7 @@ import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun TodayCopyrightCard(
@@ -35,10 +36,10 @@ fun TodayCopyrightCard(
             modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(CosmicSize.radiusXL))
-                .background(CosmicCardGradient)
+                .background(CosmicTheme.colors.backgroundVariant)
                 .border(
                     width = 1.dp,
-                    color = CosmicSurfaceBorder,
+                    color = CosmicTheme.colors.border,
                     shape = RoundedCornerShape(CosmicSize.radiusXL),
                 ),
     ) {
@@ -51,16 +52,17 @@ fun TodayCopyrightCard(
                 painter = painterResource(R.drawable.ic_check),
                 modifier = Modifier.padding(end = CosmicSize.smallL).size(CosmicSize.iconM),
                 contentDescription = "",
-                tint = MaterialTheme.colorScheme.primary,
+                tint = CosmicTheme.colors.selected,
             )
             Text(
                 text = "Public NASA Data • APOD Archive",
-                style = MaterialTheme.typography.labelLarge,
+                style = CosmicTheme.typography.bodyMediumS,
+                color = CosmicTheme.colors.whitePrimary
             )
         }
         Text(
             text = "Image Credit: $credit, NASA • Copyright $copyright",
-            style = MaterialTheme.typography.bodySmall,
+            style = CosmicTheme.typography.bodySmall,
             modifier =
                 Modifier
                     .padding(
@@ -68,11 +70,12 @@ fun TodayCopyrightCard(
                     ).padding(top = CosmicSize.medium)
                     .fillMaxWidth(),
             textAlign = TextAlign.Center,
+            color = CosmicTheme.colors.bodyGray
         )
 
         Text(
             text = "Independent educational explorer • Not affiliated with NASA",
-            style = MaterialTheme.typography.bodySmall,
+            style = CosmicTheme.typography.bodySmall,
             textAlign = TextAlign.Center,
             modifier =
                 Modifier
@@ -81,11 +84,12 @@ fun TodayCopyrightCard(
                     .fillMaxWidth()
                     .padding(top = CosmicSize.medium)
                     .clip(RoundedCornerShape(CosmicSize.radiusRound))
-                    .background(MaterialTheme.colorScheme.surface)
+                    .background(CosmicTheme.colors.surface)
                     .padding(
                         horizontal = CosmicSize.medium,
                         vertical = CosmicSize.medium,
                     ),
+            color = CosmicTheme.colors.bodyGray
         )
     }
 }

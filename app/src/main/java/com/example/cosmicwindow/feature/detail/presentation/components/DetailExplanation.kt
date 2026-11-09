@@ -8,17 +8,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.style.TextDecoration
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 
 @Composable
 fun DetailExplanation(explanation: String) {
     Text(
         text = "Explanation",
-        style = MaterialTheme.typography.titleLarge,
+        style = CosmicTheme.typography.titleMediumS.copy(fontWeight = FontWeight.Medium),
         modifier = Modifier.padding(horizontal = CosmicSize.medium),
+        color = CosmicTheme.colors.whitePrimary
     )
     Text(
         text =
@@ -35,13 +38,13 @@ fun DetailExplanation(explanation: String) {
                     TextLinkStyles(
                         style =
                             SpanStyle(
-                                color = MaterialTheme.colorScheme.primary,
+                                color = CosmicTheme.colors.primary,
                                 textDecoration = TextDecoration.Underline,
                             ),
                     ),
             ),
-        style = MaterialTheme.typography.bodyLarge,
-        color = CosmicTitleColor,
+        style = CosmicTheme.typography.bodyMedium,
+        color = CosmicTheme.colors.whitePrimary,
         modifier = Modifier.padding(CosmicSize.medium),
     )
 }

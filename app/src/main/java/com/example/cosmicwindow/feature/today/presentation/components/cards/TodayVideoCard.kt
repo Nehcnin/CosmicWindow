@@ -29,6 +29,7 @@ import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicOnYellow
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.core.ui.theme.CosmicYellow
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import com.example.cosmicwindow.feature.today.presentation.components.TodayVideoPlayer
@@ -42,7 +43,7 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
             modifier
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = CosmicTheme.colors.surface,
                     shape =
                         RoundedCornerShape(
                             size = CosmicSize.radiusXL,
@@ -60,7 +61,7 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
             Icon(
                 painter = painterResource(R.drawable.ic_video),
                 contentDescription = "",
-                tint = CosmicYellow,
+                tint = CosmicTheme.colors.yellowPrimary,
                 modifier =
                     Modifier
                         .padding(end = CosmicSize.smallL)
@@ -69,7 +70,8 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
 
             Text(
                 text = "Featured APOD Video",
-                style = MaterialTheme.typography.titleLarge,
+                style = CosmicTheme.typography.titleSmall,
+                color = CosmicTheme.colors.whitePrimary
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -78,12 +80,12 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
                 modifier =
                     Modifier
                         .background(
-                            color = CosmicOnYellow,
+                            color = CosmicTheme.colors.yellowBackground,
                             shape = RoundedCornerShape(size = CosmicSize.radiusRound),
                         ).padding(CosmicSize.mediumS),
                 text = "External Media",
-                color = CosmicYellow,
-                style = MaterialTheme.typography.labelLarge,
+                color = CosmicTheme.colors.yellowPrimary,
+                style = CosmicTheme.typography.bodySmallMedium,
             )
         }
         if (apod.videoUrl != null && apod.imgUrl != null) {
@@ -100,13 +102,15 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
 
         Text(
             text = apod.title,
-            style = MaterialTheme.typography.titleLarge,
+            style = CosmicTheme.typography.titleSmall,
             modifier = Modifier.padding(bottom = CosmicSize.medium),
+            color = CosmicTheme.colors.whitePrimary
         )
         if (apod.alt != null) {
             Text(
                 text = apod.alt,
-                style = MaterialTheme.typography.bodyLarge,
+                style = CosmicTheme.typography.bodyMedium,
+                color = CosmicTheme.colors.bodyGray
             )
         }
 
@@ -117,10 +121,10 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
                     .padding(top = CosmicSize.medium)
                     .height(CosmicSize.large)
                     .clip(RoundedCornerShape(CosmicSize.radiusL))
-                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                    .background(CosmicTheme.colors.surfaceVariant)
                     .border(
                         width = 1.dp,
-                        color = CosmicSurfaceBorder,
+                        color = CosmicTheme.colors.border,
                         shape = RoundedCornerShape(CosmicSize.radiusL),
                     ).clickable {
                         apod.articleUrl?.let { url ->
@@ -137,8 +141,8 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
             ) {
                 Text(
                     text = "Open video in browser",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.primary,
+                    style = CosmicTheme.typography.bodyMedium,
+                    color = CosmicTheme.colors.primary,
                 )
                 Icon(
                     painter = painterResource(R.drawable.ic_external),
@@ -147,7 +151,7 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
                             .padding(start = CosmicSize.smallL)
                             .size(CosmicSize.iconS),
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = CosmicTheme.colors.primary,
                 )
             }
         }

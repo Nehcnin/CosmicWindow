@@ -13,6 +13,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.cosmicwindow.core.ui.components.CosmicBottomBar
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.detail.presentation.DetailScreen
 import com.example.cosmicwindow.feature.earth.presentation.EarthScreen
 import com.example.cosmicwindow.feature.earth.presentation.EarthViewModel
@@ -33,6 +34,7 @@ fun CosmicNavigation() {
     val showBottomBar = destination?.hasRoute<DetailRoute>() == false
 
     Scaffold(
+        containerColor = CosmicTheme.colors.background,
         bottomBar = {
             if (showBottomBar) {
                 CosmicBottomBar(

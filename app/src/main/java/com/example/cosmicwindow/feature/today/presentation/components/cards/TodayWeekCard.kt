@@ -25,6 +25,7 @@ import coil3.compose.AsyncImage
 import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import java.time.LocalDate
@@ -39,7 +40,7 @@ fun TodayWeekCard(apod: Apod, dayText: String) {
                 .fillMaxHeight()
                 .width(CosmicSize.cardL)
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = CosmicTheme.colors.surface,
                     shape = RoundedCornerShape(CosmicSize.radiusXL),
                 ).border(
                     width = 1.dp,
@@ -77,12 +78,14 @@ fun TodayWeekCard(apod: Apod, dayText: String) {
                             color = CosmicCardGradient,
                             shape = RoundedCornerShape(CosmicSize.radiusRound),
                         ).padding(CosmicSize.mediumS),
-                style = MaterialTheme.typography.bodyMedium,
+                style = CosmicTheme.typography.bodyMedium,
+                color = CosmicTheme.colors.bodyGray
             )
         }
         Text(
             text = dayText,
-            style = MaterialTheme.typography.bodyMedium,
+            style = CosmicTheme.typography.bodyMedium,
+            color = CosmicTheme.colors.bodyGray
         )
         Text(
             modifier =
@@ -93,11 +96,11 @@ fun TodayWeekCard(apod: Apod, dayText: String) {
                         repeatDelayMillis = 8000,
                     ),
             text = apod.title,
-            style = MaterialTheme.typography.bodyLarge,
+            style = CosmicTheme.typography.bodyMediumS,
             overflow = TextOverflow.Clip,
             maxLines = 1,
             softWrap = false,
-            color = CosmicTitleColor,
+            color = CosmicTheme.colors.whitePrimary,
         )
     }
 }

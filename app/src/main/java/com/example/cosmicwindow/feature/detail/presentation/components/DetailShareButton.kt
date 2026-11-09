@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.example.cosmicwindow.core.ui.theme.CosmicButtonGray
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun DetailShareButton(context: Context, url: String) {
@@ -33,10 +34,10 @@ fun DetailShareButton(context: Context, url: String) {
                 .fillMaxWidth()
                 .height(CosmicSize.cardXXS)
                 .clip(shape = RoundedCornerShape(CosmicSize.radiusRound))
-                .background(CosmicButtonGray)
+                .background(CosmicTheme.colors.bodyGrayVariant)
                 .border(
                     width = 1.dp,
-                    color = CosmicSurfaceBorder,
+                    color = CosmicTheme.colors.border,
                     shape = RoundedCornerShape(CosmicSize.radiusRound),
                 ).clickable(
                     onClick = {
@@ -61,13 +62,13 @@ fun DetailShareButton(context: Context, url: String) {
                     .padding(CosmicSize.smallL)
                     .fillMaxSize()
                     .clip(shape = RoundedCornerShape(CosmicSize.radiusRound))
-                    .background(MaterialTheme.colorScheme.primary),
+                    .background(CosmicTheme.colors.primary),
             contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = "Share Story",
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.onPrimary,
+                style = CosmicTheme.typography.bodyMedium,
+                color = CosmicTheme.colors.onPrimary,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp,
             )

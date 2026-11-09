@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import com.example.cosmicwindow.feature.today.presentation.components.cards.TodayWeekCard
 
@@ -53,18 +54,19 @@ fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
 
             Text(
                 text = "Previous 7 Days",
-                style = MaterialTheme.typography.titleLarge,
+                style = CosmicTheme.typography.titleMediumS,
+                color = CosmicTheme.colors.whitePrimary
             )
 
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
                 text = "Past APOD Entries",
-                style = MaterialTheme.typography.bodyLarge,
+                style = CosmicTheme.typography.bodySmall,
+                color = CosmicTheme.colors.bodyGray
             )
         }
         LazyRow(
-            // modifier = Modifier.padding(start = CosmicSize.medium),
             horizontalArrangement = Arrangement.spacedBy(CosmicSize.smallL),
             contentPadding =
                 PaddingValues(

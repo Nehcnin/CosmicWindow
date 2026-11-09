@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.detail.presentation.components.DetailExplanation
 import com.example.cosmicwindow.feature.detail.presentation.components.DetailHeader
 import com.example.cosmicwindow.feature.detail.presentation.components.DetailImage
@@ -46,7 +47,9 @@ fun DetailScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center,
             ) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                    color = CosmicTheme.colors.primary
+                )
             }
         }
 
@@ -57,7 +60,7 @@ fun DetailScreen(
             ) {
                 Text(
                     text = error ?: "Unknown error",
-                    color = MaterialTheme.colorScheme.error,
+                    color = CosmicTheme.colors.error,
                 )
             }
         }
@@ -87,12 +90,13 @@ fun DetailScreen(
                     item {
                         Text(
                             text = loadedApod.title,
-                            style = MaterialTheme.typography.headlineLarge,
+                            style = CosmicTheme.typography.titleLarge,
                             modifier =
                                 Modifier.padding(
                                     horizontal = CosmicSize.medium,
                                     vertical = CosmicSize.mediumS,
                                 ),
+                            color = CosmicTheme.colors.whitePrimary
                         )
                     }
 

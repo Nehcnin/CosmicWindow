@@ -34,6 +34,7 @@ import coil3.compose.AsyncImage
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicPrimary
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @OptIn(UnstableApi::class)
 @Composable
@@ -81,7 +82,6 @@ fun TodayVideoPlayer(
                         controllerAutoShow = false
                         controllerHideOnTouch = true
 
-                        // Kék Play/Pause ikon
                         val blueTint =
                             ColorStateList.valueOf(
                                 CosmicPrimary.toArgb(),
@@ -130,7 +130,7 @@ fun TodayVideoPlayer(
                     painter = painterResource(R.drawable.ic_play),
                     contentDescription = "Play video",
                     modifier = Modifier.size(CosmicSize.iconM),
-                    tint = MaterialTheme.colorScheme.onPrimary,
+                    tint = CosmicTheme.colors.onPrimary,
                 )
             }
         }

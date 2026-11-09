@@ -26,6 +26,7 @@ import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicErrorBackground
 import com.example.cosmicwindow.core.ui.theme.CosmicErrorIcon
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun CosmicErrorCard(modifier: Modifier = Modifier, callback: () -> Unit) {
@@ -36,7 +37,7 @@ fun CosmicErrorCard(modifier: Modifier = Modifier, callback: () -> Unit) {
                 .height(CosmicSize.cardXXS)
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = CosmicTheme.colors.surface,
                     shape = RoundedCornerShape(CosmicSize.radiusXL),
                 ).border(
                     width = 1.dp,
@@ -74,7 +75,7 @@ fun CosmicErrorCard(modifier: Modifier = Modifier, callback: () -> Unit) {
                 softWrap = false,
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
-                style = MaterialTheme.typography.bodyMedium,
+                style = CosmicTheme.typography.bodyMedium,
             )
 
             CosmicIconButton(

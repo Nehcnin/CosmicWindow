@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
 import com.example.cosmicwindow.core.ui.theme.CosmicOnPrimary
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun CosmicBottomBarElement(
@@ -53,21 +54,22 @@ fun CosmicBottomBarElement(
                 .width(CosmicSize.largeL)
                 .height(32.dp)
                 .clip(RoundedCornerShape(9999.dp))
-                .background(if (selected) MaterialTheme.colorScheme.primary else Color.Transparent),
+                .background(if (selected) CosmicTheme.colors.primary else Color.Transparent),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
                 painter = painterResource(icon),
                 contentDescription = description,
                 modifier = Modifier.size(CosmicSize.iconM),
-                tint = if (selected) CosmicOnPrimary else CosmicIconGray,
+                tint = if (selected) CosmicTheme.colors.onPrimary else CosmicTheme.colors.bodyGray,
             )
         }
 
         Text(
             modifier = Modifier.padding(top = 4.dp),
             text = text,
-            style = MaterialTheme.typography.labelMedium,
+            style = CosmicTheme.typography.bodySmallBold,
+            color = if (selected) CosmicTheme.colors.selected else CosmicTheme.colors.bodyGray
         )
     }
 }

@@ -17,9 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 
 @Composable
@@ -45,7 +47,7 @@ fun DetailHeader(
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_button_rarrow),
-                tint = CosmicTitleColor,
+                tint = CosmicTheme.colors.whitePrimary,
                 contentDescription = "backButton",
                 modifier =
                     Modifier
@@ -56,7 +58,8 @@ fun DetailHeader(
 
         Text(
             text = "APOD Story Detail",
-            style = MaterialTheme.typography.headlineSmall,
+            style = CosmicTheme.typography.titleMediumS.copy(fontWeight = FontWeight.Medium),
+            color = CosmicTheme.colors.whitePrimary
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -70,7 +73,7 @@ fun DetailHeader(
             Icon(
                 painter = painterResource(R.drawable.ic_nav_saved),
                 contentDescription = "",
-                tint = CosmicIconGray,
+                tint = CosmicTheme.colors.bodyGray,
                 modifier = Modifier.size(CosmicSize.iconM),
             )
         }
@@ -97,7 +100,7 @@ fun DetailHeader(
             Icon(
                 painter = painterResource(R.drawable.ic_share),
                 contentDescription = "",
-                tint = CosmicIconGray,
+                tint = CosmicTheme.colors.bodyGray,
                 modifier = Modifier.size(CosmicSize.iconM),
             )
         }

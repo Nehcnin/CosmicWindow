@@ -31,6 +31,7 @@ import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.core.ui.theme.CosmicYellow
 
 @Composable
@@ -46,7 +47,7 @@ fun DetailCopyrightCard(
                 .padding(CosmicSize.medium)
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = CosmicTheme.colors.surface,
                     shape = RoundedCornerShape(CosmicSize.radiusL),
                 ).border(
                     width = 1.dp,
@@ -56,9 +57,9 @@ fun DetailCopyrightCard(
     ) {
         Text(
             text = "ATTRIBUTION & SOURCE",
-            style = MaterialTheme.typography.labelLarge,
+            style = CosmicTheme.typography.bodyMediumSemi,
             fontWeight = FontWeight.SemiBold,
-            color = CosmicNavTextSelected,
+            color = CosmicTheme.colors.selected,
         )
 
         Row(
@@ -71,13 +72,14 @@ fun DetailCopyrightCard(
         ) {
             Text(
                 text = "Source",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicIconGray,
+                style = CosmicTheme.typography.bodyMediumSemi,
+                color = CosmicTheme.colors.bodyGray,
             )
             Text(
                 text = "NASA APOD API",
-                style = MaterialTheme.typography.labelLarge,
+                style = CosmicTheme.typography.bodyMediumSemi,
                 fontSize = 16.sp,
+                color = CosmicTheme.colors.whitePrimary
             )
         }
 
@@ -96,13 +98,14 @@ fun DetailCopyrightCard(
         ) {
             Text(
                 text = "Credit",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicIconGray,
+                style = CosmicTheme.typography.bodyMediumSemi,
+                color = CosmicTheme.colors.bodyGray,
             )
             Text(
                 text = credit,
-                style = MaterialTheme.typography.labelLarge,
+                style = CosmicTheme.typography.bodyMediumSemi,
                 fontSize = 16.sp,
+                color = CosmicTheme.colors.whitePrimary
             )
         }
 
@@ -121,14 +124,14 @@ fun DetailCopyrightCard(
         ) {
             Text(
                 text = "Copyright",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicIconGray,
+                style = CosmicTheme.typography.bodyMediumSemi,
+                color = CosmicTheme.colors.bodyGray,
             )
             Text(
                 text = copyright,
-                style = MaterialTheme.typography.labelLarge,
+                style = CosmicTheme.typography.bodyMediumSemi,
                 fontSize = 16.sp,
-                color = CosmicYellow,
+                color = CosmicTheme.colors.bodyGray,
             )
         }
 
@@ -139,7 +142,7 @@ fun DetailCopyrightCard(
                     .fillMaxWidth()
                     .height(CosmicSize.large)
                     .background(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        color = CosmicTheme.colors.surfaceVariant,
                         shape = RoundedCornerShape(CosmicSize.radiusL),
                     ).clip(RoundedCornerShape(CosmicSize.radiusL))
                     .clickable {
@@ -152,14 +155,14 @@ fun DetailCopyrightCard(
         ) {
             Text(
                 text = "View original APOD entry",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicNavTextSelected,
+                style = CosmicTheme.typography.bodyMediumSemi,
+                color = CosmicTheme.colors.selected,
                 fontWeight = FontWeight.SemiBold,
             )
 
             Icon(
                 painter = painterResource(R.drawable.ic_external),
-                tint = CosmicNavTextSelected,
+                tint = CosmicTheme.colors.selected,
                 modifier =
                     Modifier
                         .padding(start = CosmicSize.smallL)

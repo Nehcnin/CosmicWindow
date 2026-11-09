@@ -13,6 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen
 import com.example.cosmicwindow.R
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun SplashScreen() {
@@ -20,7 +21,7 @@ fun SplashScreen() {
         modifier =
             Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
+                .background(CosmicTheme.colors.background),
     ) {
         Image(
             painter = painterResource(id = R.drawable.splash_screen),

@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import coil3.compose.AsyncImage
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 // TABVIEW!!!!!!
 @Composable
@@ -42,8 +43,8 @@ fun EarthImage(imageUrl: String) {
                             Brush.radialGradient(
                                 0.0f to Color.Transparent,
                                 0.75f to Color.Transparent,
-                                0.751f to MaterialTheme.colorScheme.background,
-                                1f to MaterialTheme.colorScheme.background,
+                                0.751f to CosmicTheme.colors.background,
+                                1f to CosmicTheme.colors.background,
                             ),
                     ),
         )
@@ -58,8 +59,8 @@ fun EarthImage(imageUrl: String) {
                             Brush.radialGradient(
                                 0.0f to Color.Transparent,
                                 0.75f to Color.Transparent,
-                                0.751f to CosmicNavTextSelected.copy(alpha = 0.2f),
-                                1f to MaterialTheme.colorScheme.background,
+                                0.751f to CosmicTheme.colors.selected.copy(alpha = 0.2f),
+                                1f to CosmicTheme.colors.background,
                             ),
                     ),
         )

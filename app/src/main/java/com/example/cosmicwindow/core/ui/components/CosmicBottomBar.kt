@@ -18,6 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.navigation.EarthRoute
 import com.example.cosmicwindow.core.navigation.TodayRoute
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import java.time.LocalDate
 
 @Composable
@@ -33,7 +34,7 @@ fun CosmicBottomBar(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background)
+                .background(CosmicTheme.colors.background)
                 .padding(bottom = 12.dp)
                 .height(80.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,

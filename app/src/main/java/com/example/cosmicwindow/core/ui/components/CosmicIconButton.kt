@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun CosmicIconButton(
@@ -47,7 +48,7 @@ fun CosmicIconButton(
         Text(
             text = text,
             color = textColor,
-            style = MaterialTheme.typography.labelMedium,
+            style = CosmicTheme.typography.bodySmall,
             maxLines = 1,
             softWrap = false,
         )
