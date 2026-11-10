@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,9 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
-import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
-import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
@@ -57,7 +54,7 @@ fun TodayCopyrightCard(
             Text(
                 text = "Public NASA Data • APOD Archive",
                 style = CosmicTheme.typography.bodyMediumS,
-                color = CosmicTheme.colors.whitePrimary
+                color = CosmicTheme.colors.whitePrimary,
             )
         }
         Text(
@@ -70,7 +67,7 @@ fun TodayCopyrightCard(
                     ).padding(top = CosmicSize.medium)
                     .fillMaxWidth(),
             textAlign = TextAlign.Center,
-            color = CosmicTheme.colors.bodyGray
+            color = CosmicTheme.colors.bodyGray,
         )
 
         Text(
@@ -89,7 +86,7 @@ fun TodayCopyrightCard(
                         horizontal = CosmicSize.medium,
                         vertical = CosmicSize.medium,
                     ),
-            color = CosmicTheme.colors.bodyGray
+            color = CosmicTheme.colors.bodyGray,
         )
     }
 }

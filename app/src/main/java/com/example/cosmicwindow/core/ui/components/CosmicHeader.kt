@@ -3,7 +3,6 @@ package com.example.cosmicwindow.core.ui.components
 import android.app.DatePickerDialog
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,12 +14,10 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -44,14 +41,14 @@ fun CosmicHeader(
     firstIconSize: Dp = 64.dp,
     lastIconSize: Dp = 24.dp,
     modifierFirst: Modifier = Modifier,
-    modifierLast: Modifier = Modifier,
     tintLast: Color = Color.Unspecified,
+    modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
 
     Row(
         modifier =
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .height(64.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -70,13 +67,13 @@ fun CosmicHeader(
                 text = title,
                 style = CosmicTheme.typography.headerTitle,
                 modifier = Modifier.padding(bottom = 4.dp),
-                color = CosmicTheme.colors.whitePrimary
+                color = CosmicTheme.colors.whitePrimary,
             )
 
             Text(
                 text = subtitle,
                 style = CosmicTheme.typography.headerBody,
-                color = CosmicTheme.colors.bodyGray
+                color = CosmicTheme.colors.bodyGray,
             )
         }
 

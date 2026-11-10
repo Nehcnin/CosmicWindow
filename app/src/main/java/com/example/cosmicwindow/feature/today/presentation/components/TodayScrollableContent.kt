@@ -1,12 +1,19 @@
 package com.example.cosmicwindow.feature.today.presentation.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import com.example.cosmicwindow.feature.today.presentation.components.cards.TodayApodCard
@@ -55,6 +62,24 @@ fun TodayScrollableContent(
                     credit = apod.credit ?: "NASA",
                     copyright = apod.copyright ?: "NASA",
                     modifier = Modifier.padding(horizontal = CosmicSize.medium),
+                )
+            }
+
+            item {
+                Box(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(CosmicTheme.sizes.medium)
+                            .background(
+                                Brush.verticalGradient(
+                                    colors =
+                                        listOf(
+                                            Color.Transparent,
+                                            CosmicTheme.colors.backgroundDark,
+                                        ),
+                                ),
+                            ),
                 )
             }
         }

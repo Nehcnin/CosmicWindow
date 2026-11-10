@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -23,8 +22,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
-import com.example.cosmicwindow.core.ui.theme.CosmicOnPrimary
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
@@ -69,7 +66,7 @@ fun CosmicBottomBarElement(
             modifier = Modifier.padding(top = 4.dp),
             text = text,
             style = CosmicTheme.typography.bodySmallBold,
-            color = if (selected) CosmicTheme.colors.selected else CosmicTheme.colors.bodyGray
+            color = if (selected) CosmicTheme.colors.selected else CosmicTheme.colors.bodyGray,
         )
     }
 }

@@ -18,7 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,7 +34,6 @@ import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicButtonGray
 import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
-import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.domain.model.Apod
@@ -134,7 +132,7 @@ fun TodayApodCard(
                     text = apod.title,
                     style = CosmicTheme.typography.titleMedium,
                     modifier = Modifier.padding(vertical = CosmicSize.smallL),
-                    color = CosmicTheme.colors.whitePrimary
+                    color = CosmicTheme.colors.whitePrimary,
                 )
 
                 if (apod.alt != null) {
@@ -144,7 +142,7 @@ fun TodayApodCard(
                         maxLines = 3,
                         softWrap = true,
                         overflow = TextOverflow.Ellipsis,
-                        color = CosmicTheme.colors.bodyGray
+                        color = CosmicTheme.colors.bodyGray,
                     )
                 }
                 Row(

@@ -14,8 +14,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
@@ -31,8 +29,6 @@ import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.ABeeZee
 import com.example.cosmicwindow.core.ui.theme.CosmicButtonGray
 import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
-import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
-import com.example.cosmicwindow.core.ui.theme.CosmicOnPrimary
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
@@ -49,7 +45,7 @@ fun EarthPlayCard(
     onIndexChange: (Int) -> Unit,
     onPlayPause: () -> Unit,
     onPrevious: () -> Unit,
-    onNext: () -> Unit
+    onNext: () -> Unit,
 ) {
     Column(
         modifier =
@@ -59,8 +55,7 @@ fun EarthPlayCard(
                 .background(
                     color = CosmicTheme.colors.surface,
                     shape = RoundedCornerShape(CosmicSize.radiusL),
-                )
-                .padding(CosmicSize.medium),
+                ).padding(CosmicSize.medium),
     ) {
         Row(
             modifier =
@@ -83,7 +78,7 @@ fun EarthPlayCard(
                     lineHeight = 28.sp,
                     letterSpacing = -0.45.sp,
                     fontWeight = FontWeight.Normal,
-                    color = CosmicTheme.colors.whitePrimary
+                    color = CosmicTheme.colors.whitePrimary,
                 )
             }
             Row(
@@ -92,8 +87,7 @@ fun EarthPlayCard(
                         .background(
                             color = CosmicTheme.colors.surfaceVariant,
                             shape = CircleShape,
-                        )
-                        .padding(horizontal = CosmicSize.medium, vertical = CosmicSize.smallL),
+                        ).padding(horizontal = CosmicSize.medium, vertical = CosmicSize.smallL),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(
@@ -114,7 +108,7 @@ fun EarthPlayCard(
                     lineHeight = 16.sp,
                     letterSpacing = 0.55.sp,
                     fontWeight = FontWeight.Medium,
-                    color = CosmicTheme.colors.selected
+                    color = CosmicTheme.colors.selected,
                 )
             }
         }
@@ -181,25 +175,25 @@ fun EarthPlayCard(
         Row(
             modifier = Modifier.fillMaxWidth().padding(top = CosmicSize.smallL),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
                 Modifier
                     .size(CosmicSize.large)
                     .background(
                         color = CosmicButtonGray,
-                        shape = CircleShape
-                    )
-                    .clip(CircleShape)
-                    .clickable(onClick = onPrevious)
+                        shape = CircleShape,
+                    ).clip(CircleShape)
+                    .clickable(onClick = onPrevious),
             ) {
                 Icon(
                     contentDescription = "",
                     painter = painterResource(R.drawable.ic_prev),
-                    modifier = Modifier
-                        .size(CosmicSize.mediumS)
-                        .align(Alignment.Center),
-                    tint = CosmicTitleColor
+                    modifier =
+                        Modifier
+                            .size(CosmicSize.mediumS)
+                            .align(Alignment.Center),
+                    tint = CosmicTitleColor,
                 )
             }
 
@@ -209,23 +203,26 @@ fun EarthPlayCard(
                     .size(CosmicSize.largeL)
                     .background(
                         color = CosmicTheme.colors.primary,
-                        shape = CircleShape
-                    )
+                        shape = CircleShape,
+                    ).padding(start = CosmicTheme.sizes.small)
                     .clip(CircleShape)
-                    .clickable(onClick = onPlayPause)
+                    .clickable(onClick = onPlayPause),
             ) {
                 Icon(
                     contentDescription = "",
-                    painter = painterResource(
-                        if (!isPlaying)
-                            R.drawable.ic_play_button
-                        else
-                            R.drawable.ic_pause
-                    ),
-                    modifier = Modifier
-                        .size(CosmicSize.iconS)
-                        .align(Alignment.Center),
-                    tint = CosmicTheme.colors.onPrimary
+                    painter =
+                        painterResource(
+                            if (!isPlaying) {
+                                R.drawable.ic_play_button
+                            } else {
+                                R.drawable.ic_pause
+                            },
+                        ),
+                    modifier =
+                        Modifier
+                            .size(CosmicSize.iconS)
+                            .align(Alignment.Center),
+                    tint = CosmicTheme.colors.onPrimary,
                 )
             }
 
@@ -234,21 +231,20 @@ fun EarthPlayCard(
                     .size(CosmicSize.large)
                     .background(
                         color = CosmicButtonGray,
-                        shape = CircleShape
-                    )
-                    .clip(CircleShape)
-                    .clickable(onClick = onNext)
+                        shape = CircleShape,
+                    ).clip(CircleShape)
+                    .clickable(onClick = onNext),
             ) {
                 Icon(
                     contentDescription = "",
                     painter = painterResource(R.drawable.ic_next),
-                    modifier = Modifier
-                        .size(CosmicSize.mediumS)
-                        .align(Alignment.Center),
-                    tint = CosmicTitleColor
+                    modifier =
+                        Modifier
+                            .size(CosmicSize.mediumS)
+                            .align(Alignment.Center),
+                    tint = CosmicTitleColor,
                 )
             }
         }
-
     }
 }

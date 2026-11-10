@@ -25,10 +25,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil3.compose.AsyncImage
 import com.example.cosmicwindow.R
-import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
-import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 
 @Composable
 fun DetailImage(url: String?) {

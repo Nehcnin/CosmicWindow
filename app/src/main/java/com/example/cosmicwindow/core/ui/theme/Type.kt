@@ -1,12 +1,9 @@
 package com.example.cosmicwindow.core.ui.theme
 
-import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import com.example.cosmicwindow.R
 
 val SpaceGrotesk =
@@ -14,30 +11,34 @@ val SpaceGrotesk =
         Font(
             R.font.spacegrotesk_variable,
             weight = FontWeight.Normal,
-            variationSettings = FontVariation.Settings(
-                FontVariation.weight(400)
-            )
+            variationSettings =
+                FontVariation.Settings(
+                    FontVariation.weight(400),
+                ),
         ),
         Font(
             R.font.spacegrotesk_variable,
             weight = FontWeight.Medium,
-            variationSettings = FontVariation.Settings(
-                FontVariation.weight(500)
-            )
+            variationSettings =
+                FontVariation.Settings(
+                    FontVariation.weight(500),
+                ),
         ),
         Font(
             R.font.spacegrotesk_variable,
             weight = FontWeight.SemiBold,
-            variationSettings = FontVariation.Settings(
-                FontVariation.weight(600)
-            )
+            variationSettings =
+                FontVariation.Settings(
+                    FontVariation.weight(600),
+                ),
         ),
         Font(
             R.font.spacegrotesk_variable,
             weight = FontWeight.Bold,
-            variationSettings = FontVariation.Settings(
-                FontVariation.weight(700)
-            )
+            variationSettings =
+                FontVariation.Settings(
+                    FontVariation.weight(700),
+                ),
         ),
     )
 
@@ -46,30 +47,34 @@ val Inter =
         Font(
             R.font.inter_variable,
             weight = FontWeight.Normal,
-            variationSettings = FontVariation.Settings(
-                FontVariation.weight(400)
-            )
+            variationSettings =
+                FontVariation.Settings(
+                    FontVariation.weight(400),
+                ),
         ),
         Font(
             R.font.inter_variable,
             weight = FontWeight.Medium,
-            variationSettings = FontVariation.Settings(
-                FontVariation.weight(500)
-            )
+            variationSettings =
+                FontVariation.Settings(
+                    FontVariation.weight(500),
+                ),
         ),
         Font(
             R.font.inter_variable,
             weight = FontWeight.SemiBold,
-            variationSettings = FontVariation.Settings(
-                FontVariation.weight(600)
-            )
+            variationSettings =
+                FontVariation.Settings(
+                    FontVariation.weight(600),
+                ),
         ),
         Font(
             R.font.inter_variable,
             weight = FontWeight.Bold,
-            variationSettings = FontVariation.Settings(
-                FontVariation.weight(700)
-            )
+            variationSettings =
+                FontVariation.Settings(
+                    FontVariation.weight(700),
+                ),
         ),
     )
 

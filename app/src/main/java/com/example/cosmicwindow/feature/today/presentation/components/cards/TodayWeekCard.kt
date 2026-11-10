@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,7 +25,6 @@ import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
-import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -79,13 +77,13 @@ fun TodayWeekCard(apod: Apod, dayText: String) {
                             shape = RoundedCornerShape(CosmicSize.radiusRound),
                         ).padding(CosmicSize.mediumS),
                 style = CosmicTheme.typography.bodyMedium,
-                color = CosmicTheme.colors.bodyGray
+                color = CosmicTheme.colors.bodyGray,
             )
         }
         Text(
             text = dayText,
             style = CosmicTheme.typography.bodyMedium,
-            color = CosmicTheme.colors.bodyGray
+            color = CosmicTheme.colors.bodyGray,
         )
         Text(
             modifier =

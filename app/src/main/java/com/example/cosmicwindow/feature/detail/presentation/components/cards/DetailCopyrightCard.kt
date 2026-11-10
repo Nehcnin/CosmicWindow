@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,12 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import com.example.cosmicwindow.R
-import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
-import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
-import com.example.cosmicwindow.core.ui.theme.CosmicYellow
 
 @Composable
 fun DetailCopyrightCard(
@@ -79,7 +75,7 @@ fun DetailCopyrightCard(
                 text = "NASA APOD API",
                 style = CosmicTheme.typography.bodyMediumSemi,
                 fontSize = 16.sp,
-                color = CosmicTheme.colors.whitePrimary
+                color = CosmicTheme.colors.whitePrimary,
             )
         }
 
@@ -105,7 +101,7 @@ fun DetailCopyrightCard(
                 text = credit,
                 style = CosmicTheme.typography.bodyMediumSemi,
                 fontSize = 16.sp,
-                color = CosmicTheme.colors.whitePrimary
+                color = CosmicTheme.colors.whitePrimary,
             )
         }
 

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -55,7 +54,7 @@ fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
             Text(
                 text = "Previous 7 Days",
                 style = CosmicTheme.typography.titleMediumS,
-                color = CosmicTheme.colors.whitePrimary
+                color = CosmicTheme.colors.whitePrimary,
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -63,7 +62,7 @@ fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
             Text(
                 text = "Past APOD Entries",
                 style = CosmicTheme.typography.bodySmall,
-                color = CosmicTheme.colors.bodyGray
+                color = CosmicTheme.colors.bodyGray,
             )
         }
         LazyRow(

@@ -1,7 +1,6 @@
 package com.example.cosmicwindow.feature.detail.presentation.components
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,7 +12,6 @@ import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.style.TextDecoration
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
-import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
 
 @Composable
 fun DetailExplanation(explanation: String) {
@@ -21,7 +19,7 @@ fun DetailExplanation(explanation: String) {
         text = "Explanation",
         style = CosmicTheme.typography.titleMediumS.copy(fontWeight = FontWeight.Medium),
         modifier = Modifier.padding(horizontal = CosmicSize.medium),
-        color = CosmicTheme.colors.whitePrimary
+        color = CosmicTheme.colors.whitePrimary,
     )
     Text(
         text =

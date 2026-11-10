@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,11 +25,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
-import com.example.cosmicwindow.core.ui.theme.CosmicOnYellow
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
-import com.example.cosmicwindow.core.ui.theme.CosmicYellow
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import com.example.cosmicwindow.feature.today.presentation.components.TodayVideoPlayer
 
@@ -71,7 +68,7 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
             Text(
                 text = "Featured APOD Video",
                 style = CosmicTheme.typography.titleSmall,
-                color = CosmicTheme.colors.whitePrimary
+                color = CosmicTheme.colors.whitePrimary,
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -104,13 +101,13 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
             text = apod.title,
             style = CosmicTheme.typography.titleSmall,
             modifier = Modifier.padding(bottom = CosmicSize.medium),
-            color = CosmicTheme.colors.whitePrimary
+            color = CosmicTheme.colors.whitePrimary,
         )
         if (apod.alt != null) {
             Text(
                 text = apod.alt,
                 style = CosmicTheme.typography.bodyMedium,
-                color = CosmicTheme.colors.bodyGray
+                color = CosmicTheme.colors.bodyGray,
             )
         }
 
