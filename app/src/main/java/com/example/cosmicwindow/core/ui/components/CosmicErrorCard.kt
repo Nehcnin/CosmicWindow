@@ -74,6 +74,7 @@ fun CosmicErrorCard(modifier: Modifier = Modifier, callback: () -> Unit) {
                 maxLines = 1,
                 overflow = TextOverflow.Clip,
                 style = CosmicTheme.typography.bodyMedium,
+                color = CosmicTheme.colors.bodyGray
             )
 
             CosmicIconButton(

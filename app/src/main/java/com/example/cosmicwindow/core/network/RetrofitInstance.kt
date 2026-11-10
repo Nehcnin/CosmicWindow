@@ -18,7 +18,7 @@ object RetrofitInstance {
             .client(client)
             .addConverterFactory(
                 json.asConverterFactory(
-                    "applicaion/json".toMediaType(),
+                    "application/json".toMediaType(),
                 ),
             ).build()
 }
