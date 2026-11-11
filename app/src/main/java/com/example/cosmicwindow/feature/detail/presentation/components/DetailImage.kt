@@ -25,103 +25,106 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil3.compose.AsyncImage
 import com.example.cosmicwindow.R
-import com.example.cosmicwindow.core.ui.theme.CosmicCardGradient
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
-import com.example.cosmicwindow.core.ui.theme.CosmicTitleColor
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
-fun DetailImage(
-    url: String?
-){
-
+fun DetailImage(url: String?) {
     var fullscreen by remember { mutableStateOf(false) }
 
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(CosmicSize.cardXXXL)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(CosmicSize.cardXXXL),
     ) {
         AsyncImage(
             model = url,
             contentDescription = "",
-            modifier = Modifier
-                .fillMaxSize(),
-            contentScale = ContentScale.Crop
+            modifier =
+                Modifier
+                    .fillMaxSize(),
+            contentScale = ContentScale.Crop,
         )
 
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colorStops = arrayOf(
-                            0.4f to Color.Transparent,
-                            1f to CosmicCardGradient
-                        )
-                    )
-                )
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colorStops =
+                                arrayOf(
+                                    0.4f to Color.Transparent,
+                                    1f to CosmicTheme.colors.backgroundVariant,
+                                ),
+                        ),
+                    ),
         )
 
         IconButton(
             onClick = {
                 fullscreen = true
             },
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(CosmicSize.medium)
-                .size(CosmicSize.largeL)
-                .background(
-                    color = CosmicCardGradient,
-                    shape = CircleShape
-                )
+            modifier =
+                Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(CosmicSize.medium)
+                    .size(CosmicSize.largeL)
+                    .background(
+                        color = CosmicTheme.colors.backgroundVariant,
+                        shape = CircleShape,
+                    ),
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_fullscreen),
                 contentDescription = "Fullscreen",
                 modifier = Modifier.size(CosmicSize.iconS),
-                tint = CosmicTitleColor
+                tint = CosmicTheme.colors.whitePrimary,
             )
         }
 
-        if(fullscreen){
+        if (fullscreen) {
             Dialog(
-                onDismissRequest = {fullscreen = false},
-                properties = DialogProperties(
-                    usePlatformDefaultWidth = false,
-                    decorFitsSystemWindows = false
-                )
+                onDismissRequest = { fullscreen = false },
+                properties =
+                    DialogProperties(
+                        usePlatformDefaultWidth = false,
+                        decorFitsSystemWindows = false,
+                    ),
             ) {
                 Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.Black),
-                    contentAlignment = Alignment.Center
-                ){
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .background(Color.Black),
+                    contentAlignment = Alignment.Center,
+                ) {
                     AsyncImage(
                         model = url,
                         contentDescription = "Fullscreen Image",
                         modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Fit
+                        contentScale = ContentScale.Fit,
                     )
 
                     IconButton(
                         onClick = { fullscreen = false },
-                        modifier = Modifier
-                            .padding(top = CosmicSize.large, end = CosmicSize.medium)
-                            .align(Alignment.TopEnd)
-
-                            .background(
-                                color = CosmicCardGradient,
-                                shape = CircleShape
-                            )
-                            .size(CosmicSize.large)
+                        modifier =
+                            Modifier
+                                .padding(top = CosmicSize.large, end = CosmicSize.medium)
+                                .align(Alignment.TopEnd)
+                                .background(
+                                    color = CosmicTheme.colors.backgroundVariant,
+                                    shape = CircleShape,
+                                ).size(CosmicSize.large),
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.ic_close),
                             contentDescription = "Close",
-                            tint = CosmicTitleColor,
-                            modifier = Modifier
-                                .size(CosmicSize.iconS)
+                            tint = CosmicTheme.colors.whitePrimary,
+                            modifier =
+                                Modifier
+                                    .size(CosmicSize.iconS),
                         )
                     }
                 }

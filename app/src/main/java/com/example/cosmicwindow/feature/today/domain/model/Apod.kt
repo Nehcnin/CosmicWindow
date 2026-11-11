@@ -10,5 +10,5 @@ data class Apod(
     val copyright: String?,
     val credit: String?,
     val alt: String?,
-    val videoUrl: String?
+    val videoUrl: String?,
 )

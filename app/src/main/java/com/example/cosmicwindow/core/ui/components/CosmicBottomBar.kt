@@ -2,76 +2,93 @@ package com.example.cosmicwindow.core.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cosmicwindow.R
-import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
+import com.example.cosmicwindow.core.navigation.EarthRoute
 import com.example.cosmicwindow.core.navigation.TodayRoute
+import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
+import java.time.LocalDate
 
 @Composable
 fun CosmicBottomBar(
     modifier: Modifier = Modifier,
-    navController : NavController
+    navController: NavController,
+    selectedDate: LocalDate,
 ) {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val destination = currentBackStackEntry?.destination
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(bottom = 12.dp)
-            .height(80.dp),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .background(CosmicTheme.colors.background)
+                .padding(bottom = 12.dp)
+                .height(80.dp)
+                .drawBehind {
+                    drawLine(
+                        color = CosmicSurfaceBorder,
+                        start = Offset(0f, 0.5f),
+                        end = Offset(size.width, 0.5f),
+                        strokeWidth = 1.dp.toPx(),
+                    )
+                },
         horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-
         CosmicBottomBarElement(
             text = "Today",
             description = "nav_today",
             icon = R.drawable.ic_nav_today,
-            selected = destination?.hasRoute<TodayRoute>() == true
+            selected = destination?.hasRoute<TodayRoute>() == true,
+            onClick = {
+                navController.navigate(TodayRoute){
+                    popUpTo(TodayRoute){saveState = true}
+                    launchSingleTop = true
+                    restoreState = true
+                } },
         )
 
         CosmicBottomBarElement(
             text = "Earth",
             description = "nav_earth",
-            icon = R.drawable.ic_nav_earth
+            icon = R.drawable.ic_nav_earth,
+            selected = destination?.hasRoute<EarthRoute>() == true,
+            onClick = {
+                navController.navigate(EarthRoute(selectedDate.toString())){
+                    popUpTo(TodayRoute){saveState = true}
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            },
         )
 
         CosmicBottomBarElement(
             text = "Explore",
             description = "nav_explore",
-            icon = R.drawable.ic_nav_explore
+            icon = R.drawable.ic_nav_explore,
+            onClick = {},
         )
 
         CosmicBottomBarElement(
             text = "Saved",
             description = "nav_saved",
-            icon = R.drawable.ic_nav_saved
+            icon = R.drawable.ic_nav_saved,
+            onClick = {},
         )
-
-
     }
 }

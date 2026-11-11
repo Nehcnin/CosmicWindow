@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,60 +21,62 @@ import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import com.example.cosmicwindow.feature.today.presentation.components.cards.TodayWeekCard
 
 @Composable
-fun TodayWeekRow(
-    viewModel: TodayViewModel,
-    modifier: Modifier = Modifier
-){
+fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(256.dp)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .height(256.dp),
     ) {
         Row(
-            modifier = Modifier
-                .padding(horizontal = CosmicSize.medium)
-                .padding(bottom = CosmicSize.mediumS)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+            modifier =
+                Modifier
+                    .padding(horizontal = CosmicSize.medium)
+                    .padding(bottom = CosmicSize.mediumS)
+                    .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_bars),
                 tint = CosmicNavTextSelected,
                 contentDescription = "",
-                modifier = Modifier
-                    .padding(end = CosmicSize.smallL)
-                    .size(CosmicSize.iconM)
+                modifier =
+                    Modifier
+                        .padding(end = CosmicSize.smallL)
+                        .size(CosmicSize.iconM),
             )
 
             Text(
                 text = "Previous 7 Days",
-                style = MaterialTheme.typography.titleLarge
+                style = CosmicTheme.typography.titleMediumS,
+                color = CosmicTheme.colors.whitePrimary,
             )
 
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
                 text = "Past APOD Entries",
-                style = MaterialTheme.typography.bodyLarge,
+                style = CosmicTheme.typography.bodySmall,
+                color = CosmicTheme.colors.bodyGray,
             )
         }
         LazyRow(
-            //modifier = Modifier.padding(start = CosmicSize.medium),
             horizontalArrangement = Arrangement.spacedBy(CosmicSize.smallL),
-            contentPadding = PaddingValues(
-                horizontal = CosmicSize.medium
-            )
+            contentPadding =
+                PaddingValues(
+                    horizontal = CosmicSize.medium,
+                ),
         ) {
-
             itemsIndexed(viewModel.apods.drop(1)) { index, apod ->
                 val dayText = if (index == 0) "Yesterday" else "$index days ago"
                 TodayWeekCard(
                     apod = apod,
-                    dayText = dayText
+                    dayText = dayText,
                 )
             }
         }

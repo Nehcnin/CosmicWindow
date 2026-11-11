@@ -8,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,156 +15,156 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import com.example.cosmicwindow.R
-import com.example.cosmicwindow.core.ui.theme.CosmicIconGray
-import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
-import com.example.cosmicwindow.core.ui.theme.CosmicYellow
+import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun DetailCopyrightCard(
     credit: String,
     copyright: String,
     url: String,
-    context : Context
+    context: Context,
 ) {
     Column(
-        modifier = Modifier
-            .padding(CosmicSize.medium)
-            .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = RoundedCornerShape(CosmicSize.radiusL)
-            )
-            .border(
-                width = 1.dp,
-                color = CosmicSurfaceBorder,
-                shape = RoundedCornerShape(CosmicSize.radiusL)
-            )
-            .padding(CosmicSize.medium)
+        modifier =
+            Modifier
+                .padding(CosmicSize.medium)
+                .fillMaxWidth()
+                .background(
+                    color = CosmicTheme.colors.surface,
+                    shape = RoundedCornerShape(CosmicSize.radiusL),
+                ).border(
+                    width = 1.dp,
+                    color = CosmicSurfaceBorder,
+                    shape = RoundedCornerShape(CosmicSize.radiusL),
+                ).padding(CosmicSize.medium),
     ) {
         Text(
             text = "ATTRIBUTION & SOURCE",
-            style = MaterialTheme.typography.labelLarge,
+            style = CosmicTheme.typography.bodyMediumSemi,
             fontWeight = FontWeight.SemiBold,
-            color = CosmicNavTextSelected
+            color = CosmicTheme.colors.selected,
         )
 
         Row(
-            modifier = Modifier
-                .padding(vertical = CosmicSize.mediumS)
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .padding(vertical = CosmicSize.mediumS)
+                    .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = "Source",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicIconGray
+                style = CosmicTheme.typography.bodyMediumSemi,
+                color = CosmicTheme.colors.bodyGray,
             )
             Text(
                 text = "NASA APOD API",
-                style = MaterialTheme.typography.labelLarge,
-                fontSize = 16.sp
+                style = CosmicTheme.typography.bodyMediumSemi,
+                fontSize = 16.sp,
+                color = CosmicTheme.colors.whitePrimary,
             )
         }
 
         HorizontalDivider(
             thickness = 1.dp,
-            color = CosmicSurfaceBorder
+            color = CosmicSurfaceBorder,
         )
 
         Row(
-            modifier = Modifier
-                .padding(vertical = CosmicSize.mediumS)
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .padding(vertical = CosmicSize.mediumS)
+                    .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = "Credit",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicIconGray
+                style = CosmicTheme.typography.bodyMediumSemi,
+                color = CosmicTheme.colors.bodyGray,
             )
             Text(
                 text = credit,
-                style = MaterialTheme.typography.labelLarge,
-                fontSize = 16.sp
+                style = CosmicTheme.typography.bodyMediumSemi,
+                fontSize = 16.sp,
+                color = CosmicTheme.colors.whitePrimary,
             )
         }
 
         HorizontalDivider(
             thickness = 1.dp,
-            color = CosmicSurfaceBorder
+            color = CosmicSurfaceBorder,
         )
 
         Row(
-            modifier = Modifier
-                .padding(vertical = CosmicSize.mediumS)
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .padding(vertical = CosmicSize.mediumS)
+                    .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = "Copyright",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicIconGray
+                style = CosmicTheme.typography.bodyMediumSemi,
+                color = CosmicTheme.colors.bodyGray,
             )
             Text(
                 text = copyright,
-                style = MaterialTheme.typography.labelLarge,
+                style = CosmicTheme.typography.bodyMediumSemi,
                 fontSize = 16.sp,
-                color = CosmicYellow
+                color = CosmicTheme.colors.bodyGray,
             )
         }
 
         Row(
-            modifier = Modifier
-                .padding(top = CosmicSize.medium)
-                .fillMaxWidth()
-                .height(CosmicSize.large)
-                .background(
-                    color = MaterialTheme.colorScheme.surfaceVariant,
-                    shape = RoundedCornerShape(CosmicSize.radiusL)
-                )
-                .clip(RoundedCornerShape(CosmicSize.radiusL))
-                .clickable {
-                    context.startActivity(
-                        Intent(Intent.ACTION_VIEW, url.toUri())
-                    )
-                },
+            modifier =
+                Modifier
+                    .padding(top = CosmicSize.medium)
+                    .fillMaxWidth()
+                    .height(CosmicSize.large)
+                    .background(
+                        color = CosmicTheme.colors.surfaceVariant,
+                        shape = RoundedCornerShape(CosmicSize.radiusL),
+                    ).clip(RoundedCornerShape(CosmicSize.radiusL))
+                    .clickable {
+                        context.startActivity(
+                            Intent(Intent.ACTION_VIEW, url.toUri()),
+                        )
+                    },
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
         ) {
             Text(
                 text = "View original APOD entry",
-                style = MaterialTheme.typography.labelLarge,
-                color = CosmicNavTextSelected,
-                fontWeight = FontWeight.SemiBold
+                style = CosmicTheme.typography.bodyMediumSemi,
+                color = CosmicTheme.colors.selected,
+                fontWeight = FontWeight.SemiBold,
             )
 
             Icon(
                 painter = painterResource(R.drawable.ic_external),
-                tint = CosmicNavTextSelected,
-                modifier = Modifier
-                    .padding(start = CosmicSize.smallL)
-                    .size(CosmicSize.iconS),
-                contentDescription = null
+                tint = CosmicTheme.colors.selected,
+                modifier =
+                    Modifier
+                        .padding(start = CosmicSize.smallL)
+                        .size(CosmicSize.iconS),
+                contentDescription = null,
             )
         }
-
     }
 }
