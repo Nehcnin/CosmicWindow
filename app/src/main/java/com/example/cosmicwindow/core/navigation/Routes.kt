@@ -14,3 +14,6 @@ data class DetailRoute(
 data class EarthRoute(
     val date: String,
 )
+
+@Serializable
+data object ExploreRoute

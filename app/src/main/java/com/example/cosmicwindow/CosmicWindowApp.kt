@@ -3,6 +3,7 @@ package com.example.cosmicwindow
 import android.app.Application
 import com.example.cosmicwindow.core.di.DetailModule
 import com.example.cosmicwindow.core.di.EarthModule
+import com.example.cosmicwindow.core.di.ExploreModule
 import com.example.cosmicwindow.core.di.NetworkModule
 import com.example.cosmicwindow.core.di.TodayModule
 import org.koin.android.ext.koin.androidContext
@@ -18,6 +19,7 @@ class CosmicWindowApp : Application() {
                 TodayModule,
                 DetailModule,
                 EarthModule,
+                ExploreModule
             )
         }
     }

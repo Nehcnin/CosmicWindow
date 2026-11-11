@@ -45,8 +45,6 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EarthScreen(date: String, viewModel: EarthViewModel) {
-    val context = LocalContext.current
-    val imageLoader = context.imageLoader
 
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
@@ -72,7 +70,7 @@ fun EarthScreen(date: String, viewModel: EarthViewModel) {
                     .fillMaxWidth()
                     .height(
                         with(LocalDensity.current) {
-                            (64.dp.toPx() + scrollBehaviour.state.heightOffset)
+                            (CosmicTheme.sizes.largeXL.toPx() + scrollBehaviour.state.heightOffset)
                                 .coerceAtLeast(0f)
                                 .toDp()
                         },

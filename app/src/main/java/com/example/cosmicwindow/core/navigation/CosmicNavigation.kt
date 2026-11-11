@@ -17,6 +17,8 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.detail.presentation.DetailScreen
 import com.example.cosmicwindow.feature.earth.presentation.EarthScreen
 import com.example.cosmicwindow.feature.earth.presentation.EarthViewModel
+import com.example.cosmicwindow.feature.explore.presentation.ExploreScreen
+import com.example.cosmicwindow.feature.explore.presentation.ExploreViewModel
 import com.example.cosmicwindow.feature.today.presentation.TodayScreen
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -27,6 +29,7 @@ fun CosmicNavigation() {
     val todayViewModel: TodayViewModel = koinViewModel()
 
     val earthViewModel: EarthViewModel = koinViewModel()
+    val exploreViewModel: ExploreViewModel = koinViewModel()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val destination = backStackEntry?.destination
@@ -75,6 +78,12 @@ fun CosmicNavigation() {
                     onBack = {
                         navController.popBackStack()
                     },
+                )
+            }
+
+            composable<ExploreRoute>{ entry ->
+                ExploreScreen(
+                    viewModel = exploreViewModel
                 )
             }
         }
