@@ -23,6 +23,7 @@ data class CosmicColors(
     val yellowPrimary: Color = CosmicYellow,
     val yellowBackground: Color = CosmicOnYellow,
     val backgroundDark: Color = CosmicBackgroundDark,
+    val borderVariant: Color = CosmicTextFieldBorder
 )
 
 internal val LocalCosmicColors =

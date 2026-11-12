@@ -14,10 +14,25 @@ import kotlinx.coroutines.launch
 
 class ExploreViewModel(
     private val repository: ExploreRepository
-): ViewModel(){
+) : ViewModel() {
 
     var isLoading by mutableStateOf(false)
         private set
+
+    var query by mutableStateOf("")
+        private set
+
+    var currentQuery = ""
+        private set
+
+    var currentPage = 1
+
+    var pageSize = 12
+
+    var isLoadingMore by mutableStateOf(false)
+        private set
+
+    var hasMorePages = true
 
     var loadJob: Job? = null
 
@@ -25,33 +40,61 @@ class ExploreViewModel(
 
     var items by mutableStateOf<List<ExploreItem>>(emptyList())
 
-    fun loadItems(){
-        isLoading = true
-        loadJob?.cancel()
+    fun onQueryChange(value: String){
+        query = value
+    }
 
-        loadJob = viewModelScope.launch {
+    fun onSearch(){
+        currentQuery = query
+        loadItems()
+    }
 
-            try{
-                items = repository.getImages()
+    fun loadNextPage() {
+        if (hasMorePages&&!isLoadingMore) {
+            isLoadingMore = true
 
-                items.forEach {
-                    Log.d("Explore API","${it.title}\n"+
-                        "${it.imageUrl}\n"+
-                        "${it.date}\n"+
-                        "${it.id}\n"+
-                        "${it.center}\n"+
-                        "${it.keywords}\n"+
-                        "${it.description}\n"
+            loadJob = viewModelScope.launch {
+
+                try {
+                    val result = repository.getImages(page = currentPage, pageSize = pageSize,query = query)
+
+                    result.forEach {
+                        Log.d(
+                            "Explore API", "${it.title}\n" +
+                                "${it.imageUrl}\n" +
+                                "${it.date}\n" +
+                                "${it.id}\n" +
+                                "${it.center}\n" +
+                                "${it.keywords}\n" +
+                                "${it.description}\n"
                         )
+                    }
+
+                    if(result.size < pageSize){
+                        hasMorePages = false
+                    }
+
+                    currentPage++
+
+                    items = items + result
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    Log.e("Explore API", e.message ?: "Error loading items")
+                } finally {
+                    isLoading = false
+                    isLoadingMore = false
                 }
-            } catch (e: CancellationException){
-                throw e
-            } catch (e: Exception){
-                Log.e("Explore API", e.message?:"Error loading items")
-            } finally {
-                isLoading = false
             }
         }
+    }
 
+    fun loadItems() {
+        isLoading = true
+        currentPage = 1
+        hasMorePages = true
+        items = emptyList()
+        error = null
+        loadNextPage()
     }
 }
