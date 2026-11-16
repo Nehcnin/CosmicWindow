@@ -25,12 +25,9 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
-import coil3.imageLoader
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.CosmicHeader
 import com.example.cosmicwindow.core.ui.components.LottieLoading
@@ -45,9 +42,6 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EarthScreen(date: String, viewModel: EarthViewModel) {
-    val context = LocalContext.current
-    val imageLoader = context.imageLoader
-
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
 
@@ -72,7 +66,7 @@ fun EarthScreen(date: String, viewModel: EarthViewModel) {
                     .fillMaxWidth()
                     .height(
                         with(LocalDensity.current) {
-                            (64.dp.toPx() + scrollBehaviour.state.heightOffset)
+                            (CosmicTheme.sizes.largeXL.toPx() + scrollBehaviour.state.heightOffset)
                                 .coerceAtLeast(0f)
                                 .toDp()
                         },

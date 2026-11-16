@@ -17,6 +17,9 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.detail.presentation.DetailScreen
 import com.example.cosmicwindow.feature.earth.presentation.EarthScreen
 import com.example.cosmicwindow.feature.earth.presentation.EarthViewModel
+import com.example.cosmicwindow.feature.explore.presentation.ExploreDetailScreen
+import com.example.cosmicwindow.feature.explore.presentation.ExploreScreen
+import com.example.cosmicwindow.feature.explore.presentation.ExploreViewModel
 import com.example.cosmicwindow.feature.today.presentation.TodayScreen
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -27,11 +30,13 @@ fun CosmicNavigation() {
     val todayViewModel: TodayViewModel = koinViewModel()
 
     val earthViewModel: EarthViewModel = koinViewModel()
+    val exploreViewModel: ExploreViewModel = koinViewModel()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
     val destination = backStackEntry?.destination
 
-    val showBottomBar = destination?.hasRoute<DetailRoute>() == false
+    val showBottomBar =
+        !(destination?.hasRoute<DetailRoute>() == true || destination?.hasRoute<ExploreDetailRoute>() == true)
 
     Scaffold(
         containerColor = CosmicTheme.colors.background,
@@ -76,6 +81,29 @@ fun CosmicNavigation() {
                         navController.popBackStack()
                     },
                 )
+            }
+
+            composable<ExploreRoute> {
+                ExploreScreen(
+                    viewModel = exploreViewModel,
+                    onItemClick = { item ->
+                        navController.navigate(ExploreDetailRoute(item.id))
+                    },
+                )
+            }
+            composable<ExploreDetailRoute> { entry ->
+                val route = entry.toRoute<ExploreDetailRoute>()
+
+                val item = exploreViewModel.items.find { it.id == route.id }
+
+                if (item != null) {
+                    ExploreDetailScreen(
+                        item = item,
+                        onBack = {
+                            navController.popBackStack()
+                        },
+                    )
+                }
             }
         }
     }

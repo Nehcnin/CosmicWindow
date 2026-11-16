@@ -14,3 +14,11 @@ data class DetailRoute(
 data class EarthRoute(
     val date: String,
 )
+
+@Serializable
+data object ExploreRoute
+
+@Serializable
+data class ExploreDetailRoute(
+    val id: String,
+)

@@ -108,4 +108,6 @@ dependencies {
     implementation("androidx.media3:media3-ui:1.11.1")
 
     implementation("com.airbnb.android:lottie-compose:6.6.7")
+
+    implementation("androidx.palette:palette-ktx:1.0.0")
 }
