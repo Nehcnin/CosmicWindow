@@ -38,6 +38,7 @@ import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.explore.domain.model.ExploreItem
+import com.example.cosmicwindow.feature.explore.presentation.components.ExpandableDescription
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -97,26 +98,8 @@ fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter),
         ) {
-            Text(
-                text = item.title,
-                style = CosmicTheme.typography.titleMedium.copy(fontWeight = FontWeight.Medium),
-                color = CosmicTheme.colors.whitePrimary,
-                modifier = Modifier.padding(horizontal = CosmicTheme.sizes.medium),
-            )
 
-            Text(
-                text = item.description,
-                style = CosmicTheme.typography.bodySmall,
-                color = CosmicTheme.colors.bodyGray,
-                modifier =
-                    Modifier
-                        .padding(
-                            horizontal = CosmicTheme.sizes.medium,
-                            vertical = CosmicTheme.sizes.smallL,
-                        )
-                        .heightIn(max = CosmicTheme.sizes.cardS)
-                        .verticalScroll(scrollState),
-            )
+            ExpandableDescription(title = item.title, description = item.description, modifier = Modifier.weight(1f))
 
             Row(
                 modifier =
