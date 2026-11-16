@@ -7,9 +7,10 @@ import retrofit2.http.Query
 interface ExploreApiService {
     @GET("search")
     suspend fun getImages(
-        @Query("q") query: String?=null,
+        @Query("q") query: String? = null,
+        @Query("keywords") keywords: String? = null,
         @Query("media_type") mediaType: String = "image",
         @Query("page_size") pageSize: Int = 20,
-        @Query("page") page: Int = 1
+        @Query("page") page: Int = 1,
     ): ExploreResponse
 }

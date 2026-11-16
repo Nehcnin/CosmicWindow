@@ -19,7 +19,7 @@ class CosmicWindowApp : Application() {
                 TodayModule,
                 DetailModule,
                 EarthModule,
-                ExploreModule
+                ExploreModule,
             )
         }
     }

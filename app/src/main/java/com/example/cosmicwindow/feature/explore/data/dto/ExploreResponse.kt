@@ -6,24 +6,24 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ExploreResponse(
-    val collection: ExploreCollection
+    val collection: ExploreCollection,
 )
 
 @Serializable
 data class ExploreCollection(
-    val items: List<ExploreItemDto>
+    val items: List<ExploreItemDto>,
 )
 
 @Serializable
 data class ExploreItemDto(
     val data: List<ExampleDataDto>,
-    val links: List<ExampleLinkDto> = emptyList()
+    val links: List<ExampleLinkDto> = emptyList(),
 )
 
 @Serializable
 data class ExampleDataDto(
     @SerialName("nasa_id")
-    val id : String,
+    val id: String,
     val center: String = "",
     @SerialName("date_created")
     val date: String = "",
@@ -31,7 +31,7 @@ data class ExampleDataDto(
     val keywords: List<String> = emptyList(),
     @SerialName("media_type")
     val mediaType: String = "image",
-    val title: String = ""
+    val title: String = "",
 )
 
 @Serializable
@@ -39,10 +39,9 @@ data class ExampleLinkDto(
     val href: String,
 )
 
-fun ExploreResponse.toDomain(): List<ExploreItem>{
-
+fun ExploreResponse.toDomain(): List<ExploreItem> {
     return collection.items.mapNotNull { item ->
-        val data = item.data.firstOrNull()?: return@mapNotNull null
+        val data = item.data.firstOrNull() ?: return@mapNotNull null
 
         ExploreItem(
             center = data.center,
@@ -52,12 +51,14 @@ fun ExploreResponse.toDomain(): List<ExploreItem>{
             id = data.id,
             title = data.title,
             imageUrl =
-                item.links.firstOrNull{ it.href.contains("orig.jpg") }?.href
-                    ?:item.links.firstOrNull{ it.href.contains("orig.png") }?.href
-                    ?:item.links.firstOrNull{it.href.contains("large.jpg")}?.href
-                    ?:item.links.firstOrNull{it.href.contains("large.png")}?.href
-                    ?:item.links.firstOrNull()?.href
-                    .orEmpty()
+                item.links.firstOrNull { it.href.contains("orig.jpg") }?.href
+                    ?: item.links.firstOrNull { it.href.contains("orig.png") }?.href
+                    ?: item.links.firstOrNull { it.href.contains("large.jpg") }?.href
+                    ?: item.links.firstOrNull { it.href.contains("large.png") }?.href
+                    ?: item.links
+                        .firstOrNull()
+                        ?.href
+                        .orEmpty(),
         )
     }
 }

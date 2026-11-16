@@ -17,3 +17,8 @@ data class EarthRoute(
 
 @Serializable
 data object ExploreRoute
+
+@Serializable
+data class ExploreDetailRoute(
+    val id: String,
+)

@@ -57,11 +57,12 @@ fun CosmicBottomBar(
             icon = R.drawable.ic_nav_today,
             selected = destination?.hasRoute<TodayRoute>() == true,
             onClick = {
-                navController.navigate(TodayRoute){
-                    popUpTo(TodayRoute){saveState = true}
+                navController.navigate(TodayRoute) {
+                    popUpTo(TodayRoute) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
-                } },
+                }
+            },
         )
 
         CosmicBottomBarElement(
@@ -70,8 +71,8 @@ fun CosmicBottomBar(
             icon = R.drawable.ic_nav_earth,
             selected = destination?.hasRoute<EarthRoute>() == true,
             onClick = {
-                navController.navigate(EarthRoute(selectedDate.toString())){
-                    popUpTo(TodayRoute){saveState = true}
+                navController.navigate(EarthRoute(selectedDate.toString())) {
+                    popUpTo(TodayRoute) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
                 }
@@ -84,8 +85,8 @@ fun CosmicBottomBar(
             icon = R.drawable.ic_nav_explore,
             selected = destination?.hasRoute<ExploreRoute>() == true,
             onClick = {
-                navController.navigate(ExploreRoute){
-                    popUpTo(TodayRoute){saveState = true}
+                navController.navigate(ExploreRoute) {
+                    popUpTo(TodayRoute) { saveState = true }
                     launchSingleTop = true
                     restoreState = true
                 }

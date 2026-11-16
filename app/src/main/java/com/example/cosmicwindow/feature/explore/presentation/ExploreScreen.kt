@@ -1,5 +1,10 @@
 package com.example.cosmicwindow.feature.explore.presentation
 
+import android.app.Activity
+import android.content.Intent
+import android.speech.RecognizerIntent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,7 +17,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
@@ -39,14 +43,15 @@ import com.example.cosmicwindow.core.ui.components.CosmicHeader
 import com.example.cosmicwindow.core.ui.components.LottieLoading
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
+import com.example.cosmicwindow.feature.explore.domain.model.ExploreItem
 import com.example.cosmicwindow.feature.explore.presentation.components.ExploreCard
 import com.example.cosmicwindow.feature.explore.presentation.components.ExploreSearchBar
+import java.util.Locale
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExploreScreen(viewModel: ExploreViewModel) {
-
+fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Unit) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
     val gridState = rememberLazyStaggeredGridState()
@@ -55,12 +60,42 @@ fun ExploreScreen(viewModel: ExploreViewModel) {
             val layoutInfo = gridState.layoutInfo
             val totalItems = layoutInfo.totalItemsCount
 
-            val lastVisibleIndex = layoutInfo.visibleItemsInfo
-                .maxOfOrNull { it.index } ?: -1
+            val lastVisibleIndex =
+                layoutInfo.visibleItemsInfo
+                    .maxOfOrNull { it.index } ?: -1
 
             totalItems > 0 && lastVisibleIndex >= totalItems - 8
         }
     }
+
+    val voiceLauncher =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.StartActivityForResult(),
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val spokenText =
+                    result.data
+                        ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                        ?.firstOrNull()
+
+                spokenText?.let {
+                    viewModel.onQueryChange(it)
+                    viewModel.onSearch()
+                }
+            }
+        }
+
+    val voiceIntent =
+        Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM,
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toLanguageTag())
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "Search NASA images")
+        }
+
+    val headerHeight = (CosmicTheme.sizes.largeXL + CosmicTheme.sizes.cardS)
 
     LaunchedEffect(shouldLoadMore, viewModel.items.size) {
         if (shouldLoadMore) {
@@ -70,7 +105,7 @@ fun ExploreScreen(viewModel: ExploreViewModel) {
 
     LaunchedEffect(scrollBehavior, density) {
         scrollBehavior.state.heightOffsetLimit =
-            with(density) { -(CosmicTheme.sizes.largeXL.toPx()) }
+            with(density) { -(headerHeight.toPx()) }
     }
 
     LaunchedEffect(Unit) {
@@ -78,9 +113,10 @@ fun ExploreScreen(viewModel: ExploreViewModel) {
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
     ) {
         Box(
             modifier =
@@ -88,14 +124,24 @@ fun ExploreScreen(viewModel: ExploreViewModel) {
                     .fillMaxWidth()
                     .height(
                         with(LocalDensity.current) {
-                            (CosmicTheme.sizes.cardL.toPx() + scrollBehavior.state.heightOffset)
+                            (headerHeight.toPx() + scrollBehavior.state.heightOffset)
                                 .coerceAtLeast(0f)
                                 .toDp()
                         },
-                    )
-                    .clipToBounds(),
+                    ).clipToBounds(),
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier =
+                    Modifier
+                        .requiredHeight(headerHeight)
+                        .fillMaxWidth()
+                        .offset {
+                            IntOffset(
+                                0,
+                                scrollBehavior.state.heightOffset.roundToInt() / 2,
+                            )
+                        },
+            ) {
                 CosmicHeader(
                     title = "Explore NASA",
                     subtitle = "IMAGE LIBRARY",
@@ -104,21 +150,16 @@ fun ExploreScreen(viewModel: ExploreViewModel) {
                     firstIconSize = CosmicSize.iconL,
                     lastIconSize = CosmicSize.largeL,
                     modifierFirst = Modifier.padding(CosmicSize.medium),
-                    modifier =
-                        Modifier
-                            .requiredHeight(CosmicTheme.sizes.largeXL)
-                            .offset {
-                                IntOffset(
-                                    0,
-                                    scrollBehavior.state.heightOffset.roundToInt() / 2,
-                                )
-                            },
+                    modifier = Modifier.requiredHeight(CosmicTheme.sizes.largeXL),
                 )
                 ExploreSearchBar(
                     query = viewModel.query,
                     onQueryChange = viewModel::onQueryChange,
-                    onMicClick = {},
-                    onSearch = viewModel::onSearch
+                    onMicClick = { voiceLauncher.launch(voiceIntent) },
+                    onSearch = viewModel::onSearch,
+                    onKeywordChange = viewModel::onKeywordChange,
+                    keyword = viewModel.keywords,
+                    modifier = Modifier.requiredHeight(CosmicTheme.sizes.cardS),
                 )
             }
         }
@@ -147,17 +188,18 @@ fun ExploreScreen(viewModel: ExploreViewModel) {
                 LazyVerticalStaggeredGrid(
                     columns = StaggeredGridCells.Fixed(2),
                     state = gridState,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .weight(1f),
-                    contentPadding = PaddingValues(CosmicTheme.sizes.medium),
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .weight(1f),
+                    contentPadding = PaddingValues(horizontal = CosmicTheme.sizes.medium),
                     verticalItemSpacing = CosmicTheme.sizes.medium,
-                    horizontalArrangement = Arrangement.spacedBy(CosmicTheme.sizes.medium)
+                    horizontalArrangement = Arrangement.spacedBy(CosmicTheme.sizes.medium),
                 ) {
-
                     itemsIndexed(viewModel.items) { index, item ->
                         ExploreCard(
                             item = item,
+                            onClick = onItemClick,
                             height = if (index % 2 == 1) 233.dp else 275.dp,
                         )
                     }
@@ -165,22 +207,25 @@ fun ExploreScreen(viewModel: ExploreViewModel) {
                     if (viewModel.isLoadingMore) {
                         item(span = StaggeredGridItemSpan.FullLine) {
                             Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(CosmicTheme.sizes.large),
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .height(CosmicTheme.sizes.large),
                                 horizontalArrangement = Arrangement.Center,
-                                verticalAlignment = Alignment.CenterVertically
+                                verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 CircularProgressIndicator(
-                                    color = CosmicTheme.colors.selected, modifier = Modifier.size(
-                                        CosmicTheme.sizes.iconL
-                                    )
+                                    color = CosmicTheme.colors.selected,
+                                    modifier =
+                                        Modifier.size(
+                                            CosmicTheme.sizes.iconL,
+                                        ),
                                 )
                                 Text(
                                     text = "Loading more NASA archive images...",
                                     style = CosmicTheme.typography.bodySmall,
                                     color = CosmicTheme.colors.bodyGray,
-                                    modifier = Modifier.padding(start = CosmicTheme.sizes.smallL)
+                                    modifier = Modifier.padding(start = CosmicTheme.sizes.smallL),
                                 )
                             }
                         }
@@ -188,6 +233,5 @@ fun ExploreScreen(viewModel: ExploreViewModel) {
                 }
             }
         }
-
     }
 }

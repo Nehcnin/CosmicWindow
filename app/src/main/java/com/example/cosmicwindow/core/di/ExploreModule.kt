@@ -12,24 +12,24 @@ import org.koin.dsl.module
 
 val ExploreModule =
     module {
-        viewModel{
+        viewModel {
             ExploreViewModel(
-                repository = get()
+                repository = get(),
             )
         }
 
-        single<ExploreApiService>{
+        single<ExploreApiService> {
             val client = OkHttpClient.Builder().build()
 
             RetrofitInstance
                 .create(
                     baseUrl = "https://images-api.nasa.gov/",
                     client = client,
-                    json = get<Json>()
+                    json = get<Json>(),
                 ).create(ExploreApiService::class.java)
         }
 
-        single<ExploreRepository>{
+        single<ExploreRepository> {
             ExploreRepositoryImpl(api = get())
         }
     }

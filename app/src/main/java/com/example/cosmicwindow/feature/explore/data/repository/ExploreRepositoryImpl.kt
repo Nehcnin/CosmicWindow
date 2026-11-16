@@ -5,19 +5,20 @@ import com.example.cosmicwindow.feature.explore.data.dto.toDomain
 import com.example.cosmicwindow.feature.explore.domain.ExploreRepository
 import com.example.cosmicwindow.feature.explore.domain.model.ExploreItem
 
-class ExploreRepositoryImpl (
-    private val api: ExploreApiService
-) : ExploreRepository{
+class ExploreRepositoryImpl(
+    private val api: ExploreApiService,
+) : ExploreRepository {
     override suspend fun getImages(
         query: String?,
         page: Int,
-        pageSize: Int
-    ): List<ExploreItem> {
-        return api.getImages(
-            query = query,
-            pageSize = pageSize,
-            page = page
-        ).toDomain()
-    }
-
+        keywords: String?,
+        pageSize: Int,
+    ): List<ExploreItem> =
+        api
+            .getImages(
+                query = query,
+                pageSize = pageSize,
+                page = page,
+                keywords = keywords,
+            ).toDomain()
 }

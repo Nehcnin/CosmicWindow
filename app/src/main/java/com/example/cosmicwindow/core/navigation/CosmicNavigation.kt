@@ -17,6 +17,7 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.detail.presentation.DetailScreen
 import com.example.cosmicwindow.feature.earth.presentation.EarthScreen
 import com.example.cosmicwindow.feature.earth.presentation.EarthViewModel
+import com.example.cosmicwindow.feature.explore.presentation.ExploreDetailScreen
 import com.example.cosmicwindow.feature.explore.presentation.ExploreScreen
 import com.example.cosmicwindow.feature.explore.presentation.ExploreViewModel
 import com.example.cosmicwindow.feature.today.presentation.TodayScreen
@@ -34,7 +35,8 @@ fun CosmicNavigation() {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val destination = backStackEntry?.destination
 
-    val showBottomBar = destination?.hasRoute<DetailRoute>() == false
+    val showBottomBar =
+        !(destination?.hasRoute<DetailRoute>() == true || destination?.hasRoute<ExploreDetailRoute>() == true)
 
     Scaffold(
         containerColor = CosmicTheme.colors.background,
@@ -81,10 +83,27 @@ fun CosmicNavigation() {
                 )
             }
 
-            composable<ExploreRoute>{ entry ->
+            composable<ExploreRoute> {
                 ExploreScreen(
-                    viewModel = exploreViewModel
+                    viewModel = exploreViewModel,
+                    onItemClick = { item ->
+                        navController.navigate(ExploreDetailRoute(item.id))
+                    },
                 )
+            }
+            composable<ExploreDetailRoute> { entry ->
+                val route = entry.toRoute<ExploreDetailRoute>()
+
+                val item = exploreViewModel.items.find { it.id == route.id }
+
+                if (item != null) {
+                    ExploreDetailScreen(
+                        item = item,
+                        onBack = {
+                            navController.popBackStack()
+                        },
+                    )
+                }
             }
         }
     }
