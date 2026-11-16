@@ -86,12 +86,14 @@ fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
                                 colorStops =
                                     arrayOf(
                                         0f to Color.Transparent,
-                                        0.7f to CosmicTheme.colors.darkPrimary.copy(alpha = 0.8f),
+                                        0.7f to Color.Transparent,
+                                        0.9f to CosmicTheme.colors.darkPrimary,
                                         1f to CosmicTheme.colors.darkPrimary,
                                     ),
                             ),
                     ),
         )
+
         Column(
             modifier =
                 Modifier
