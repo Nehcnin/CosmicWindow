@@ -8,10 +8,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -40,7 +44,7 @@ import java.util.Locale
 
 @Composable
 fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
-    var expanded by remember(item.description) { mutableStateOf(false) }
+    val scrollState = rememberScrollState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         AsyncImage(
@@ -81,11 +85,7 @@ fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
                                 colorStops =
                                     arrayOf(
                                         0f to Color.Transparent,
-                                        if (!expanded) {
-                                            0.7f to CosmicTheme.colors.darkPrimary.copy(alpha = 0.8f)
-                                        } else {
-                                            0.3f to CosmicTheme.colors.darkPrimary.copy(alpha = 0.6f)
-                                        },
+                                        0.7f to CosmicTheme.colors.darkPrimary.copy(alpha = 0.8f),
                                         1f to CosmicTheme.colors.darkPrimary,
                                     ),
                             ),
@@ -113,11 +113,9 @@ fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
                         .padding(
                             horizontal = CosmicTheme.sizes.medium,
                             vertical = CosmicTheme.sizes.smallL,
-                        ).clickable {
-                            expanded = !expanded
-                        },
-                maxLines = if (expanded) Int.MAX_VALUE else 4,
-                overflow = TextOverflow.Ellipsis,
+                        )
+                        .heightIn(max = CosmicTheme.sizes.cardS)
+                        .verticalScroll(scrollState),
             )
 
             Row(
