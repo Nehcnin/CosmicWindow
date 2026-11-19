@@ -28,6 +28,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
+import coil3.ImageLoader
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.CosmicHeader
 import com.example.cosmicwindow.core.ui.components.LottieLoading
@@ -41,7 +42,11 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EarthScreen(date: String, viewModel: EarthViewModel) {
+fun EarthScreen(
+    date: String,
+    viewModel: EarthViewModel,
+    imageLoader: ImageLoader
+) {
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
 
@@ -152,7 +157,9 @@ fun EarthScreen(date: String, viewModel: EarthViewModel) {
                                 )
                             }
                         }
-                        EarthImage(viewModel.epics[viewModel.currentIndex].imageUrl)
+                        EarthImage(
+                            viewModel.epics[viewModel.currentIndex].imageUrl,
+                            imageLoader = imageLoader)
                         EarthPlayCard(
                             viewModel.epics[viewModel.currentIndex].captureTime.format(
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),

@@ -10,11 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import coil3.ImageLoader
 import coil3.compose.AsyncImage
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
-fun EarthImage(imageUrl: String) {
+fun EarthImage(
+    imageUrl: String,
+    imageLoader: ImageLoader) {
     Box(
         modifier =
             Modifier
@@ -24,6 +27,7 @@ fun EarthImage(imageUrl: String) {
         AsyncImage(
             model = imageUrl,
             contentDescription = "Earth",
+            imageLoader = imageLoader,
             modifier =
                 Modifier
                     .fillMaxWidth(0.85f)

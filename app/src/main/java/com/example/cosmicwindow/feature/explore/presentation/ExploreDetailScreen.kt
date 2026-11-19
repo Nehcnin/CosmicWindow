@@ -45,7 +45,6 @@ import java.util.Locale
 
 @Composable
 fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
-    val scrollState = rememberScrollState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         AsyncImage(

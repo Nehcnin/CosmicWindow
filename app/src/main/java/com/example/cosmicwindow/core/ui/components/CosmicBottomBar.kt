@@ -19,6 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.navigation.EarthRoute
 import com.example.cosmicwindow.core.navigation.ExploreRoute
+import com.example.cosmicwindow.core.navigation.SavedRoute
 import com.example.cosmicwindow.core.navigation.TodayRoute
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
@@ -97,7 +98,14 @@ fun CosmicBottomBar(
             text = "Saved",
             description = "nav_saved",
             icon = R.drawable.ic_nav_saved,
-            onClick = {},
+            selected = destination?.hasRoute<SavedRoute>() == true,
+            onClick = {
+                navController.navigate(SavedRoute) {
+                    popUpTo(TodayRoute) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            },
         )
     }
 }

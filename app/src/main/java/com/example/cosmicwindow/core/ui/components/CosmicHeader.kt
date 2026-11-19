@@ -33,7 +33,7 @@ fun CosmicHeader(
     title: String,
     subtitle: String,
     @DrawableRes firstIcon: Int,
-    @DrawableRes lastIcon: Int,
+    @DrawableRes lastIcon: Int? = null,
     onLastIconClick: (() -> Unit)? = null,
     showDatePicker: Boolean = false,
     selectedDate: LocalDate = LocalDate.now(),
@@ -105,12 +105,14 @@ fun CosmicHeader(
                     },
             contentAlignment = Alignment.Center,
         ) {
-            Icon(
-                painter = painterResource(lastIcon),
-                contentDescription = "Header action",
-                modifier = Modifier.size(lastIconSize),
-                tint = tintLast,
-            )
+            if(lastIcon != null) {
+                Icon(
+                    painter = painterResource(lastIcon),
+                    contentDescription = "Header action",
+                    modifier = Modifier.size(lastIconSize),
+                    tint = tintLast,
+                )
+            }
         }
     }
 }

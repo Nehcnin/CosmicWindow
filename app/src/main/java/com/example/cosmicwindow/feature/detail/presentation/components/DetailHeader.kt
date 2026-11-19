@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
+import com.example.cosmicwindow.feature.today.domain.model.Apod
 
 @Composable
 fun DetailHeader(
@@ -28,6 +29,9 @@ fun DetailHeader(
     context: Context,
     url: String?,
     modifier: Modifier = Modifier,
+    onSave: (Apod?) -> Unit,
+    apod: Apod?,
+    saved: Boolean
 ) {
     Row(
         modifier =
@@ -65,13 +69,13 @@ fun DetailHeader(
         Spacer(modifier = Modifier.weight(1f))
 
         IconButton(
-            onClick = {},
+            onClick = {onSave(apod)},
             modifier =
                 Modifier
                     .size(CosmicSize.largeL),
         ) {
             Icon(
-                painter = painterResource(R.drawable.ic_nav_saved),
+                painter = painterResource(if (saved) R.drawable.ic_saved_full else R.drawable.ic_nav_saved),
                 contentDescription = "",
                 tint = CosmicTheme.colors.bodyGray,
                 modifier = Modifier.size(CosmicSize.iconM),

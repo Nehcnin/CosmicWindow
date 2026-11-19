@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
     id("org.jlleitschuh.gradle.ktlint")
 }
 
@@ -110,4 +111,7 @@ dependencies {
     implementation("com.airbnb.android:lottie-compose:6.6.7")
 
     implementation("androidx.palette:palette-ktx:1.0.0")
+
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 }

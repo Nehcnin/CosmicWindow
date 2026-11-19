@@ -46,6 +46,8 @@ fun TodayApodCard(
     apod: Apod,
     modifier: Modifier = Modifier,
     onReadStory: () -> Unit = {},
+    onSaveApod: (Apod) -> Unit = {},
+    saved: Boolean
 ) {
     val context = LocalContext.current
 
@@ -162,9 +164,11 @@ fun TodayApodCard(
                                 .background(
                                     color = CosmicTheme.colors.primary,
                                     shape = RoundedCornerShape(9999.dp),
-                                ).padding(
+                                )
+                                .padding(
                                     horizontal = CosmicSize.mediumL,
-                                ).clickable(onClick = onReadStory),
+                                )
+                                .clickable(onClick = onReadStory),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center,
                     ) {
@@ -184,7 +188,7 @@ fun TodayApodCard(
                         )
                     }
                     IconButton(
-                        onClick = {},
+                        onClick = { onSaveApod(apod) },
                         modifier =
                             Modifier
                                 .size(CosmicSize.largeL)
@@ -194,7 +198,7 @@ fun TodayApodCard(
                                 ),
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_nav_saved),
+                            painter = painterResource(if (saved) R.drawable.ic_saved_full else R.drawable.ic_nav_saved),
                             contentDescription = "",
                             tint = CosmicIconGray,
                             modifier = Modifier.size(CosmicSize.iconM),

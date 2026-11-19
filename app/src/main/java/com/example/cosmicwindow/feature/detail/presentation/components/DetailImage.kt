@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -27,10 +28,13 @@ import coil3.compose.AsyncImage
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
+import java.io.File
 
 @Composable
-fun DetailImage(url: String?) {
+fun DetailImage(url: String?, isLocal: Boolean = false) {
     var fullscreen by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
 
     Box(
         modifier =
@@ -39,7 +43,8 @@ fun DetailImage(url: String?) {
                 .height(CosmicSize.cardXXXL),
     ) {
         AsyncImage(
-            model = url,
+
+            model = if(isLocal) File(context.filesDir, url) else url,
             contentDescription = "",
             modifier =
                 Modifier
@@ -101,7 +106,7 @@ fun DetailImage(url: String?) {
                     contentAlignment = Alignment.Center,
                 ) {
                     AsyncImage(
-                        model = url,
+                        model = if(isLocal) File(context.filesDir, url) else url,
                         contentDescription = "Fullscreen Image",
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Fit,

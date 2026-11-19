@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import coil3.ImageLoader
 import com.example.cosmicwindow.core.ui.components.CosmicBottomBar
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.detail.presentation.DetailScreen
@@ -20,9 +21,12 @@ import com.example.cosmicwindow.feature.earth.presentation.EarthViewModel
 import com.example.cosmicwindow.feature.explore.presentation.ExploreDetailScreen
 import com.example.cosmicwindow.feature.explore.presentation.ExploreScreen
 import com.example.cosmicwindow.feature.explore.presentation.ExploreViewModel
+import com.example.cosmicwindow.feature.saved.presentation.SavedScreen
+import com.example.cosmicwindow.feature.saved.presentation.SavedViewModel
 import com.example.cosmicwindow.feature.today.presentation.TodayScreen
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 @Composable
 fun CosmicNavigation() {
@@ -35,6 +39,9 @@ fun CosmicNavigation() {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val destination = backStackEntry?.destination
 
+    val savedViewModel : SavedViewModel = koinViewModel()
+
+    val imageLoader: ImageLoader = koinInject()
     val showBottomBar =
         !(destination?.hasRoute<DetailRoute>() == true || destination?.hasRoute<ExploreDetailRoute>() == true)
 
@@ -69,6 +76,7 @@ fun CosmicNavigation() {
                 EarthScreen(
                     date = route.date,
                     viewModel = earthViewModel,
+                    imageLoader = imageLoader
                 )
             }
 
@@ -80,6 +88,7 @@ fun CosmicNavigation() {
                     onBack = {
                         navController.popBackStack()
                     },
+                    isLocal = route.isLocal,
                 )
             }
 
@@ -104,6 +113,16 @@ fun CosmicNavigation() {
                         },
                     )
                 }
+            }
+
+            composable<SavedRoute> {
+                SavedScreen(
+                    viewModel = savedViewModel,
+                    onReadStory = { date, isLocal ->
+                        Log.d("NAV_DEBUG", "Navigating with date: $date")
+                        navController.navigate(DetailRoute(date, isLocal))
+                    },
+                )
             }
         }
     }

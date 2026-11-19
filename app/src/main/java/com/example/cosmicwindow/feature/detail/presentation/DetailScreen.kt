@@ -24,6 +24,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
+import androidx.lifecycle.compose.LifecycleResumeEffect
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cosmicwindow.core.ui.components.LottieLoading
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
@@ -42,8 +44,8 @@ fun DetailScreen(
     date: String,
     onBack: () -> Unit,
     viewModel: DetailViewModel = koinViewModel(),
+    isLocal: Boolean = false
 ) {
-    val apod by viewModel.apod.collectAsState()
 
     val isLoading by viewModel.isLoading.collectAsState()
 
@@ -60,11 +62,17 @@ fun DetailScreen(
     }
 
     LaunchedEffect(date) {
-        viewModel.loadApod(date)
+        viewModel.loadApod(date, isLocal)
+    }
+
+    LifecycleResumeEffect(Unit) {
+        viewModel.refreshSavedState()
+
+        onPauseOrDispose {  }
     }
 
     when {
-        isLoading || (apod == null && error == null) -> {
+        isLoading || (viewModel.apod == null && error == null) -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center,
@@ -86,7 +94,7 @@ fun DetailScreen(
         }
 
         else -> {
-            apod?.let { loadedApod ->
+            viewModel.apod?.let { loadedApod ->
 
                 Column(
                     modifier =
@@ -119,6 +127,9 @@ fun DetailScreen(
                                             scrollBehaviour.state.heightOffset.roundToInt() / 2,
                                         )
                                     },
+                            onSave = viewModel::onToggleSaveApod,
+                            apod = viewModel.apod,
+                            saved = viewModel.isFirstSaved
                         )
                     }
 
@@ -131,6 +142,7 @@ fun DetailScreen(
                         item {
                             DetailImage(
                                 url = loadedApod.imgUrl,
+                                isLocal = isLocal
                             )
                         }
 

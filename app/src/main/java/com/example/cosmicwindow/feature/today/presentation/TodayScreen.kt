@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.CosmicErrorCard
 import com.example.cosmicwindow.core.ui.components.CosmicHeader
@@ -38,6 +39,12 @@ fun TodayScreen(viewModel: TodayViewModel = koinViewModel(), onReadStory: (Strin
     LaunchedEffect(scrollBehaviour, density, headerHeight) {
         scrollBehaviour.state.heightOffsetLimit =
             with(density) { -headerHeight.toPx() }
+    }
+
+    LifecycleResumeEffect(Unit) {
+        viewModel.refreshSavedState()
+
+        onPauseOrDispose {  }
     }
 
     Column(

@@ -24,6 +24,7 @@ import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import com.example.cosmicwindow.feature.today.presentation.components.cards.TodayWeekCard
+import java.time.LocalDate
 
 @Composable
 fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
@@ -77,8 +78,12 @@ fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
                 TodayWeekCard(
                     apod = apod,
                     dayText = dayText,
+                    onClick = {
+                        viewModel.updateDate(LocalDate.parse(apod.date))
+                    }
                 )
             }
         }
     }
 }
+
