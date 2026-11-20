@@ -13,6 +13,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -34,14 +37,17 @@ import com.example.cosmicwindow.feature.saved.presentation.components.OfflineSiz
 import java.io.File
 import kotlin.math.roundToInt
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.example.cosmicwindow.feature.saved.presentation.components.SavedApodCard
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SavedScreen(
     viewModel: SavedViewModel,
-    onReadStory: (String, Boolean) -> Unit
+    onReadStory: (String, Boolean) -> Unit,
+    snackbarHostState: SnackbarHostState
 ) {
     val savedApods by viewModel.savedApods.collectAsStateWithLifecycle()
     val storageSizeMB by viewModel.storageSizeMB.collectAsStateWithLifecycle()
@@ -57,6 +63,9 @@ fun SavedScreen(
     LaunchedEffect(Unit) {
         viewModel.refreshStorageSize()
     }
+
+    val pendingDeletes by viewModel.pendingDeletes.collectAsStateWithLifecycle()
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier =
@@ -108,10 +117,27 @@ fun SavedScreen(
                 )
             }
 
-            items(savedApods) { apod ->
+            items(
+                items = savedApods.filter { it.date !in pendingDeletes },
+                key = {it.date}
+            ) { apod ->
                 SavedApodCard(
                     apod = apod,
-                    onDeleteSaved = viewModel::deleteSavedApod,
+                    onDeleteSaved = {
+                        viewModel.deleteSavedApod(apod)
+
+                        scope.launch {
+                            val result = snackbarHostState.showSnackbar(
+                                message = "Saved APOD deleted successfully",
+                                actionLabel = "Undo",
+                                duration = SnackbarDuration.Indefinite
+                            )
+
+                            if(result == SnackbarResult.ActionPerformed){
+                                viewModel.undoDelete(apod.date)
+                            }
+                        }
+                    },
                     onReadStory = onReadStory
                 )
             }

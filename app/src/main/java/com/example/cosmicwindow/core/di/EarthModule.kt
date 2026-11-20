@@ -3,7 +3,9 @@ package com.example.cosmicwindow.core.di
 import coil3.ImageLoader
 import coil3.imageLoader
 import coil3.request.ImageRequest
+import coil3.size.Precision
 import com.example.cosmicwindow.BuildConfig
+import com.example.cosmicwindow.core.location.LocationProvider
 import com.example.cosmicwindow.core.network.EpicApiService
 import com.example.cosmicwindow.core.network.RetrofitInstance
 import com.example.cosmicwindow.feature.earth.data.repository.EpicRepositoryImpl
@@ -22,6 +24,7 @@ val EarthModule =
                 repository = get(),
                 imageLoader = get(),
                 createImageRequest = get(),
+                locationProvider = get()
             )
         }
 
@@ -61,6 +64,10 @@ val EarthModule =
             androidContext().imageLoader
         }
 
+        single<LocationProvider>{
+            LocationProvider(androidContext())
+        }
+
         single<(String) -> ImageRequest> {
             val context = androidContext()
 
@@ -68,6 +75,8 @@ val EarthModule =
                 ImageRequest
                     .Builder(context)
                     .data(url)
+                    .size(800, 800)
+                    .precision(Precision.INEXACT)
                     .build()
             }
 

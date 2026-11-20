@@ -41,7 +41,6 @@ class DetailViewModel(
 
             val formattedDate = LocalDate.parse(date).format(apiDateFormatter)
 
-            apod?.let { isFirstSaved = savedRepository.isSaved(it) }
 
             try {
                 if(!isLocal)

@@ -59,9 +59,11 @@ fun CosmicBottomBar(
             selected = destination?.hasRoute<TodayRoute>() == true,
             onClick = {
                 navController.navigate(TodayRoute) {
-                    popUpTo(TodayRoute) { saveState = true }
+                    popUpTo(TodayRoute) {
+                        saveState = false
+                    }
                     launchSingleTop = true
-                    restoreState = true
+                    restoreState = false
                 }
             },
         )
@@ -73,9 +75,11 @@ fun CosmicBottomBar(
             selected = destination?.hasRoute<EarthRoute>() == true,
             onClick = {
                 navController.navigate(EarthRoute(selectedDate.toString())) {
-                    popUpTo(TodayRoute) { saveState = true }
+                    popUpTo(TodayRoute) {
+                        saveState = false
+                    }
                     launchSingleTop = true
-                    restoreState = true
+                    restoreState = false
                 }
             },
         )
@@ -87,9 +91,11 @@ fun CosmicBottomBar(
             selected = destination?.hasRoute<ExploreRoute>() == true,
             onClick = {
                 navController.navigate(ExploreRoute) {
-                    popUpTo(TodayRoute) { saveState = true }
+                    popUpTo(TodayRoute) {
+                        saveState = false
+                    }
                     launchSingleTop = true
-                    restoreState = true
+                    restoreState = false
                 }
             },
         )
@@ -101,9 +107,11 @@ fun CosmicBottomBar(
             selected = destination?.hasRoute<SavedRoute>() == true,
             onClick = {
                 navController.navigate(SavedRoute) {
-                    popUpTo(TodayRoute) { saveState = true }
+                    popUpTo(TodayRoute) {
+                        saveState = false
+                    }
                     launchSingleTop = true
-                    restoreState = true
+                    restoreState = false
                 }
             },
         )

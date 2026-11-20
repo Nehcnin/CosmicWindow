@@ -1,5 +1,11 @@
 package com.example.cosmicwindow.feature.earth.presentation
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,16 +25,24 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
+import androidx.core.content.ContextCompat
 import coil3.ImageLoader
+import coil3.request.SuccessResult
+import coil3.toBitmap
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.CosmicHeader
 import com.example.cosmicwindow.core.ui.components.LottieLoading
@@ -37,6 +51,10 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.earth.presentation.components.EarthImage
 import com.example.cosmicwindow.feature.earth.presentation.components.EarthInfoCard
 import com.example.cosmicwindow.feature.earth.presentation.components.EarthPlayCard
+import com.example.cosmicwindow.feature.earth.presentation.util.detectEarthRadius
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
@@ -49,6 +67,39 @@ fun EarthScreen(
 ) {
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
+    val context = LocalContext.current
+
+    var earthRadiusFraction by remember(date){
+        mutableStateOf<Float?>(null)
+    }
+
+    val locationPermissionLauncher =
+        rememberLauncherForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { granted ->
+            if (granted) {
+                viewModel.loadLocation()
+            }
+        }
+
+    LaunchedEffect(Unit) {
+        val granted = ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+
+        if (granted) {
+            viewModel.loadLocation()
+            Log.d(
+                "EPIC_LOCATION",
+                "Coarse permission granted: $granted"
+            )
+        } else {
+            locationPermissionLauncher.launch(
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+        }
+    }
 
     LaunchedEffect(scrollBehaviour, density) {
         scrollBehaviour.state.heightOffsetLimit =
@@ -57,6 +108,63 @@ fun EarthScreen(
 
     LaunchedEffect(date) {
         viewModel.loadDate(date)
+    }
+
+    val firstImageUrl = viewModel.epics.firstOrNull()?.imageUrl
+
+    LaunchedEffect(date, firstImageUrl) {
+        if(firstImageUrl == null) return@LaunchedEffect
+
+        earthRadiusFraction = null
+
+        try{
+            val result = imageLoader.execute(
+                viewModel.imageRequest(firstImageUrl)
+            )
+
+            if(result is SuccessResult){
+                val radius = withContext(Dispatchers.Default){
+                    val bitmap = result.image.toBitmap()
+
+                    val softwareBitmap =
+                        if(bitmap.config == Bitmap.Config.HARDWARE){
+                            bitmap.copy(
+                                Bitmap.Config.ARGB_8888,
+                                false
+                            )
+                        } else{
+                            bitmap
+                        }
+
+                    if(softwareBitmap != null){
+                        try {
+                            detectEarthRadius(softwareBitmap)
+                        } finally {
+                            if(softwareBitmap != bitmap){
+                                softwareBitmap.recycle()
+                            }
+                        }
+                    } else{
+                        null
+                    }
+                }
+
+                earthRadiusFraction = radius
+
+                Log.d(
+                    "EPIC_EARTH",
+                    "Earth radius fraction: $radius",
+                )
+            }
+        } catch (e: CancellationException){
+            throw e
+        } catch (e: Exception){
+            Log.e(
+                "EPIC_EARTH",
+                "Earth radius detection failed",
+                e,
+            )
+        }
     }
 
     Column(
@@ -75,7 +183,8 @@ fun EarthScreen(
                                 .coerceAtLeast(0f)
                                 .toDp()
                         },
-                    ).clipToBounds(),
+                    )
+                    .clipToBounds(),
         ) {
             CosmicHeader(
                 title = "Earth in Motion",
@@ -137,7 +246,8 @@ fun EarthScreen(
                                         .background(
                                             color = CosmicTheme.colors.surface,
                                             shape = CircleShape,
-                                        ).padding(horizontal = CosmicSize.medium, vertical = CosmicSize.smallL)
+                                        )
+                                        .padding(horizontal = CosmicSize.medium, vertical = CosmicSize.smallL)
                                         .align(Alignment.CenterEnd),
                             ) {
                                 Icon(
@@ -157,9 +267,15 @@ fun EarthScreen(
                                 )
                             }
                         }
+                        val epic = viewModel.epics[viewModel.currentIndex]
+
                         EarthImage(
-                            viewModel.epics[viewModel.currentIndex].imageUrl,
-                            imageLoader = imageLoader)
+                            imageRequest = viewModel.imageRequest(epic.imageUrl),
+                            imageLoader = imageLoader,
+                            epic = epic,
+                            userLocation = viewModel.userLocation,
+                            earthRadiusFraction = earthRadiusFraction,
+                        )
                         EarthPlayCard(
                             viewModel.epics[viewModel.currentIndex].captureTime.format(
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),

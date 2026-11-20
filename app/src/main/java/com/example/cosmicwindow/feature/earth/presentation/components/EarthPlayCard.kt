@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -204,8 +205,7 @@ fun EarthPlayCard(
                     .background(
                         color = CosmicTheme.colors.primary,
                         shape = CircleShape,
-                    ).padding(start = CosmicTheme.sizes.small)
-                    .clip(CircleShape)
+                    ).clip(CircleShape)
                     .clickable(onClick = onPlayPause),
             ) {
                 Icon(
@@ -220,6 +220,9 @@ fun EarthPlayCard(
                         ),
                     modifier =
                         Modifier
+                            .offset(
+                                x = if (!isPlaying) CosmicTheme.sizes.smallS else 0.dp
+                            )
                             .size(CosmicSize.iconS)
                             .align(Alignment.Center),
                     tint = CosmicTheme.colors.onPrimary,

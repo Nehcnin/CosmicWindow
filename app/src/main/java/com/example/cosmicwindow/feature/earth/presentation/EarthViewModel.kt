@@ -9,17 +9,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil3.ImageLoader
 import coil3.request.ImageRequest
+import com.example.cosmicwindow.core.location.GeoLocation
+import com.example.cosmicwindow.core.location.LocationProvider
 import com.example.cosmicwindow.feature.earth.domain.model.Epic
 import com.example.cosmicwindow.feature.earth.domain.repository.EpicRepository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Semaphore
+import kotlinx.coroutines.sync.withPermit
 
 class EarthViewModel(
     private val repository: EpicRepository,
     private val imageLoader: ImageLoader,
     private val createImageRequest: (String) -> ImageRequest,
+    private val locationProvider: LocationProvider
 ) : ViewModel() {
     var currentIndex by mutableIntStateOf(0)
         private set
@@ -32,6 +37,9 @@ class EarthViewModel(
         private set
 
     var error by mutableStateOf<String?>(null)
+        private set
+
+    var userLocation by mutableStateOf<GeoLocation?>(null)
         private set
 
     private var loadJob: Job? = null
@@ -84,16 +92,37 @@ class EarthViewModel(
         }
     }
 
+    fun imageRequest(url: String): ImageRequest =
+        createImageRequest(url)
+
     private fun preloadImages(images: List<Epic>) {
         preloadJob?.cancel()
 
         preloadJob =
             viewModelScope.launch {
+                val semaphore = Semaphore(5)
+
                 images.forEach { epic ->
                     launch {
-                        imageLoader.execute(
-                            createImageRequest(epic.imageUrl),
-                        )
+                        semaphore.withPermit {
+                            try {
+                                val result = imageLoader.execute(
+                                    createImageRequest(epic.imageUrl),
+                                )
+
+                                Log.d(
+                                    "EPIC_CACHE",
+                                    "Source " +
+                                        "Cache: ${imageLoader.memoryCache?.size} / " +
+                                        "${imageLoader.memoryCache?.maxSize}",
+                                )
+
+                            } catch (e: CancellationException) {
+                                throw e
+                            } catch (e: Exception) {
+                                Log.e("EPIC_CACHE", "Preload failed", e)
+                            }
+                        }
                     }
                 }
             }
@@ -136,5 +165,17 @@ class EarthViewModel(
                     isLoading = false
                 }
             }
+    }
+
+    fun loadLocation() {
+        viewModelScope.launch {
+            userLocation = locationProvider.getLocation()
+
+            Log.d(
+                "EPIC_LOCATION",
+                "Location result: $userLocation"
+            )
+
+        }
     }
 }
