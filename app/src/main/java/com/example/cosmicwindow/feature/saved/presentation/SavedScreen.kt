@@ -53,7 +53,6 @@ fun SavedScreen(
     val storageSizeMB by viewModel.storageSizeMB.collectAsStateWithLifecycle()
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
-    val context = LocalContext.current
 
     LaunchedEffect(scrollBehaviour, density) {
         scrollBehaviour.state.heightOffsetLimit =

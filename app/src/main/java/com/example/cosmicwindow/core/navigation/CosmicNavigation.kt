@@ -49,8 +49,6 @@ fun CosmicNavigation() {
     val destination = backStackEntry?.destination
 
     val savedViewModel : SavedViewModel = koinViewModel()
-
-    val imageLoader: ImageLoader = koinInject()
     val showBottomBar =
         !(destination?.hasRoute<DetailRoute>() == true || destination?.hasRoute<ExploreDetailRoute>() == true)
 
@@ -149,7 +147,6 @@ fun CosmicNavigation() {
                 EarthScreen(
                     date = route.date,
                     viewModel = earthViewModel,
-                    imageLoader = imageLoader
                 )
             }
 

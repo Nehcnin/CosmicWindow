@@ -63,43 +63,10 @@ import kotlin.math.roundToInt
 fun EarthScreen(
     date: String,
     viewModel: EarthViewModel,
-    imageLoader: ImageLoader
 ) {
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
     val context = LocalContext.current
-
-    var earthRadiusFraction by remember(date){
-        mutableStateOf<Float?>(null)
-    }
-
-    val locationPermissionLauncher =
-        rememberLauncherForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { granted ->
-            if (granted) {
-                viewModel.loadLocation()
-            }
-        }
-
-    LaunchedEffect(Unit) {
-        val granted = ContextCompat.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-
-        if (granted) {
-            viewModel.loadLocation()
-            Log.d(
-                "EPIC_LOCATION",
-                "Coarse permission granted: $granted"
-            )
-        } else {
-            locationPermissionLauncher.launch(
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-        }
-    }
 
     LaunchedEffect(scrollBehaviour, density) {
         scrollBehaviour.state.heightOffsetLimit =
@@ -108,63 +75,6 @@ fun EarthScreen(
 
     LaunchedEffect(date) {
         viewModel.loadDate(date)
-    }
-
-    val firstImageUrl = viewModel.epics.firstOrNull()?.imageUrl
-
-    LaunchedEffect(date, firstImageUrl) {
-        if(firstImageUrl == null) return@LaunchedEffect
-
-        earthRadiusFraction = null
-
-        try{
-            val result = imageLoader.execute(
-                viewModel.imageRequest(firstImageUrl)
-            )
-
-            if(result is SuccessResult){
-                val radius = withContext(Dispatchers.Default){
-                    val bitmap = result.image.toBitmap()
-
-                    val softwareBitmap =
-                        if(bitmap.config == Bitmap.Config.HARDWARE){
-                            bitmap.copy(
-                                Bitmap.Config.ARGB_8888,
-                                false
-                            )
-                        } else{
-                            bitmap
-                        }
-
-                    if(softwareBitmap != null){
-                        try {
-                            detectEarthRadius(softwareBitmap)
-                        } finally {
-                            if(softwareBitmap != bitmap){
-                                softwareBitmap.recycle()
-                            }
-                        }
-                    } else{
-                        null
-                    }
-                }
-
-                earthRadiusFraction = radius
-
-                Log.d(
-                    "EPIC_EARTH",
-                    "Earth radius fraction: $radius",
-                )
-            }
-        } catch (e: CancellationException){
-            throw e
-        } catch (e: Exception){
-            Log.e(
-                "EPIC_EARTH",
-                "Earth radius detection failed",
-                e,
-            )
-        }
     }
 
     Column(
@@ -270,11 +180,12 @@ fun EarthScreen(
                         val epic = viewModel.epics[viewModel.currentIndex]
 
                         EarthImage(
-                            imageRequest = viewModel.imageRequest(epic.imageUrl),
-                            imageLoader = imageLoader,
+                            image = viewModel.getLoadedImage(viewModel.currentIndex),
                             epic = epic,
                             userLocation = viewModel.userLocation,
-                            earthRadiusFraction = earthRadiusFraction,
+                            earthRadiusFraction = viewModel.earthRadiusFraction,
+                            locationEnabled = viewModel.locationEnabled,
+                            onLocationEnabledChange = viewModel::setLocationEnable
                         )
                         EarthPlayCard(
                             viewModel.epics[viewModel.currentIndex].captureTime.format(
