@@ -38,6 +38,8 @@ import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.ui.res.stringResource
+import com.example.cosmicwindow.R
 import java.time.Instant
 
 @Composable
@@ -108,7 +110,7 @@ fun CosmicHeader(
             if (lastIcon != null) {
                 Icon(
                     painter = painterResource(lastIcon),
-                    contentDescription = "Header action",
+                    contentDescription = stringResource(R.string.common_header_action),
                     modifier = Modifier.size(lastIconSize),
                     tint = tintLast,
                 )

@@ -38,6 +38,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.core.content.ContextCompat
 import coil3.ImageLoader
@@ -97,8 +98,8 @@ fun EarthScreen(
                     .clipToBounds(),
         ) {
             CosmicHeader(
-                title = "Earth in Motion",
-                subtitle = "DISCOVER EPIC",
+                title = stringResource(R.string.earth_header_title),
+                subtitle = stringResource(R.string.earth_header_subtitle),
                 firstIcon = R.drawable.ic_header2,
                 lastIcon = R.drawable.ic_header_today,
                 firstIconSize = CosmicSize.iconL,
@@ -127,12 +128,16 @@ fun EarthScreen(
 
             viewModel.error != null -> {
                 Text(
-                    text = viewModel.error ?: "Unknown error",
+                    text = viewModel.error ?: stringResource(R.string.common_unknown_error),
                 )
             }
 
             viewModel.epics.isEmpty() -> {
-                Text("No EPIC images available for this date")
+                Text(
+                    text = stringResource(R.string.earth_no_images),
+                    style = CosmicTheme.typography.bodyMedium,
+                    color = CosmicTheme.colors.whitePrimary
+                    )
             }
 
             else -> {
@@ -171,7 +176,7 @@ fun EarthScreen(
                                 )
 
                                 Text(
-                                    text = "EPIC Feed",
+                                    text = stringResource(R.string.earth_feed),
                                     style = CosmicTheme.typography.bodySmallMedium,
                                     color = CosmicTheme.colors.bodyGray,
                                 )
@@ -188,10 +193,9 @@ fun EarthScreen(
                             onLocationEnabledChange = viewModel::setLocationEnable
                         )
                         EarthPlayCard(
-                            viewModel.epics[viewModel.currentIndex].captureTime.format(
+                            stringResource(R.string.earth_capture_time_utc,viewModel.epics[viewModel.currentIndex].captureTime.format(
                                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
-                            ) +
-                                " UTC",
+                            )),
                             viewModel.currentIndex,
                             viewModel.epics.size,
                             isPlaying = viewModel.isPlaying,

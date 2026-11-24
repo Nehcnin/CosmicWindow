@@ -23,9 +23,11 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.LottieLoading
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
@@ -87,7 +89,7 @@ fun DetailScreen(
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
-                    text = error ?: "Unknown error",
+                    text = error ?: stringResource(R.string.common_unknown_error),
                     color = CosmicTheme.colors.error,
                 )
             }
@@ -174,8 +176,8 @@ fun DetailScreen(
 
                         item {
                             DetailCopyrightCard(
-                                credit = loadedApod.credit ?: "NASA",
-                                copyright = "Public Domain",
+                                credit = loadedApod.credit ?: stringResource(R.string.common_nasa),
+                                copyright = stringResource(R.string.common_public_domain),
                                 url = loadedApod.articleUrl ?: "",
                                 context = context,
                             )

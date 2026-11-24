@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,7 +53,7 @@ fun DetailCopyrightCard(
                 ).padding(CosmicSize.medium),
     ) {
         Text(
-            text = "ATTRIBUTION & SOURCE",
+            text = stringResource(R.string.detail_attribution_title),
             style = CosmicTheme.typography.bodyMediumSemi,
             fontWeight = FontWeight.SemiBold,
             color = CosmicTheme.colors.selected,
@@ -67,12 +68,12 @@ fun DetailCopyrightCard(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = "Source",
+                text = stringResource(R.string.detail_source),
                 style = CosmicTheme.typography.bodyMediumSemi,
                 color = CosmicTheme.colors.bodyGray,
             )
             Text(
-                text = "NASA APOD API",
+                text = stringResource(R.string.detail_source_name),
                 style = CosmicTheme.typography.bodyMediumSemi,
                 fontSize = 16.sp,
                 color = CosmicTheme.colors.whitePrimary,
@@ -93,7 +94,7 @@ fun DetailCopyrightCard(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = "Credit",
+                text = stringResource(R.string.detail_credit),
                 style = CosmicTheme.typography.bodyMediumSemi,
                 color = CosmicTheme.colors.bodyGray,
             )
@@ -119,7 +120,7 @@ fun DetailCopyrightCard(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = "Copyright",
+                text = stringResource(R.string.detail_copyright),
                 style = CosmicTheme.typography.bodyMediumSemi,
                 color = CosmicTheme.colors.bodyGray,
             )
@@ -150,7 +151,7 @@ fun DetailCopyrightCard(
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "View original APOD entry",
+                text = stringResource(R.string.detail_view_original),
                 style = CosmicTheme.typography.bodyMediumSemi,
                 color = CosmicTheme.colors.selected,
                 fontWeight = FontWeight.SemiBold,

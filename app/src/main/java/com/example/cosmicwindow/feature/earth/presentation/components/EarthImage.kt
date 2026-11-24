@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import coil3.compose.asPainter
 import coil3.compose.LocalPlatformContext
 import com.example.cosmicwindow.R
@@ -40,6 +41,7 @@ fun EarthImage(
     onLocationEnabledChange: (Boolean)-> Unit
 ) {
     val radius = earthRadiusFraction ?: 0.75f
+    val radiusScale = radius *1.1f
     val context = LocalPlatformContext.current
 
     val projected = remember(
@@ -79,7 +81,7 @@ fun EarthImage(
         if (image != null) {
             Image(
                 painter = image.asPainter(context),
-                contentDescription = "Earth",
+                contentDescription = stringResource(R.string.earth_image_description),
                 modifier = Modifier
                     .fillMaxWidth(0.85f)
                     .aspectRatio(1f),
@@ -134,9 +136,9 @@ fun EarthImage(
                 val earthRadius = maxWidth/2*earthRadiusFraction
 
                 Icon(
-                    painter = painterResource(R.drawable.ic_location),
+                    painter = painterResource(R.drawable.ic_map_pin),
                     contentDescription = "",
-                    tint = CosmicTheme.colors.selected,
+                    tint = Color.Unspecified,
                     modifier = Modifier
                         .offset(
                             x = earthRadius*projected.x,

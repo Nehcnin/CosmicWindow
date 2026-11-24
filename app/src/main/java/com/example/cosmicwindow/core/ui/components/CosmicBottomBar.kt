@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -53,8 +54,8 @@ fun CosmicBottomBar(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         CosmicBottomBarElement(
-            text = "Today",
-            description = "nav_today",
+            text = stringResource(R.string.nav_today),
+            description = stringResource(R.string.nav_today_description),
             icon = R.drawable.ic_nav_today,
             selected = destination?.hasRoute<TodayRoute>() == true,
             onClick = {
@@ -69,8 +70,8 @@ fun CosmicBottomBar(
         )
 
         CosmicBottomBarElement(
-            text = "Earth",
-            description = "nav_earth",
+            text = stringResource(R.string.nav_earth),
+            description = stringResource(R.string.nav_earth_description),
             icon = R.drawable.ic_nav_earth,
             selected = destination?.hasRoute<EarthRoute>() == true,
             onClick = {
@@ -85,8 +86,8 @@ fun CosmicBottomBar(
         )
 
         CosmicBottomBarElement(
-            text = "Explore",
-            description = "nav_explore",
+            text = stringResource(R.string.nav_explore),
+            description = stringResource(R.string.nav_explore_description),
             icon = R.drawable.ic_nav_explore,
             selected = destination?.hasRoute<ExploreRoute>() == true,
             onClick = {
@@ -101,8 +102,8 @@ fun CosmicBottomBar(
         )
 
         CosmicBottomBarElement(
-            text = "Saved",
-            description = "nav_saved",
+            text = stringResource(R.string.nav_saved),
+            description = stringResource(R.string.nav_saved_description),
             icon = R.drawable.ic_nav_saved,
             selected = destination?.hasRoute<SavedRoute>() == true,
             onClick = {

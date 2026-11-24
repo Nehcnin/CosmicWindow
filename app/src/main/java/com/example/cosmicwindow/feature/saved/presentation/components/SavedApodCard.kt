@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -119,7 +120,7 @@ fun SavedApodCard(
                 )
 
                 Text(
-                    text = "APOD Story",
+                    text = stringResource(R.string.saved_apod_story),
                     style = CosmicTheme.typography.bodySmallMedium,
                     color = CosmicTheme.colors.selected
                 )
@@ -213,14 +214,14 @@ fun SavedApodCard(
                 )
 
                 Text(
-                    text = "Saved Offline · ${
+                    text = stringResource(R.string.saved_offline_date,
                         LocalDate.parse(apod.saveDate).format(
                             DateTimeFormatter.ofPattern(
                                 "MMM dd",
                                 Locale.ENGLISH
                             )
                         )
-                    }",
+                    ),
                     style = CosmicTheme.typography.bodySmallMedium,
                     color = CosmicTheme.colors.bodyGray
                 )
@@ -237,7 +238,7 @@ fun SavedApodCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "Read Cosmic Story",
+                    text = stringResource(R.string.common_read_cosmic_story),
                     style = CosmicTheme.typography.bodySmallMedium.copy(fontSize = 12.sp),
                     color = CosmicTheme.colors.selected,
                 )

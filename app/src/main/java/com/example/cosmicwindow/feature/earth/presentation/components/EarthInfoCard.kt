@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
@@ -39,8 +40,7 @@ fun EarthInfoCard() {
 
         Text(
             text =
-                "Images captured by NASA's Earth Polychromatic Imaging Camera (EPIC)" +
-                    " aboard the NOAA DSCVR spacecraft at Lagrange point 1",
+                stringResource(R.string.earth_info_description),
             style = CosmicTheme.typography.bodyMedium,
             color = CosmicTheme.colors.bodyGray,
         )

@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import coil3.compose.AsyncImage
@@ -67,7 +68,7 @@ fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_close),
-                contentDescription = "Close",
+                contentDescription = stringResource(R.string.common_cancel),
                 tint = CosmicTheme.colors.whitePrimary,
                 modifier =
                     Modifier
@@ -118,7 +119,7 @@ fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
                     modifier = Modifier.weight(1f),
                 ) {
                     Text(
-                        text = "Observation Date",
+                        text = stringResource(R.string.explore_observation_date),
                         style = CosmicTheme.typography.bodySmallMedium,
                         color = CosmicTheme.colors.bodyGray,
                     )
@@ -137,7 +138,7 @@ fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
                     modifier = Modifier.weight(1f),
                 ) {
                     Text(
-                        text = "Center",
+                        text = stringResource(R.string.explore_center),
                         style = CosmicTheme.typography.bodySmallMedium,
                         color = CosmicTheme.colors.bodyGray,
                     )
@@ -153,7 +154,7 @@ fun ExploreDetailScreen(item: ExploreItem, onBack: () -> Unit) {
                     modifier = Modifier.weight(1f),
                 ) {
                     Text(
-                        text = "NASA ID",
+                        text = stringResource(R.string.explore_nasa_id),
                         style = CosmicTheme.typography.bodySmallMedium,
                         color = CosmicTheme.colors.bodyGray,
                     )

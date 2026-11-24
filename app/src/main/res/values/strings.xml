@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
@@ -157,6 +156,7 @@
     <!-- ==================== SAVED ==================== -->
 
     <!-- Header -->
+    <string name="saved_header_title">Saved</string>
     <string name="saved_header_subtitle">COSMIC WINDOW</string>
 
     <!-- Snackbar -->

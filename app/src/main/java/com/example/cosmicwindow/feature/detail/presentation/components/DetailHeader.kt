@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
@@ -33,6 +34,9 @@ fun DetailHeader(
     apod: Apod?,
     saved: Boolean
 ) {
+
+    val intentTitle = stringResource(R.string.common_share_apod)
+
     Row(
         modifier =
             modifier
@@ -52,7 +56,7 @@ fun DetailHeader(
             Icon(
                 painter = painterResource(R.drawable.ic_button_rarrow),
                 tint = CosmicTheme.colors.whitePrimary,
-                contentDescription = "backButton",
+                contentDescription = stringResource(R.string.detail_back_button),
                 modifier =
                     Modifier
                         .size(CosmicSize.iconS)
@@ -61,7 +65,7 @@ fun DetailHeader(
         }
 
         Text(
-            text = "APOD Story Detail",
+            text = stringResource(R.string.detail_header_title),
             style = CosmicTheme.typography.titleMediumS.copy(fontWeight = FontWeight.Medium),
             color = CosmicTheme.colors.whitePrimary,
         )
@@ -94,7 +98,7 @@ fun DetailHeader(
                     }
 
                 context.startActivity(
-                    Intent.createChooser(shareIntent, "Share APOD"),
+                    Intent.createChooser(shareIntent, intentTitle),
                 )
             },
             modifier =

@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
@@ -49,13 +50,13 @@ fun ExploreSearchBar(
 ) {
     val keywords =
         listOf(
-            "James Webb" to R.drawable.ic_jameswebb,
-            "Mars" to R.drawable.ic_globe,
-            "Moon" to R.drawable.ic_moon,
-            "Nebula" to R.drawable.ic_dots,
-            "Earth" to R.drawable.ic_globe,
-            "Galaxy" to R.drawable.ic_dots,
-            "Apollo" to R.drawable.ic_jameswebb,
+            stringResource(R.string.explore_keyword_james_webb) to R.drawable.ic_jameswebb,
+            stringResource(R.string.explore_keyword_mars) to R.drawable.ic_globe,
+            stringResource(R.string.explore_keyword_moon) to R.drawable.ic_moon,
+            stringResource(R.string.explore_keyword_nebula) to R.drawable.ic_dots,
+            stringResource(R.string.explore_keyword_earth) to R.drawable.ic_globe,
+            stringResource(R.string.explore_keyword_galaxy) to R.drawable.ic_dots,
+            stringResource(R.string.explore_keyword_apollo) to R.drawable.ic_jameswebb,
         )
 
     Column(
@@ -122,7 +123,7 @@ fun ExploreSearchBar(
                     ) {
                         if (query.isEmpty()) {
                             Text(
-                                text = "Search NASA images (e.g. Mars)",
+                                text = stringResource(R.string.explore_search_hint),
                                 style = CosmicTheme.typography.bodyMediumS.copy(fontWeight = FontWeight.Normal),
                                 color = CosmicTheme.colors.bodyGray,
                                 maxLines = 1,

@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -52,6 +53,8 @@ fun TodayApodCard(
     val context = LocalContext.current
 
     val date = LocalDate.parse(apod.date)
+
+    val intentTitle = stringResource(R.string.common_share_apod)
 
     val formattedDate =
         date
@@ -111,7 +114,7 @@ fun TodayApodCard(
                     if (apod.credit != null) {
                         Text(
                             modifier = Modifier.padding(horizontal = CosmicSize.smallL),
-                            text = "•",
+                            text = stringResource(R.string.common_bullet),
                             style = CosmicTheme.typography.bodySmallBold,
                             color = CosmicTheme.colors.bodyGray,
                         )
@@ -173,7 +176,7 @@ fun TodayApodCard(
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Text(
-                            text = "Read Cosmic Story",
+                            text = stringResource(R.string.common_read_cosmic_story),
                             style = CosmicTheme.typography.bodyMedium,
                             color = CosmicTheme.colors.onPrimary,
                         )
@@ -217,7 +220,7 @@ fun TodayApodCard(
                                 }
 
                             context.startActivity(
-                                Intent.createChooser(shareIntent, "Share APOD"),
+                                Intent.createChooser(shareIntent, intentTitle),
                             )
                         },
                         modifier =

@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import kotlin.math.roundToInt
@@ -56,13 +57,13 @@ fun OfflineSizeCard(
 
         Column() {
             Text(
-                text = "Offline Ready",
+                text = stringResource(R.string.saved_offline_ready),
                 style = CosmicTheme.typography.bodyMediumSemi,
                 color = CosmicTheme.colors.whitePrimary
             )
 
             Text(
-                text = "$count discoveries synced to device",
+                text = stringResource(R.string.saved_discoveries_synced, count),
                 style = CosmicTheme.typography.bodySmall,
                 color = CosmicTheme.colors.bodyGray
             )
@@ -86,7 +87,7 @@ fun OfflineSizeCard(
             )
 
             Text(
-                text = "$rounded MB",
+                text = stringResource(R.string.saved_storage_size, rounded),
                 style = CosmicTheme.typography.bodySmallMedium,
                 color = CosmicTheme.colors.selected
             )

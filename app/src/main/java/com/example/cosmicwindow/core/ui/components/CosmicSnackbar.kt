@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
@@ -64,7 +65,7 @@ fun CosmicSnackbar(
             )
         ) {
             Text(
-                text = "Undo",
+                text = stringResource(R.string.common_undo),
                 style = CosmicTheme.typography.bodyMedium,
                 color = CosmicTheme.colors.selected,
                 modifier = Modifier.padding(CosmicTheme.sizes.small)

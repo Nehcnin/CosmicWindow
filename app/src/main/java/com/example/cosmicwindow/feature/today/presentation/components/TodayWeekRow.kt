@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicNavTextSelected
@@ -53,15 +54,15 @@ fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
             )
 
             Text(
-                text = "Previous 7 Days",
+                text = stringResource(R.string.today_previous_days),
                 style = CosmicTheme.typography.titleMediumS,
                 color = CosmicTheme.colors.whitePrimary,
             )
 
-            Spacer(modifier = Modifier.weight(1f))
+
 
             Text(
-                text = "Past APOD Entries",
+                text = stringResource(R.string.today_past_entries),
                 style = CosmicTheme.typography.bodySmall,
                 color = CosmicTheme.colors.bodyGray,
             )
@@ -74,7 +75,7 @@ fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
                 ),
         ) {
             itemsIndexed(viewModel.apods.drop(1)) { index, apod ->
-                val dayText = if (index == 0) "Yesterday" else "$index days ago"
+                val dayText = if (index == 0) stringResource(R.string.today_yesterday) else stringResource(R.string.today_days_ago, index)
                 TodayWeekCard(
                     apod = apod,
                     dayText = dayText,

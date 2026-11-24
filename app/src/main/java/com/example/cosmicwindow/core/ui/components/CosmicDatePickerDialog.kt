@@ -11,6 +11,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import java.time.Instant
 import java.time.LocalDate
@@ -60,12 +62,12 @@ fun CosmicDatePickerDialog(
                     changeDatePickerOpen(false)
                 },
             ) {
-                Text("OK", color = CosmicTheme.colors.selected)
+                Text(stringResource(R.string.common_ok), color = CosmicTheme.colors.selected)
             }
         },
         dismissButton = {
             TextButton(onClick = { changeDatePickerOpen(false) }) {
-                Text("Cancel", color = CosmicTheme.colors.bodyGray)
+                Text(stringResource(R.string.common_cancel), color = CosmicTheme.colors.bodyGray)
             }
         },
     ) {

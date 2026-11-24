@@ -1,3 +1,4 @@
+
 package com.example.cosmicwindow.feature.earth.presentation.components
 
 import androidx.compose.foundation.background
@@ -17,12 +18,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,6 +53,18 @@ fun EarthPlayCard(
     onPrevious: () -> Unit,
     onNext: () -> Unit,
 ) {
+    val sliderState = remember(maxIndex) {
+        SliderState(
+            value = currentIndex.toFloat(),
+            trackRange = 0f..(maxIndex - 1).coerceAtLeast(1).toFloat(),
+            steps = 0
+        )
+    }
+
+    LaunchedEffect(currentIndex, maxIndex) {
+        sliderState.value = currentIndex.toFloat()
+    }
+
     Column(
         modifier =
             Modifier
@@ -68,7 +85,7 @@ fun EarthPlayCard(
         ) {
             Column {
                 Text(
-                    text = "CAPTURE TIME",
+                    text = stringResource(R.string.earth_capture_time),
                     style = CosmicTheme.typography.bodySmallMedium,
                     color = CosmicTheme.colors.bodyGray,
                 )
@@ -82,13 +99,17 @@ fun EarthPlayCard(
                     color = CosmicTheme.colors.whitePrimary,
                 )
             }
+
             Row(
                 modifier =
                     Modifier
                         .background(
                             color = CosmicTheme.colors.surfaceVariant,
                             shape = CircleShape,
-                        ).padding(horizontal = CosmicSize.medium, vertical = CosmicSize.smallL),
+                        ).padding(
+                            horizontal = CosmicSize.medium,
+                            vertical = CosmicSize.smallL
+                        ),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(
@@ -103,7 +124,11 @@ fun EarthPlayCard(
                 )
 
                 Text(
-                    text = "Frame ${currentIndex + 1} of $maxIndex",
+                    text = stringResource(
+                        R.string.earth_frame_count,
+                        currentIndex + 1,
+                        maxIndex
+                    ),
                     fontFamily = LiberationMono,
                     fontSize = 11.sp,
                     lineHeight = 16.sp,
@@ -115,10 +140,11 @@ fun EarthPlayCard(
         }
 
         Slider(
-            value = currentIndex.toFloat(),
-            onValueChange = { onIndexChange(it.roundToInt()) },
-            valueRange = 0f..(maxIndex - 1).coerceAtLeast(1).toFloat(),
-            steps = 0,
+            state = sliderState,
+            onValueChange = { value ->
+                sliderState.value = value
+                onIndexChange(value.roundToInt())
+            },
             enabled = maxIndex > 1,
             modifier = Modifier.fillMaxWidth(),
             thumb = {
@@ -132,9 +158,9 @@ fun EarthPlayCard(
                             ),
                 )
             },
-            track = { sliderState ->
+            track = { state ->
                 SliderDefaults.Track(
-                    sliderState = sliderState,
+                    sliderState = state,
                     modifier = Modifier.height(CosmicSize.smallL),
                     colors =
                         SliderDefaults.colors(
@@ -152,21 +178,21 @@ fun EarthPlayCard(
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = "Frame 1",
+                text = stringResource(R.string.earth_frame_number, 1),
                 fontFamily = LiberationMono,
                 style = CosmicTheme.typography.bodySmallMedium,
                 color = CosmicIconGray,
             )
 
             Text(
-                text = "Sequence: 24h",
+                text = stringResource(R.string.earth_sequence),
                 fontFamily = LiberationMono,
                 style = CosmicTheme.typography.bodySmallMedium,
                 color = CosmicIconGray.copy(alpha = 0.6f),
             )
 
             Text(
-                text = "Frame $maxIndex",
+                text = stringResource(R.string.earth_frame_number, maxIndex),
                 fontFamily = LiberationMono,
                 style = CosmicTheme.typography.bodySmallMedium,
                 color = CosmicIconGray,
@@ -174,7 +200,9 @@ fun EarthPlayCard(
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth().padding(top = CosmicSize.smallL),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = CosmicSize.smallL),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -184,11 +212,14 @@ fun EarthPlayCard(
                     .background(
                         color = CosmicButtonGray,
                         shape = CircleShape,
-                    ).clip(CircleShape)
+                    )
+                    .clip(CircleShape)
                     .clickable(onClick = onPrevious),
             ) {
                 Icon(
-                    contentDescription = "",
+                    contentDescription = stringResource(
+                        R.string.earth_previous_frame
+                    ),
                     painter = painterResource(R.drawable.ic_prev),
                     modifier =
                         Modifier
@@ -205,11 +236,15 @@ fun EarthPlayCard(
                     .background(
                         color = CosmicTheme.colors.primary,
                         shape = CircleShape,
-                    ).clip(CircleShape)
+                    )
+                    .clip(CircleShape)
                     .clickable(onClick = onPlayPause),
             ) {
                 Icon(
-                    contentDescription = "",
+                    contentDescription = stringResource(
+                        if (isPlaying) R.string.earth_pause
+                        else R.string.earth_play
+                    ),
                     painter =
                         painterResource(
                             if (!isPlaying) {
@@ -221,7 +256,11 @@ fun EarthPlayCard(
                     modifier =
                         Modifier
                             .offset(
-                                x = if (!isPlaying) CosmicTheme.sizes.smallS else 0.dp
+                                x = if (!isPlaying) {
+                                    CosmicTheme.sizes.smallS
+                                } else {
+                                    0.dp
+                                }
                             )
                             .size(CosmicSize.iconS)
                             .align(Alignment.Center),
@@ -235,11 +274,14 @@ fun EarthPlayCard(
                     .background(
                         color = CosmicButtonGray,
                         shape = CircleShape,
-                    ).clip(CircleShape)
+                    )
+                    .clip(CircleShape)
                     .clickable(onClick = onNext),
             ) {
                 Icon(
-                    contentDescription = "",
+                    contentDescription = stringResource(
+                        R.string.earth_next_frame
+                    ),
                     painter = painterResource(R.drawable.ic_next),
                     modifier =
                         Modifier

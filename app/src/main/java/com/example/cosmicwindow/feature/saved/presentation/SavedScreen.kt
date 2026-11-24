@@ -38,6 +38,7 @@ import java.io.File
 import kotlin.math.roundToInt
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.example.cosmicwindow.feature.saved.presentation.components.SavedApodCard
 import kotlinx.coroutines.launch
@@ -66,6 +67,9 @@ fun SavedScreen(
     val pendingDeletes by viewModel.pendingDeletes.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
 
+    val undoLabel = stringResource(R.string.common_undo)
+    val deleteMessage = stringResource(R.string.saved_delete_success)
+
     Column(
         modifier =
             Modifier
@@ -86,8 +90,8 @@ fun SavedScreen(
                     .clipToBounds(),
         ) {
             CosmicHeader(
-                title = "Saved",
-                subtitle = "COSMIC WINDOW",
+                title = stringResource(R.string.saved_header_title),
+                subtitle = stringResource(R.string.saved_header_subtitle),
                 firstIcon = R.drawable.ic_header2,
                 firstIconSize = CosmicSize.iconL,
                 modifierFirst = Modifier.padding(CosmicSize.medium),
@@ -127,8 +131,8 @@ fun SavedScreen(
 
                         scope.launch {
                             val result = snackbarHostState.showSnackbar(
-                                message = "Saved APOD deleted successfully",
-                                actionLabel = "Undo",
+                                message = deleteMessage,
+                                actionLabel = undoLabel,
                                 duration = SnackbarDuration.Indefinite
                             )
 
