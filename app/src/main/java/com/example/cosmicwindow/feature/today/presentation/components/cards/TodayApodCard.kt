@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -40,7 +41,6 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @Composable
 fun TodayApodCard(
@@ -48,9 +48,10 @@ fun TodayApodCard(
     modifier: Modifier = Modifier,
     onReadStory: () -> Unit = {},
     onSaveApod: (Apod) -> Unit = {},
-    saved: Boolean
+    saved: Boolean,
 ) {
     val context = LocalContext.current
+    val locale = LocalConfiguration.current.locales[0]
 
     val date = LocalDate.parse(apod.date)
 
@@ -59,8 +60,8 @@ fun TodayApodCard(
     val formattedDate =
         date
             .format(
-                DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH),
-            ).uppercase(Locale.ENGLISH)
+                DateTimeFormatter.ofPattern("MMMM dd, yyyy", locale),
+            ).uppercase(locale)
 
     Card(
         modifier =
@@ -167,11 +168,9 @@ fun TodayApodCard(
                                 .background(
                                     color = CosmicTheme.colors.primary,
                                     shape = RoundedCornerShape(9999.dp),
-                                )
-                                .padding(
+                                ).padding(
                                     horizontal = CosmicSize.mediumL,
-                                )
-                                .clickable(onClick = onReadStory),
+                                ).clickable(onClick = onReadStory),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center,
                     ) {
@@ -179,6 +178,8 @@ fun TodayApodCard(
                             text = stringResource(R.string.common_read_cosmic_story),
                             style = CosmicTheme.typography.bodyMedium,
                             color = CosmicTheme.colors.onPrimary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                         )
                         Icon(
                             painter = painterResource(R.drawable.ic_button_rarrow),

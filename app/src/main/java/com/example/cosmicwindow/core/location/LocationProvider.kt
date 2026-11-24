@@ -23,29 +23,34 @@ class LocationProvider(
     private val context: Context,
 ) {
     suspend fun getLocation(): GeoLocation? {
-        val permission = ContextCompat.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
+        val permission =
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            ) == PackageManager.PERMISSION_GRANTED
 
         if (!permission) return null
 
-        val manager = context.getSystemService(
-            Context.LOCATION_SERVICE
-        ) as LocationManager
+        val manager =
+            context.getSystemService(
+                Context.LOCATION_SERVICE,
+            ) as LocationManager
 
         val provider = LocationManager.GPS_PROVIDER
 
         try {
             if (!manager.isLocationEnabled ||
                 !manager.isProviderEnabled(provider)
-            ) return null
+            ) {
+                return null
+            }
 
             val cached = manager.getLastKnownLocation(provider)
 
             if (cached != null) {
-                val age = SystemClock.elapsedRealtimeNanos() -
-                    cached.elapsedRealtimeNanos
+                val age =
+                    SystemClock.elapsedRealtimeNanos() -
+                        cached.elapsedRealtimeNanos
 
                 if (age in 0..600_000_000_000L) {
                     return cached.toGeoLocation()
@@ -54,30 +59,30 @@ class LocationProvider(
 
             val signal = CancellationSignal()
 
-            val location = try {
-                withTimeoutOrNull(15_000L.milliseconds) {
-                    suspendCancellableCoroutine<Location?> { continuation ->
-                        continuation.invokeOnCancellation {
-                            signal.cancel()
-                        }
+            val location =
+                try {
+                    withTimeoutOrNull(15_000L.milliseconds) {
+                        suspendCancellableCoroutine<Location?> { continuation ->
+                            continuation.invokeOnCancellation {
+                                signal.cancel()
+                            }
 
-                        manager.getCurrentLocation(
-                            provider,
-                            signal,
-                            context.mainExecutor
-                        ) { result ->
-                            if (continuation.isActive) {
-                                continuation.resume(result)
+                            manager.getCurrentLocation(
+                                provider,
+                                signal,
+                                context.mainExecutor,
+                            ) { result ->
+                                if (continuation.isActive) {
+                                    continuation.resume(result)
+                                }
                             }
                         }
                     }
+                } finally {
+                    signal.cancel()
                 }
-            } finally {
-                signal.cancel()
-            }
 
             return location?.toGeoLocation()
-
         } catch (e: SecurityException) {
             return null
         } catch (e: IllegalArgumentException) {
@@ -85,8 +90,9 @@ class LocationProvider(
         }
     }
 
-    private fun Location.toGeoLocation() = GeoLocation(
-        latitude = latitude,
-        longitude = longitude
-    )
+    private fun Location.toGeoLocation() =
+        GeoLocation(
+            latitude = latitude,
+            longitude = longitude,
+        )
 }

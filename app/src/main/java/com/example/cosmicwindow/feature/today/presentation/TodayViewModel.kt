@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 
 class TodayViewModel(
     private val repository: ApodRepository,
-    private val savedRepository: SavedRepository
+    private val savedRepository: SavedRepository,
 ) : ViewModel() {
     var date by mutableStateOf(LocalDate.now())
         private set
@@ -96,42 +96,36 @@ class TodayViewModel(
                     isLoading = false
                 }
             }
-
-
     }
 
-    fun onToggleSaveApod(apod: Apod){
-
+    fun onToggleSaveApod(apod: Apod) {
         isFirstSaved = !isFirstSaved
 
-        SaveOrDeleteApod(apod)
-
+        saveOrDeleteApod(apod)
     }
 
-    fun SaveOrDeleteApod(apod: Apod){
+    fun saveOrDeleteApod(apod: Apod) {
         viewModelScope.launch {
-
             try {
                 val isSaved = savedRepository.isSaved(apod)
 
                 if (isSaved && !isFirstSaved) {
                     savedRepository.deleteApod(apod.date)
                     Log.d("SAVED", "DELETING APOD")
-                } else if(!isSaved && isFirstSaved){
-                    Log.d("SAVED","SAVING APOD")
+                } else if (!isSaved && isFirstSaved) {
+                    Log.d("SAVED", "SAVING APOD")
                     savedRepository.saveApod(apod)
                 }
-
-            } catch (e: CancellationException){
+            } catch (e: CancellationException) {
                 throw e
-            } catch (e: Exception){
-                Log.e("SAVED","Failed to toggle saved APOD")
+            } catch (e: Exception) {
+                Log.e("SAVED", "Failed to toggle saved APOD")
             }
         }
     }
 
-    fun refreshSavedState(){
-        val currApod = apod?:return
+    fun refreshSavedState() {
+        val currApod = apod ?: return
 
         viewModelScope.launch {
             isFirstSaved = savedRepository.isSaved(currApod)

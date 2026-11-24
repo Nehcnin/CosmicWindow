@@ -28,21 +28,24 @@ fun detectEarthRadius(bitmap: Bitmap): Float? {
         for (i in 0 until samples) {
             val angle = 2.0 * PI * i / samples
 
-            val x = (
-                centerX + cos(angle).toFloat() * radius
+            val x =
+                (
+                    centerX + cos(angle).toFloat() * radius
                 ).roundToInt().coerceIn(0, width - 1)
 
-            val y = (
-                centerY + sin(angle).toFloat() * radius
+            val y =
+                (
+                    centerY + sin(angle).toFloat() * radius
                 ).roundToInt().coerceIn(0, height - 1)
 
             val pixel = bitmap.getPixel(x, y)
 
-            val brightness = maxOf(
-                Color.red(pixel),
-                Color.green(pixel),
-                Color.blue(pixel),
-            )
+            val brightness =
+                maxOf(
+                    Color.red(pixel),
+                    Color.green(pixel),
+                    Color.blue(pixel),
+                )
 
             if (brightness > 30) {
                 brightPixels++

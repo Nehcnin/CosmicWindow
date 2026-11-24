@@ -36,7 +36,7 @@ class EarthViewModel(
     private val repository: EpicRepository,
     private val imageLoader: ImageLoader,
     private val createImageRequest: (String) -> ImageRequest,
-    private val locationProvider: LocationProvider
+    private val locationProvider: LocationProvider,
 ) : ViewModel() {
     var currentIndex by mutableIntStateOf(0)
         private set
@@ -57,7 +57,7 @@ class EarthViewModel(
     var locationEnabled by mutableStateOf(false)
         private set
 
-    var  earthRadiusFraction by mutableStateOf<Float?>(null)
+    var earthRadiusFraction by mutableStateOf<Float?>(null)
         private set
 
     private val loadedImages = mutableStateMapOf<Int, Image>()
@@ -65,9 +65,7 @@ class EarthViewModel(
     val allFramesReady: Boolean
         get() = epics.isNotEmpty() && loadedImages.size == epics.size
 
-    fun getLoadedImage(index: Int): Image?{
-        return loadedImages[index]
-    }
+    fun getLoadedImage(index: Int): Image? = loadedImages[index]
 
     private var locationJob: Job? = null
 
@@ -121,14 +119,14 @@ class EarthViewModel(
         }
     }
 
-
-    private suspend fun loadFrame(index: Int, epic: Epic){
-        repeat(3){ attempt ->
+    private suspend fun loadFrame(index: Int, epic: Epic) {
+        repeat(3) { attempt ->
 
             try {
-                val result = imageLoader.execute(
-                    createImageRequest(epic.imageUrl)
-                )
+                val result =
+                    imageLoader.execute(
+                        createImageRequest(epic.imageUrl),
+                    )
 
                 if (result is SuccessResult) {
                     loadedImages[index] = result.image
@@ -136,7 +134,7 @@ class EarthViewModel(
                     Log.d(
                         "EPIC_CACHE",
                         "Loaded ${index + 1}/${epics.size}, " +
-                            "source=${result.dataSource}"
+                            "source=${result.dataSource}",
                     )
 
                     if (index == 0) {
@@ -145,44 +143,45 @@ class EarthViewModel(
 
                     return
                 }
-            } catch (e: CancellationException){
+            } catch (e: CancellationException) {
                 throw e
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.e(
                     "EPIC_CAHCE",
-                    "Frame $index attempt ${attempt +1} failed"
+                    "Frame $index attempt ${attempt + 1} failed",
                 )
             }
 
-            if(attempt < 2){
-                delay((500L * attempt+1).milliseconds)
+            if (attempt < 2) {
+                delay((500L * attempt + 1).milliseconds)
             }
         }
     }
 
-    private suspend fun detectRadius(image: Image){
-        val radius = withContext(Dispatchers.Default){
-            val bitmap = image.toBitmap()
+    private suspend fun detectRadius(image: Image) {
+        val radius =
+            withContext(Dispatchers.Default) {
+                val bitmap = image.toBitmap()
 
-            val softwareBitmap =
-                if(bitmap.config == Bitmap.Config.HARDWARE){
-                    bitmap.copy(Bitmap.Config.ARGB_8888, false)
-                } else{
-                    bitmap
-                }
-
-            if(softwareBitmap != null){
-                try {
-                    detectEarthRadius(softwareBitmap)
-                } finally {
-                    if(softwareBitmap !==bitmap){
-                        softwareBitmap.recycle()
+                val softwareBitmap =
+                    if (bitmap.config == Bitmap.Config.HARDWARE) {
+                        bitmap.copy(Bitmap.Config.ARGB_8888, false)
+                    } else {
+                        bitmap
                     }
+
+                if (softwareBitmap != null) {
+                    try {
+                        detectEarthRadius(softwareBitmap)
+                    } finally {
+                        if (softwareBitmap !== bitmap) {
+                            softwareBitmap.recycle()
+                        }
+                    }
+                } else {
+                    null
                 }
-            } else{
-                null
             }
-        }
 
         earthRadiusFraction = radius
 
@@ -197,20 +196,20 @@ class EarthViewModel(
                 val semaphore = Semaphore(5)
 
                 coroutineScope {
-                    images.mapIndexed { index, epic ->
-                        async {
-                            semaphore.withPermit {
-                                loadFrame(index, epic)
+                    images
+                        .mapIndexed { index, epic ->
+                            async {
+                                semaphore.withPermit {
+                                    loadFrame(index, epic)
+                                }
                             }
-                        }
-                    }.awaitAll()
+                        }.awaitAll()
                 }
 
                 Log.d(
                     "EPIC_CACHE",
-                    "Preload complete: ${loadedImages.size}/${images.size}"
+                    "Preload complete: ${loadedImages.size}/${images.size}",
                 )
-
             }
     }
 
@@ -256,35 +255,34 @@ class EarthViewModel(
             }
     }
 
-    fun setLocationEnable(enabled: Boolean){
+    fun setLocationEnable(enabled: Boolean) {
         locationEnabled = enabled
 
         locationJob?.cancel()
         locationJob = null
 
-        if(enabled){
+        if (enabled) {
             loadLocation()
-        } else{
+        } else {
             userLocation = null
         }
     }
 
     fun loadLocation() {
-        locationJob = viewModelScope.launch {
+        locationJob =
+            viewModelScope.launch {
+                try {
+                    val location = locationProvider.getLocation()
 
-            try {
-                val location = locationProvider.getLocation()
-
-                if(locationEnabled){
-                    userLocation = location
+                    if (locationEnabled) {
+                        userLocation = location
+                    }
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    Log.e("EPIC_LOCATION", "Location failed", e)
+                    userLocation = null
                 }
-            } catch (e: CancellationException){
-                throw e
-            } catch (e: Exception){
-                Log.e("EPIC_LOCATION", "Location failed", e)
-                userLocation = null
             }
-
-        }
     }
 }

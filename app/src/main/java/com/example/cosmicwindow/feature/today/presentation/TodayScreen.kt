@@ -45,7 +45,7 @@ fun TodayScreen(viewModel: TodayViewModel = koinViewModel(), onReadStory: (Strin
     LifecycleResumeEffect(Unit) {
         viewModel.refreshSavedState()
 
-        onPauseOrDispose {  }
+        onPauseOrDispose { }
     }
 
     Column(

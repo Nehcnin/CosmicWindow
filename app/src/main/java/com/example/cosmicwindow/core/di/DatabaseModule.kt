@@ -8,19 +8,21 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import org.koin.plugin.module.dsl.single
 
-val databaseModule = module {
-    single {
-        Room.databaseBuilder<CosmicDatabase>(
-            context = androidContext(),
-            name = "cosmic_database",
-        ).build()
-    }
+val databaseModule =
+    module {
+        single {
+            Room
+                .databaseBuilder<CosmicDatabase>(
+                    context = androidContext(),
+                    name = "cosmic_database",
+                ).build()
+        }
 
-    single<SavedApodDao> {
-        get<CosmicDatabase>().savedApodDao()
-    }
+        single<SavedApodDao> {
+            get<CosmicDatabase>().savedApodDao()
+        }
 
-    single {
-        ImageStorage(androidContext())
+        single {
+            ImageStorage(androidContext())
+        }
     }
-}

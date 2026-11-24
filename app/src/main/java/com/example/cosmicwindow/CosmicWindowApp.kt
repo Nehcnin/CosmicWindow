@@ -23,7 +23,7 @@ class CosmicWindowApp : Application() {
                 EarthModule,
                 ExploreModule,
                 SavedModule,
-                databaseModule
+                databaseModule,
             )
         }
     }

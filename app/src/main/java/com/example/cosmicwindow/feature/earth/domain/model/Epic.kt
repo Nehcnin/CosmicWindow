@@ -6,5 +6,5 @@ data class Epic(
     val imageUrl: String,
     val captureTime: LocalDateTime,
     val centerLatitude: Double,
-    val centerLongitude: Double
+    val centerLongitude: Double,
 )

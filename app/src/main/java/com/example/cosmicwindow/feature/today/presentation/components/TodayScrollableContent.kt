@@ -43,7 +43,7 @@ fun TodayScrollableContent(
                             .padding(horizontal = CosmicSize.medium),
                     onReadStory = { onReadStory(apod.date) },
                     onSaveApod = viewModel::onToggleSaveApod,
-                    saved = viewModel.isFirstSaved
+                    saved = viewModel.isFirstSaved,
                 )
             }
             item {

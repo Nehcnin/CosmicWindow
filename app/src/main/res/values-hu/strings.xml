@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ==================== COMMON ==================== -->
+
+    <string name="app_name">CosmicWindow</string>
+    <string name="common_nasa">NASA</string>
+    <string name="common_unknown_error">Ismeretlen hiba</string>
+    <string name="common_public_domain">Közkincs</string>
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Mégse</string>
+    <string name="common_close">Bezárás</string>
+    <string name="common_undo">Visszavonás</string>
+    <string name="common_share_apod">APOD megosztása</string>
+    <string name="common_read_cosmic_story">Kozmikus történet olvasása</string>
+    <string name="common_header_action">Fejlécművelet</string>
+    <string name="common_select_date">Dátum kiválasztása</string>
+    <string name="common_bullet">•</string>
+    <string name="common_save_story">Történet mentése</string>
+    <string name="common_remove_saved_story">Mentett történet eltávolítása</string>
+    <string name="common_share_story">Történet megosztása</string>
+
+
+    <!-- ==================== NAVIGATION ==================== -->
+
+    <string name="nav_today">Ma</string>
+    <string name="nav_earth">Föld</string>
+    <string name="nav_explore">Felfedezés</string>
+    <string name="nav_saved">Mentések</string>
+
+    <string name="nav_today_description">Ma lap</string>
+    <string name="nav_earth_description">Föld lap</string>
+    <string name="nav_explore_description">Felfedezés lap</string>
+    <string name="nav_saved_description">Mentések lap</string>
+
+
+    <!-- ==================== TODAY ==================== -->
+
+    <!-- Header -->
+    <string name="today_header_title">Cosmic Window</string>
+    <string name="today_header_subtitle">A NAP CSILLAGÁSZATI KÉPE</string>
+    <string name="today_date_label">Ma az űrben • %1$s</string>
+
+    <!-- Previous days -->
+    <string name="today_previous_days">Előző 7 nap</string>
+    <string name="today_past_entries">Korábbi APOD-bejegyzések</string>
+    <string name="today_yesterday">Tegnap</string>
+    <string name="today_days_ago">%1$d napja</string>
+
+    <!-- APOD card -->
+    <string name="today_image_description">A nap csillagászati képe</string>
+
+    <!-- Video -->
+    <string name="today_featured_video">Kiemelt APOD-videó</string>
+    <string name="today_external_media">Külső média</string>
+    <string name="today_open_video_browser">Videó megnyitása böngészőben</string>
+    <string name="today_video_thumbnail">Videó előnézeti képe</string>
+    <string name="today_play_video">Videó lejátszása</string>
+
+    <!-- Copyright -->
+    <string name="today_public_nasa_data">Nyilvános NASA-adatok • APOD-archívum</string>
+    <string name="today_image_credit">Kép: %1$s, NASA • Szerzői jog: %2$s</string>
+    <string name="today_disclaimer">Független oktatási célú alkalmazás • Nem áll kapcsolatban a NASA-val</string>
+
+
+    <!-- ==================== DETAIL ==================== -->
+
+    <!-- Header -->
+    <string name="detail_header_title">APOD-történet részletei</string>
+    <string name="detail_back_button">Vissza</string>
+
+    <!-- Image -->
+    <string name="detail_fullscreen">Teljes képernyő</string>
+    <string name="detail_fullscreen_image">Teljes képernyős kép</string>
+
+    <!-- Explanation -->
+    <string name="detail_explanation">Magyarázat</string>
+
+    <!-- Share -->
+    <string name="detail_share_story">Történet megosztása</string>
+
+    <!-- Attribution -->
+    <string name="detail_attribution_title">SZERZŐI ADATOK ÉS FORRÁS</string>
+    <string name="detail_source">Forrás</string>
+    <string name="detail_source_name">NASA APOD API</string>
+    <string name="detail_credit">Készítő</string>
+    <string name="detail_copyright">Szerzői jog</string>
+    <string name="detail_view_original">Eredeti APOD-bejegyzés megtekintése</string>
+
+    <!-- Video -->
+    <string name="detail_video_available">Videós változat elérhető</string>
+    <string name="detail_external_host">Külső szolgáltató</string>
+    <string name="detail_open_video">Videó megnyitása</string>
+
+
+    <!-- ==================== EARTH ==================== -->
+
+    <!-- Header -->
+    <string name="earth_header_title">A Föld mozgásban</string>
+    <string name="earth_header_subtitle">FEDEZD FEL AZ EPIC-ET</string>
+
+    <!-- Feed -->
+    <string name="earth_feed">EPIC-képek</string>
+    <string name="earth_no_images">Ehhez a dátumhoz nem érhetők el EPIC-képek</string>
+    <string name="earth_image_description">Föld</string>
+
+    <!-- Information -->
+    <string name="earth_info_description">A képeket a NASA EPIC (Earth Polychromatic Imaging Camera) kamerája készítette a NOAA DSCVR űrszonda fedélzetén, az 1-es Lagrange-pontnál</string>
+
+    <!-- Playback -->
+    <string name="earth_capture_time">FELVÉTEL IDŐPONTJA</string>
+    <string name="earth_capture_time_utc">%1$s UTC</string>
+    <string name="earth_frame_count">Képkocka: %1$d / %2$d</string>
+    <string name="earth_frame_number">%1$d. képkocka</string>
+    <string name="earth_sequence">Idősor: 24 óra</string>
+
+    <!-- Playback accessibility -->
+    <string name="earth_previous_frame">Előző képkocka</string>
+    <string name="earth_next_frame">Következő képkocka</string>
+    <string name="earth_play">Lejátszás</string>
+    <string name="earth_pause">Szüneteltetés</string>
+    <string name="earth_user_location">A tartózkodási helyed</string>
+
+
+    <!-- ==================== EXPLORE ==================== -->
+
+    <!-- Header -->
+    <string name="explore_header_title">Fedezd fel a NASA-t</string>
+    <string name="explore_header_subtitle">KÉPTÁR</string>
+
+    <!-- Search -->
+    <string name="explore_search_hint">Keress a NASA képei között (pl. Mars)</string>
+    <string name="explore_voice_prompt">Keresés a NASA képei között</string>
+    <string name="explore_voice_search">Hangalapú keresés</string>
+    <string name="explore_search_description">Képek keresése</string>
+
+    <!-- Keywords -->
+    <string name="explore_keyword_james_webb" translatable="false">James Webb</string>
+    <string name="explore_keyword_mars" translatable="false">Mars</string>
+    <string name="explore_keyword_moon" translatable="false">Moon</string>
+    <string name="explore_keyword_nebula" translatable="false">Nebula</string>
+    <string name="explore_keyword_earth" translatable="false">Earth</string>
+    <string name="explore_keyword_galaxy" translatable="false">Galaxy</string>
+    <string name="explore_keyword_apollo" translatable="false">Apollo</string>
+
+    <!-- Loading and empty state -->
+    <string name="explore_loading_more">További képek betöltése a NASA archívumából...</string>
+    <string name="explore_no_images">Nem találhatók NASA-képek</string>
+
+    <!-- Detail -->
+    <string name="explore_observation_date">Megfigyelés dátuma</string>
+    <string name="explore_center">Központ</string>
+    <string name="explore_nasa_id">NASA-azonosító</string>
+
+
+    <!-- ==================== SAVED ==================== -->
+
+    <!-- Header -->
+    <string name="saved_header_title">Mentések</string>
+    <string name="saved_header_subtitle">COSMIC WINDOW</string>
+
+    <!-- Snackbar -->
+    <string name="saved_delete_success">A mentett APOD sikeresen törölve</string>
+
+    <!-- Offline size card -->
+    <string name="saved_offline_ready">Offline elérhető</string>
+    <string name="saved_discoveries_synced">%1$d felfedezés szinkronizálva az eszközre</string>
+    <string name="saved_storage_size">%1$s MB</string>
+
+    <!-- Saved APOD card -->
+    <string name="saved_apod_story">APOD-történet</string>
+    <string name="saved_offline_date">Offline mentve · %1$s</string>
+
+</resources>

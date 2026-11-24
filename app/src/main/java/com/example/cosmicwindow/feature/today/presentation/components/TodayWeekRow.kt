@@ -59,7 +59,7 @@ fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
                 color = CosmicTheme.colors.whitePrimary,
             )
 
-
+            Spacer(modifier = Modifier.weight(1f))
 
             Text(
                 text = stringResource(R.string.today_past_entries),
@@ -75,16 +75,22 @@ fun TodayWeekRow(viewModel: TodayViewModel, modifier: Modifier = Modifier) {
                 ),
         ) {
             itemsIndexed(viewModel.apods.drop(1)) { index, apod ->
-                val dayText = if (index == 0) stringResource(R.string.today_yesterday) else stringResource(R.string.today_days_ago, index)
+                val dayText =
+                    if (index ==
+                        0
+                    ) {
+                        stringResource(R.string.today_yesterday)
+                    } else {
+                        stringResource(R.string.today_days_ago, index)
+                    }
                 TodayWeekCard(
                     apod = apod,
                     dayText = dayText,
                     onClick = {
                         viewModel.updateDate(LocalDate.parse(apod.date))
-                    }
+                    },
                 )
             }
         }
     }
 }
-

@@ -1,6 +1,5 @@
 package com.example.cosmicwindow.feature.saved.domain.model
 
-
 data class SavedApod(
     val date: String,
     val title: String,
@@ -11,5 +10,5 @@ data class SavedApod(
     val credit: String,
     val copyright: String,
     val articleUrl: String,
-    val videoUrl: String
+    val videoUrl: String,
 )

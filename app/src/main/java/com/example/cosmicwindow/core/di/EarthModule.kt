@@ -24,7 +24,7 @@ val EarthModule =
                 repository = get(),
                 imageLoader = get(),
                 createImageRequest = get(),
-                locationProvider = get()
+                locationProvider = get(),
             )
         }
 
@@ -64,7 +64,7 @@ val EarthModule =
             androidContext().imageLoader
         }
 
-        single<LocationProvider>{
+        single<LocationProvider> {
             LocationProvider(androidContext())
         }
 

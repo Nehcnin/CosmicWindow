@@ -26,7 +26,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.lifecycle.compose.LifecycleResumeEffect
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.LottieLoading
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
@@ -46,9 +45,8 @@ fun DetailScreen(
     date: String,
     onBack: () -> Unit,
     viewModel: DetailViewModel = koinViewModel(),
-    isLocal: Boolean = false
+    isLocal: Boolean = false,
 ) {
-
     val isLoading by viewModel.isLoading.collectAsState()
 
     val error by viewModel.error.collectAsState()
@@ -70,7 +68,7 @@ fun DetailScreen(
     LifecycleResumeEffect(Unit) {
         viewModel.refreshSavedState()
 
-        onPauseOrDispose {  }
+        onPauseOrDispose { }
     }
 
     when {
@@ -131,7 +129,7 @@ fun DetailScreen(
                                     },
                             onSave = viewModel::onToggleSaveApod,
                             apod = viewModel.apod,
-                            saved = viewModel.isFirstSaved
+                            saved = viewModel.isFirstSaved,
                         )
                     }
 
@@ -144,7 +142,7 @@ fun DetailScreen(
                         item {
                             DetailImage(
                                 url = loadedApod.imgUrl,
-                                isLocal = isLocal
+                                isLocal = isLocal,
                             )
                         }
 

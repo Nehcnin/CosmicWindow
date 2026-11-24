@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,23 +23,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import java.time.LocalDate
-import java.time.ZoneOffset
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerDialog
-import androidx.compose.material3.DatePickerDefaults
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.SelectableDates
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.ui.res.stringResource
-import com.example.cosmicwindow.R
-import java.time.Instant
 
 @Composable
 fun CosmicHeader(
@@ -120,11 +110,10 @@ fun CosmicHeader(
 
     if (datePickerOpen) {
         CosmicDatePickerDialog(
-            changeDatePickerOpen = {datePickerOpen = it},
+            changeDatePickerOpen = { datePickerOpen = it },
             datePickerOpen = datePickerOpen,
             selectedDate = selectedDate,
-            onDateSelected = onDateSelected
+            onDateSelected = onDateSelected,
         )
     }
-
 }

@@ -7,8 +7,8 @@ import com.example.cosmicwindow.feature.saved.data.SavedApodEntity
 
 @Database(
     entities = [SavedApodEntity::class],
-    version = 1
+    version = 1,
 )
-abstract class CosmicDatabase : RoomDatabase(){
+abstract class CosmicDatabase : RoomDatabase() {
     abstract fun savedApodDao(): SavedApodDao
 }

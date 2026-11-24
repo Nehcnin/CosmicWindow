@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
@@ -34,16 +32,15 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 fun ExpandableDescription(
     title: String,
     description: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val density = LocalDensity.current
     val minHeight = CosmicTheme.sizes.cardS
 
     BoxWithConstraints(
         modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.BottomCenter,
     ) {
-
         val maxHeight = this.maxHeight
 
         var expandedHeight by remember {
@@ -58,53 +55,65 @@ fun ExpandableDescription(
             mutableIntStateOf(0)
         }
 
-        val initialHeight = if (contentHeight == 0) {
-            minOf(minHeightPx, maxHeightPx)
-        } else {
-            minOf(contentHeight.toFloat(), minHeightPx, maxHeightPx)
-        }
+        val initialHeight =
+            if (contentHeight == 0) {
+                minOf(minHeightPx, maxHeightPx)
+            } else {
+                minOf(contentHeight.toFloat(), minHeightPx, maxHeightPx)
+            }
 
-        val allowedHeight = minOf(
-            maxHeightPx,
-            contentHeight.toFloat().coerceAtLeast(initialHeight)
-        )
+        val allowedHeight =
+            minOf(
+                maxHeightPx,
+                contentHeight.toFloat().coerceAtLeast(initialHeight),
+            )
         Box {
-
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(with(density) {
-                        expandedHeight.coerceIn(initialHeight, allowedHeight).toDp()
-                    } + CosmicTheme.sizes.large)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colorStops = arrayOf(
-                                0f to Color.Transparent,
-                                0.2f to CosmicTheme.colors.darkPrimary.copy(alpha = 0.8f),
-                                1f to CosmicTheme.colors.darkPrimary,
-                            )
-                        )
-                    )
-                    .align(Alignment.BottomCenter)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(
+                            with(density) {
+                                expandedHeight.coerceIn(initialHeight, allowedHeight).toDp()
+                            } + CosmicTheme.sizes.large,
+                        ).background(
+                            brush =
+                                Brush.verticalGradient(
+                                    colorStops =
+                                        arrayOf(
+                                            0f to Color.Transparent,
+                                            0.2f to CosmicTheme.colors.darkPrimary.copy(alpha = 0.8f),
+                                            1f to CosmicTheme.colors.darkPrimary,
+                                        ),
+                                ),
+                        ).align(Alignment.BottomCenter),
             )
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = CosmicTheme.sizes.smallL)
-                    .height(with(density) { expandedHeight.coerceIn(initialHeight, allowedHeight).toDp() })
-                    .verticalScroll(scrollState)
-                    .pointerInput(initialHeight, maxHeightPx) {
-                        detectVerticalDragGestures { change, dragAmount ->
-                            change.consume()
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = CosmicTheme.sizes.smallL)
+                        .height(
+                            with(density) {
+                                expandedHeight
+                                    .coerceIn(
+                                        initialHeight,
+                                        allowedHeight,
+                                    ).toDp()
+                            },
+                        ).verticalScroll(scrollState)
+                        .pointerInput(initialHeight, maxHeightPx) {
+                            detectVerticalDragGestures { change, dragAmount ->
+                                change.consume()
 
-                            if (scrollState.value == 0 && dragAmount > 0 || expandedHeight < allowedHeight) {
-                                expandedHeight = (expandedHeight - dragAmount).coerceIn(initialHeight, allowedHeight)
-                            } else {
-                                scrollState.dispatchRawDelta(-dragAmount)
+                                if (scrollState.value == 0 && dragAmount > 0 || expandedHeight < allowedHeight) {
+                                    expandedHeight =
+                                        (expandedHeight - dragAmount).coerceIn(initialHeight, allowedHeight)
+                                } else {
+                                    scrollState.dispatchRawDelta(-dragAmount)
+                                }
                             }
-                        }
-                    }
-                    .align(Alignment.BottomCenter)
+                        }.align(Alignment.BottomCenter),
 //                    .background(
 //                        brush =
 //                            Brush.verticalGradient(
@@ -118,11 +127,11 @@ fun ExpandableDescription(
 //                    ),
             ) {
                 Column(
-                    modifier = Modifier.onSizeChanged {
-                        contentHeight = it.height
-                    }
+                    modifier =
+                        Modifier.onSizeChanged {
+                            contentHeight = it.height
+                        },
                 ) {
-
                     Text(
                         text = title,
                         style = CosmicTheme.typography.titleMedium.copy(fontWeight = FontWeight.Medium),
@@ -138,25 +147,26 @@ fun ExpandableDescription(
                                 .padding(
                                     horizontal = CosmicTheme.sizes.medium,
                                     vertical = CosmicTheme.sizes.smallL,
-                                )
-
+                                ),
                     )
                 }
             }
             if (scrollState.value < scrollState.maxValue) {
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(CosmicTheme.sizes.large)
-                        .align(Alignment.BottomCenter)
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(
-                                    Color.Transparent,
-                                    CosmicTheme.colors.darkPrimary
-                                )
-                            )
-                        )
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(CosmicTheme.sizes.large)
+                            .align(Alignment.BottomCenter)
+                            .background(
+                                Brush.verticalGradient(
+                                    colors =
+                                        listOf(
+                                            Color.Transparent,
+                                            CosmicTheme.colors.darkPrimary,
+                                        ),
+                                ),
+                            ),
                 )
             }
         }

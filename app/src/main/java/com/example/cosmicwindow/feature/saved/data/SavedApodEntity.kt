@@ -16,5 +16,5 @@ data class SavedApodEntity(
     val credit: String,
     val copyright: String,
     val articleUrl: String,
-    val videoUrl: String
+    val videoUrl: String,
 )

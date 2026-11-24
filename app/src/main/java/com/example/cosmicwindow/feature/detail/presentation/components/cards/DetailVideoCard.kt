@@ -138,6 +138,8 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
                 text = stringResource(R.string.detail_open_video),
                 style = CosmicTheme.typography.bodySmallBold,
                 color = CosmicTheme.colors.selected,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             Icon(
                 painter = painterResource(R.drawable.ic_external),

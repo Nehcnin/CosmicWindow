@@ -20,35 +20,29 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.AsyncImage
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.CosmicHeader
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.saved.presentation.components.OfflineSizeCard
-import java.io.File
-import kotlin.math.roundToInt
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.example.cosmicwindow.feature.saved.presentation.components.SavedApodCard
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SavedScreen(
     viewModel: SavedViewModel,
     onReadStory: (String, Boolean) -> Unit,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
 ) {
     val savedApods by viewModel.savedApods.collectAsStateWithLifecycle()
     val storageSizeMB by viewModel.storageSizeMB.collectAsStateWithLifecycle()
@@ -86,8 +80,7 @@ fun SavedScreen(
                                 .coerceAtLeast(0f)
                                 .toDp()
                         },
-                    )
-                    .clipToBounds(),
+                    ).clipToBounds(),
         ) {
             CosmicHeader(
                 title = stringResource(R.string.saved_header_title),
@@ -108,21 +101,22 @@ fun SavedScreen(
         }
 
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = CosmicTheme.sizes.medium),
-            verticalArrangement = Arrangement.spacedBy(CosmicTheme.sizes.medium)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = CosmicTheme.sizes.medium),
+            verticalArrangement = Arrangement.spacedBy(CosmicTheme.sizes.medium),
         ) {
             item {
                 OfflineSizeCard(
                     count = savedApods.size,
-                    size = storageSizeMB
+                    size = storageSizeMB,
                 )
             }
 
             items(
                 items = savedApods.filter { it.date !in pendingDeletes },
-                key = {it.date}
+                key = { it.date },
             ) { apod ->
                 SavedApodCard(
                     apod = apod,
@@ -130,18 +124,19 @@ fun SavedScreen(
                         viewModel.deleteSavedApod(apod)
 
                         scope.launch {
-                            val result = snackbarHostState.showSnackbar(
-                                message = deleteMessage,
-                                actionLabel = undoLabel,
-                                duration = SnackbarDuration.Indefinite
-                            )
+                            val result =
+                                snackbarHostState.showSnackbar(
+                                    message = deleteMessage,
+                                    actionLabel = undoLabel,
+                                    duration = SnackbarDuration.Indefinite,
+                                )
 
-                            if(result == SnackbarResult.ActionPerformed){
+                            if (result == SnackbarResult.ActionPerformed) {
                                 viewModel.undoDelete(apod.date)
                             }
                         }
                     },
-                    onReadStory = onReadStory
+                    onReadStory = onReadStory,
                 )
             }
         }

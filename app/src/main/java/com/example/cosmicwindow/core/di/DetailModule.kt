@@ -9,7 +9,7 @@ val DetailModule =
         viewModel {
             DetailViewModel(
                 repository = get(),
-                savedRepository = get()
+                savedRepository = get(),
             )
         }
     }

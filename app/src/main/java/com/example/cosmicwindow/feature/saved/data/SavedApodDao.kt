@@ -1,7 +1,6 @@
 package com.example.cosmicwindow.feature.saved.data
 
 import androidx.room3.Dao
-import androidx.room3.Delete
 import androidx.room3.Insert
 import androidx.room3.OnConflictStrategy
 import androidx.room3.Query

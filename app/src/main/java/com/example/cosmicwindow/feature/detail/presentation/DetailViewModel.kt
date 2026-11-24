@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter
 
 class DetailViewModel(
     private val repository: ApodRepository,
-    private val savedRepository: SavedRepository
+    private val savedRepository: SavedRepository,
 ) : ViewModel() {
     var apod by mutableStateOf<Apod?>(null)
         private set
@@ -41,12 +41,12 @@ class DetailViewModel(
 
             val formattedDate = LocalDate.parse(date).format(apiDateFormatter)
 
-
             try {
-                if(!isLocal)
+                if (!isLocal) {
                     apod = repository.getByDate(formattedDate)
-                else
+                } else {
                     apod = savedRepository.getByDateSimpleApod(date)
+                }
                 Log.d("DETAIL", "APOD LOADED")
             } catch (e: Exception) {
                 _error.value = e.message ?: "Failed to load APOD"
@@ -57,41 +57,37 @@ class DetailViewModel(
         }
     }
 
-
-    fun onToggleSaveApod(apod: Apod?){
-        if(apod != null) {
+    fun onToggleSaveApod(apod: Apod?) {
+        if (apod != null) {
             Log.d("SAVED", "Toggle SAVE APOD")
             isFirstSaved = !isFirstSaved
 
-            SaveOrDeleteApod(apod)
+            saveOrDeleteApod(apod)
         }
-
     }
 
-    fun SaveOrDeleteApod(apod: Apod){
+    fun saveOrDeleteApod(apod: Apod) {
         viewModelScope.launch {
-
             try {
                 val isSaved = savedRepository.isSaved(apod)
 
                 if (isSaved && !isFirstSaved) {
                     savedRepository.deleteApod(apod.date)
                     Log.d("SAVED", "DELETING APOD")
-                } else if(!isSaved && isFirstSaved){
-                    Log.d("SAVED","SAVING APOD")
+                } else if (!isSaved && isFirstSaved) {
+                    Log.d("SAVED", "SAVING APOD")
                     savedRepository.saveApod(apod)
                 }
-
-            } catch (e: CancellationException){
+            } catch (e: CancellationException) {
                 throw e
-            } catch (e: Exception){
-                Log.e("SAVED","Failed to toggle saved APOD")
+            } catch (e: Exception) {
+                Log.e("SAVED", "Failed to toggle saved APOD")
             }
         }
     }
 
-    fun refreshSavedState(){
-        val currApod = apod?:return
+    fun refreshSavedState() {
+        val currApod = apod ?: return
 
         viewModelScope.launch {
             isFirstSaved = savedRepository.isSaved(currApod)

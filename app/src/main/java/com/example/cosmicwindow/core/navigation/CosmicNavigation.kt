@@ -19,7 +19,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import coil3.ImageLoader
 import com.example.cosmicwindow.core.ui.components.CosmicBottomBar
 import com.example.cosmicwindow.core.ui.components.CosmicSnackbar
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
@@ -35,7 +34,6 @@ import com.example.cosmicwindow.feature.today.presentation.TodayScreen
 import com.example.cosmicwindow.feature.today.presentation.TodayViewModel
 import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 
 @Composable
 fun CosmicNavigation() {
@@ -48,7 +46,7 @@ fun CosmicNavigation() {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val destination = backStackEntry?.destination
 
-    val savedViewModel : SavedViewModel = koinViewModel()
+    val savedViewModel: SavedViewModel = koinViewModel()
     val showBottomBar =
         !(destination?.hasRoute<DetailRoute>() == true || destination?.hasRoute<ExploreDetailRoute>() == true)
 
@@ -66,8 +64,8 @@ fun CosmicNavigation() {
         },
         snackbarHost = {
             SnackbarHost(
-                hostState = snackbarHostState
-            ){ snackbarData ->
+                hostState = snackbarHostState,
+            ) { snackbarData ->
 
                 LaunchedEffect(snackbarData) {
                     delay(5000)
@@ -78,56 +76,56 @@ fun CosmicNavigation() {
                     message = snackbarData.visuals.message,
                     onUndo = {
                         snackbarData.performAction()
-                    }
+                    },
                 )
             }
-        }
+        },
     ) { innerPadding ->
         NavHost(
             navController = navController,
             startDestination = TodayRoute,
             modifier = Modifier.padding(innerPadding),
-
             enterTransition = {
                 slideIntoContainer(
-                    towards = slideDirection(
-                        initialState.destination,
-                        targetState.destination,
-                        false,
-                    ),
+                    towards =
+                        slideDirection(
+                            initialState.destination,
+                            targetState.destination,
+                            false,
+                        ),
                     animationSpec = tween(300),
                 )
             },
-
             exitTransition = {
                 slideOutOfContainer(
-                    towards = slideDirection(
-                        initialState.destination,
-                        targetState.destination,
-                        false,
-                    ),
+                    towards =
+                        slideDirection(
+                            initialState.destination,
+                            targetState.destination,
+                            false,
+                        ),
                     animationSpec = tween(300),
                 )
             },
-
             popEnterTransition = {
                 slideIntoContainer(
-                    towards = slideDirection(
-                        initialState.destination,
-                        targetState.destination,
-                        true,
-                    ),
+                    towards =
+                        slideDirection(
+                            initialState.destination,
+                            targetState.destination,
+                            true,
+                        ),
                     animationSpec = tween(300),
                 )
             },
-
             popExitTransition = {
                 slideOutOfContainer(
-                    towards = slideDirection(
-                        initialState.destination,
-                        targetState.destination,
-                        true,
-                    ),
+                    towards =
+                        slideDirection(
+                            initialState.destination,
+                            targetState.destination,
+                            true,
+                        ),
                     animationSpec = tween(300),
                 )
             },
@@ -191,7 +189,7 @@ fun CosmicNavigation() {
                     onReadStory = { date, isLocal ->
                         navController.navigate(DetailRoute(date, isLocal))
                     },
-                    snackbarHostState = snackbarHostState
+                    snackbarHostState = snackbarHostState,
                 )
             }
         }
@@ -206,7 +204,6 @@ private fun NavDestination.tabIndex(): Int =
         hasRoute<SavedRoute>() -> 3
         else -> -1
     }
-
 
 private fun slideDirection(
     from: NavDestination,

@@ -8,7 +8,7 @@ data object TodayRoute
 @Serializable
 data class DetailRoute(
     val date: String,
-    val isLocal: Boolean = false
+    val isLocal: Boolean = false,
 )
 
 @Serializable

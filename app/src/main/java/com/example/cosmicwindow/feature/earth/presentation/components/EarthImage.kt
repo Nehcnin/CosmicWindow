@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,8 +21,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import coil3.compose.asPainter
 import coil3.compose.LocalPlatformContext
+import coil3.compose.asPainter
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.location.GeoLocation
 import com.example.cosmicwindow.core.ui.components.LottieLoading
@@ -38,31 +37,32 @@ fun EarthImage(
     userLocation: GeoLocation?,
     earthRadiusFraction: Float?,
     locationEnabled: Boolean,
-    onLocationEnabledChange: (Boolean)-> Unit
+    onLocationEnabledChange: (Boolean) -> Unit,
 ) {
     val radius = earthRadiusFraction ?: 0.75f
-    val radiusScale = radius *1.1f
+    val radiusScale = radius * 1.1f
     val context = LocalPlatformContext.current
 
-    val projected = remember(
-        epic.centerLatitude,
-        epic.centerLongitude,
-        userLocation,
-        locationEnabled
-    ) {
-        if(locationEnabled) {
-            userLocation?.let { location ->
-                projectLocation(
-                    latitude = location.latitude,
-                    longitude = location.longitude,
-                    centerLatitude = epic.centerLatitude,
-                    centerLongitude = epic.centerLongitude,
-                )
+    val projected =
+        remember(
+            epic.centerLatitude,
+            epic.centerLongitude,
+            userLocation,
+            locationEnabled,
+        ) {
+            if (locationEnabled) {
+                userLocation?.let { location ->
+                    projectLocation(
+                        latitude = location.latitude,
+                        longitude = location.longitude,
+                        centerLatitude = epic.centerLatitude,
+                        centerLongitude = epic.centerLongitude,
+                    )
+                }
+            } else {
+                null
             }
-        }else{
-            null
         }
-    }
 
     LaunchedEffect(projected, earthRadiusFraction) {
         Log.d(
@@ -70,7 +70,7 @@ fun EarthImage(
             "GPS: $userLocation, " +
                 "Center: ${epic.centerLatitude}, ${epic.centerLongitude}, " +
                 "Projected: $projected, " +
-                "Radius: $earthRadiusFraction"
+                "Radius: $earthRadiusFraction",
         )
     }
 
@@ -82,16 +82,18 @@ fun EarthImage(
             Image(
                 painter = image.asPainter(context),
                 contentDescription = stringResource(R.string.earth_image_description),
-                modifier = Modifier
-                    .fillMaxWidth(0.85f)
-                    .aspectRatio(1f),
+                modifier =
+                    Modifier
+                        .fillMaxWidth(0.85f)
+                        .aspectRatio(1f),
                 contentScale = ContentScale.Fit,
             )
         } else {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.85f)
-                    .aspectRatio(1f),
+                modifier =
+                    Modifier
+                        .fillMaxWidth(0.85f)
+                        .aspectRatio(1f),
                 contentAlignment = Alignment.Center,
             ) {
                 LottieLoading()
@@ -99,52 +101,57 @@ fun EarthImage(
         }
 
         Box(
-            modifier = Modifier
-                .fillMaxWidth(0.95f)
-                .aspectRatio(1f)
-                .background(
-                    brush = Brush.radialGradient(
-                        0.0f to Color.Transparent,
-                        radius to Color.Transparent,
-                        radius + 0.001f to CosmicTheme.colors.background,
-                        1f to CosmicTheme.colors.background,
+            modifier =
+                Modifier
+                    .fillMaxWidth(0.95f)
+                    .aspectRatio(1f)
+                    .background(
+                        brush =
+                            Brush.radialGradient(
+                                0.0f to Color.Transparent,
+                                radius to Color.Transparent,
+                                radius + 0.001f to CosmicTheme.colors.background,
+                                1f to CosmicTheme.colors.background,
+                            ),
                     ),
-                ),
         )
 
         Box(
-            modifier = Modifier
-                .fillMaxWidth(0.95f)
-                .aspectRatio(1f)
-                .background(
-                    brush = Brush.radialGradient(
-                        0.0f to Color.Transparent,
-                        radius to Color.Transparent,
-                        radius + 0.001f to CosmicTheme.colors.selected.copy(alpha = 0.2f),
-                        1f to CosmicTheme.colors.background,
+            modifier =
+                Modifier
+                    .fillMaxWidth(0.95f)
+                    .aspectRatio(1f)
+                    .background(
+                        brush =
+                            Brush.radialGradient(
+                                0.0f to Color.Transparent,
+                                radius to Color.Transparent,
+                                radius + 0.001f to CosmicTheme.colors.selected.copy(alpha = 0.2f),
+                                1f to CosmicTheme.colors.background,
+                            ),
                     ),
-                ),
         )
 
         if (projected != null && earthRadiusFraction != null && image != null) {
             BoxWithConstraints(
-                modifier = Modifier
-                    .fillMaxWidth(0.85f)
-                    .aspectRatio(1f),
-                contentAlignment = Alignment.Center
-            ){
-                val earthRadius = maxWidth/2*earthRadiusFraction
+                modifier =
+                    Modifier
+                        .fillMaxWidth(0.85f)
+                        .aspectRatio(1f),
+                contentAlignment = Alignment.Center,
+            ) {
+                val earthRadius = maxWidth / 2 * earthRadiusFraction
 
                 Icon(
                     painter = painterResource(R.drawable.ic_map_pin),
                     contentDescription = "",
                     tint = Color.Unspecified,
-                    modifier = Modifier
-                        .offset(
-                            x = earthRadius*projected.x,
-                            y = earthRadius*projected.y- CosmicTheme.sizes.medium/2
-                        )
-                        .size(CosmicTheme.sizes.medium)
+                    modifier =
+                        Modifier
+                            .offset(
+                                x = earthRadius * projected.x,
+                                y = earthRadius * projected.y - CosmicTheme.sizes.medium / 2,
+                            ).size(CosmicTheme.sizes.medium),
                 )
             }
         }
@@ -152,7 +159,7 @@ fun EarthImage(
         LocationPermissionButton(
             enabled = locationEnabled,
             onEnableChange = onLocationEnabledChange,
-            modifier = Modifier.align(Alignment.BottomEnd)
+            modifier = Modifier.align(Alignment.BottomEnd),
         )
     }
 }

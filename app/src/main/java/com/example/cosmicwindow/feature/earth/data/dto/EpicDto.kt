@@ -11,13 +11,13 @@ data class EpicDto(
     val image: String,
     val date: String,
     @SerialName("centroid_coordinates")
-    val centroidCoordinates: EpicCoordinatesDto
+    val centroidCoordinates: EpicCoordinatesDto,
 )
 
 @Serializable
 data class EpicCoordinatesDto(
     val lat: Double,
-    val lon: Double
+    val lon: Double,
 )
 
 fun EpicDto.toDomain(type: String = "natural"): Epic {
@@ -36,6 +36,6 @@ fun EpicDto.toDomain(type: String = "natural"): Epic {
         imageUrl = "https://epic.gsfc.nasa.gov/archive/$type/$datePath/png/$image.png",
         captureTime = captureTime,
         centerLatitude = centroidCoordinates.lat,
-        centerLongitude = centroidCoordinates.lon
+        centerLongitude = centroidCoordinates.lon,
     )
 }

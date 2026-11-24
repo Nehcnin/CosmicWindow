@@ -1,11 +1,5 @@
 package com.example.cosmicwindow.feature.earth.presentation
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.util.Log
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,8 +20,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,10 +32,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
-import androidx.core.content.ContextCompat
-import coil3.ImageLoader
-import coil3.request.SuccessResult
-import coil3.toBitmap
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.CosmicHeader
 import com.example.cosmicwindow.core.ui.components.LottieLoading
@@ -52,19 +40,12 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.earth.presentation.components.EarthImage
 import com.example.cosmicwindow.feature.earth.presentation.components.EarthInfoCard
 import com.example.cosmicwindow.feature.earth.presentation.components.EarthPlayCard
-import com.example.cosmicwindow.feature.earth.presentation.util.detectEarthRadius
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EarthScreen(
-    date: String,
-    viewModel: EarthViewModel,
-) {
+fun EarthScreen(date: String, viewModel: EarthViewModel) {
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
     val context = LocalContext.current
@@ -94,8 +75,7 @@ fun EarthScreen(
                                 .coerceAtLeast(0f)
                                 .toDp()
                         },
-                    )
-                    .clipToBounds(),
+                    ).clipToBounds(),
         ) {
             CosmicHeader(
                 title = stringResource(R.string.earth_header_title),
@@ -136,8 +116,8 @@ fun EarthScreen(
                 Text(
                     text = stringResource(R.string.earth_no_images),
                     style = CosmicTheme.typography.bodyMedium,
-                    color = CosmicTheme.colors.whitePrimary
-                    )
+                    color = CosmicTheme.colors.whitePrimary,
+                )
             }
 
             else -> {
@@ -161,8 +141,7 @@ fun EarthScreen(
                                         .background(
                                             color = CosmicTheme.colors.surface,
                                             shape = CircleShape,
-                                        )
-                                        .padding(horizontal = CosmicSize.medium, vertical = CosmicSize.smallL)
+                                        ).padding(horizontal = CosmicSize.medium, vertical = CosmicSize.smallL)
                                         .align(Alignment.CenterEnd),
                             ) {
                                 Icon(
@@ -190,12 +169,15 @@ fun EarthScreen(
                             userLocation = viewModel.userLocation,
                             earthRadiusFraction = viewModel.earthRadiusFraction,
                             locationEnabled = viewModel.locationEnabled,
-                            onLocationEnabledChange = viewModel::setLocationEnable
+                            onLocationEnabledChange = viewModel::setLocationEnable,
                         )
                         EarthPlayCard(
-                            stringResource(R.string.earth_capture_time_utc,viewModel.epics[viewModel.currentIndex].captureTime.format(
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
-                            )),
+                            stringResource(
+                                R.string.earth_capture_time_utc,
+                                viewModel.epics[viewModel.currentIndex].captureTime.format(
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
+                                ),
+                            ),
                             viewModel.currentIndex,
                             viewModel.epics.size,
                             isPlaying = viewModel.isPlaying,

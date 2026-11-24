@@ -9,17 +9,17 @@ import org.koin.dsl.module
 val SavedModule =
     module {
 
-        single<SavedRepository>{
+        single<SavedRepository> {
             SavedRepositoryImpl(
                 dao = get(),
-                imageStorage = get()
+                imageStorage = get(),
             )
         }
 
         viewModel {
             SavedViewModel(
                 savedRepository = get(),
-                imageStorage = get()
+                imageStorage = get(),
             )
         }
     }

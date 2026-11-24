@@ -44,8 +44,7 @@ fun DetailImage(url: String?, isLocal: Boolean = false) {
                 .height(CosmicSize.cardXXXL),
     ) {
         AsyncImage(
-
-            model = if(isLocal) File(context.filesDir, url) else url,
+            model = if (isLocal) File(context.filesDir, url) else url,
             contentDescription = "",
             modifier =
                 Modifier
@@ -107,7 +106,7 @@ fun DetailImage(url: String?, isLocal: Boolean = false) {
                     contentAlignment = Alignment.Center,
                 ) {
                     AsyncImage(
-                        model = if(isLocal) File(context.filesDir, url) else url,
+                        model = if (isLocal) File(context.filesDir, url) else url,
                         contentDescription = "Fullscreen Image",
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Fit,

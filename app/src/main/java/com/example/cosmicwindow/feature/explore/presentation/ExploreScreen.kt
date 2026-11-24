@@ -35,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
@@ -47,12 +48,12 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.explore.domain.model.ExploreItem
 import com.example.cosmicwindow.feature.explore.presentation.components.ExploreCard
 import com.example.cosmicwindow.feature.explore.presentation.components.ExploreSearchBar
-import java.util.Locale
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Unit) {
+    val locale = LocalConfiguration.current.locales[0]
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
     val gridState = rememberLazyStaggeredGridState()
@@ -92,7 +93,7 @@ fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Uni
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM,
             )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toLanguageTag())
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, locale.toLanguageTag())
             putExtra(RecognizerIntent.EXTRA_PROMPT, stringResource(R.string.explore_voice_prompt))
         }
 
@@ -185,7 +186,7 @@ fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Uni
                 Text(
                     text = stringResource(R.string.earth_no_images),
                     style = CosmicTheme.typography.bodyMedium,
-                    color = CosmicTheme.colors.whitePrimary
+                    color = CosmicTheme.colors.whitePrimary,
                 )
             }
 

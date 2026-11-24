@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -44,7 +45,6 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.explore.domain.model.ExploreItem
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @Composable
 fun ExploreCard(
@@ -52,6 +52,8 @@ fun ExploreCard(
     height: Dp,
     onClick: (ExploreItem) -> Unit,
 ) {
+    val locale = LocalConfiguration.current.locales[0]
+
     var textColor by remember(item.imageUrl) {
         mutableStateOf(Color.White)
     }
@@ -174,7 +176,7 @@ fun ExploreCard(
                     text =
                         LocalDate
                             .parse(item.date.substringBefore("T"))
-                            .format(DateTimeFormatter.ofPattern("MMM d, yyyy", Locale.ENGLISH)),
+                            .format(DateTimeFormatter.ofPattern("MMM d, yyyy", locale)),
                     style = CosmicTheme.typography.bodySmall,
                     color = CosmicTheme.colors.bodyGray,
                     modifier =

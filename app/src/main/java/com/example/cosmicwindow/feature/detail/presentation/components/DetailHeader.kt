@@ -32,9 +32,8 @@ fun DetailHeader(
     modifier: Modifier = Modifier,
     onSave: (Apod?) -> Unit,
     apod: Apod?,
-    saved: Boolean
+    saved: Boolean,
 ) {
-
     val intentTitle = stringResource(R.string.common_share_apod)
 
     Row(
@@ -73,7 +72,7 @@ fun DetailHeader(
         Spacer(modifier = Modifier.weight(1f))
 
         IconButton(
-            onClick = {onSave(apod)},
+            onClick = { onSave(apod) },
             modifier =
                 Modifier
                     .size(CosmicSize.largeL),

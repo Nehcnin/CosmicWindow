@@ -26,7 +26,6 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun DetailShareButton(context: Context, url: String) {
-
     val intentTitle = stringResource(R.string.common_share_apod)
     Box(
         modifier =

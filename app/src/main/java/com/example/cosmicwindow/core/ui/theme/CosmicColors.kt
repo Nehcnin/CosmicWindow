@@ -26,7 +26,7 @@ data class CosmicColors(
     val borderVariant: Color = CosmicTextFieldBorder,
     val surfaceSecondary: Color = CosmicSurfaceSecondary,
     val darkPrimary: Color = CosmicDark,
-    val surfaceTertiary: Color = CosmicSurfaceTertiary
+    val surfaceTertiary: Color = CosmicSurfaceTertiary,
 )
 
 internal val LocalCosmicColors =
