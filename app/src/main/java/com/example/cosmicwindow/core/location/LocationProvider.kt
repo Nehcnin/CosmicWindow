@@ -36,7 +36,7 @@ class LocationProvider(
                 Context.LOCATION_SERVICE,
             ) as LocationManager
 
-        val provider = LocationManager.GPS_PROVIDER
+        val provider = LocationManager.FUSED_PROVIDER
 
         try {
             if (!manager.isLocationEnabled ||
