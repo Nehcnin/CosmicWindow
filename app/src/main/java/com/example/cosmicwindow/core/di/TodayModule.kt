@@ -50,6 +50,9 @@ val TodayModule =
         }
 
         viewModel {
-            TodayViewModel(get())
+            TodayViewModel(
+                repository = get(),
+                savedRepository = get(),
+            )
         }
     }

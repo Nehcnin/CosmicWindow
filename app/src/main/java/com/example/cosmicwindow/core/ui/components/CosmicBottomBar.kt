@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -19,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.navigation.EarthRoute
 import com.example.cosmicwindow.core.navigation.ExploreRoute
+import com.example.cosmicwindow.core.navigation.SavedRoute
 import com.example.cosmicwindow.core.navigation.TodayRoute
 import com.example.cosmicwindow.core.ui.theme.CosmicSurfaceBorder
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
@@ -52,52 +54,67 @@ fun CosmicBottomBar(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         CosmicBottomBarElement(
-            text = "Today",
-            description = "nav_today",
+            text = stringResource(R.string.nav_today),
+            description = stringResource(R.string.nav_today_description),
             icon = R.drawable.ic_nav_today,
             selected = destination?.hasRoute<TodayRoute>() == true,
             onClick = {
                 navController.navigate(TodayRoute) {
-                    popUpTo(TodayRoute) { saveState = true }
+                    popUpTo(TodayRoute) {
+                        saveState = false
+                    }
                     launchSingleTop = true
-                    restoreState = true
+                    restoreState = false
                 }
             },
         )
 
         CosmicBottomBarElement(
-            text = "Earth",
-            description = "nav_earth",
+            text = stringResource(R.string.nav_earth),
+            description = stringResource(R.string.nav_earth_description),
             icon = R.drawable.ic_nav_earth,
             selected = destination?.hasRoute<EarthRoute>() == true,
             onClick = {
                 navController.navigate(EarthRoute(selectedDate.toString())) {
-                    popUpTo(TodayRoute) { saveState = true }
+                    popUpTo(TodayRoute) {
+                        saveState = false
+                    }
                     launchSingleTop = true
-                    restoreState = true
+                    restoreState = false
                 }
             },
         )
 
         CosmicBottomBarElement(
-            text = "Explore",
-            description = "nav_explore",
+            text = stringResource(R.string.nav_explore),
+            description = stringResource(R.string.nav_explore_description),
             icon = R.drawable.ic_nav_explore,
             selected = destination?.hasRoute<ExploreRoute>() == true,
             onClick = {
                 navController.navigate(ExploreRoute) {
-                    popUpTo(TodayRoute) { saveState = true }
+                    popUpTo(TodayRoute) {
+                        saveState = false
+                    }
                     launchSingleTop = true
-                    restoreState = true
+                    restoreState = false
                 }
             },
         )
 
         CosmicBottomBarElement(
-            text = "Saved",
-            description = "nav_saved",
+            text = stringResource(R.string.nav_saved),
+            description = stringResource(R.string.nav_saved_description),
             icon = R.drawable.ic_nav_saved,
-            onClick = {},
+            selected = destination?.hasRoute<SavedRoute>() == true,
+            onClick = {
+                navController.navigate(SavedRoute) {
+                    popUpTo(TodayRoute) {
+                        saveState = false
+                    }
+                    launchSingleTop = true
+                    restoreState = false
+                }
+            },
         )
     }
 }

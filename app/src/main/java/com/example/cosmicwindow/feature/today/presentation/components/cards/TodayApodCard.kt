@@ -25,8 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -39,23 +41,27 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @Composable
 fun TodayApodCard(
     apod: Apod,
     modifier: Modifier = Modifier,
     onReadStory: () -> Unit = {},
+    onSaveApod: (Apod) -> Unit = {},
+    saved: Boolean,
 ) {
     val context = LocalContext.current
+    val locale = LocalConfiguration.current.locales[0]
 
     val date = LocalDate.parse(apod.date)
+
+    val intentTitle = stringResource(R.string.common_share_apod)
 
     val formattedDate =
         date
             .format(
-                DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH),
-            ).uppercase(Locale.ENGLISH)
+                DateTimeFormatter.ofPattern("MMMM dd, yyyy", locale),
+            ).uppercase(locale)
 
     Card(
         modifier =
@@ -109,7 +115,7 @@ fun TodayApodCard(
                     if (apod.credit != null) {
                         Text(
                             modifier = Modifier.padding(horizontal = CosmicSize.smallL),
-                            text = "•",
+                            text = stringResource(R.string.common_bullet),
                             style = CosmicTheme.typography.bodySmallBold,
                             color = CosmicTheme.colors.bodyGray,
                         )
@@ -169,9 +175,11 @@ fun TodayApodCard(
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Text(
-                            text = "Read Cosmic Story",
+                            text = stringResource(R.string.common_read_cosmic_story),
                             style = CosmicTheme.typography.bodyMedium,
                             color = CosmicTheme.colors.onPrimary,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
                         )
                         Icon(
                             painter = painterResource(R.drawable.ic_button_rarrow),
@@ -184,7 +192,7 @@ fun TodayApodCard(
                         )
                     }
                     IconButton(
-                        onClick = {},
+                        onClick = { onSaveApod(apod) },
                         modifier =
                             Modifier
                                 .size(CosmicSize.largeL)
@@ -194,7 +202,7 @@ fun TodayApodCard(
                                 ),
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_nav_saved),
+                            painter = painterResource(if (saved) R.drawable.ic_saved_full else R.drawable.ic_nav_saved),
                             contentDescription = "",
                             tint = CosmicIconGray,
                             modifier = Modifier.size(CosmicSize.iconM),
@@ -213,7 +221,7 @@ fun TodayApodCard(
                                 }
 
                             context.startActivity(
-                                Intent.createChooser(shareIntent, "Share APOD"),
+                                Intent.createChooser(shareIntent, intentTitle),
                             )
                         },
                         modifier =

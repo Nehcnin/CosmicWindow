@@ -3,6 +3,7 @@ package com.example.cosmicwindow.feature.today.presentation.components.cards
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -28,10 +30,14 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @Composable
-fun TodayWeekCard(apod: Apod, dayText: String) {
+fun TodayWeekCard(
+    apod: Apod,
+    dayText: String,
+    onClick: () -> Unit,
+) {
+    val locale = LocalConfiguration.current.locales[0]
     Column(
         modifier =
             Modifier
@@ -44,7 +50,8 @@ fun TodayWeekCard(apod: Apod, dayText: String) {
                     width = 1.dp,
                     color = CosmicSurfaceBorder,
                     shape = RoundedCornerShape(CosmicSize.radiusXL),
-                ).padding(CosmicSize.mediumS),
+                ).padding(CosmicSize.mediumS)
+                .clickable(onClick = onClick),
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
         Box(
@@ -67,7 +74,7 @@ fun TodayWeekCard(apod: Apod, dayText: String) {
                 text =
                     LocalDate
                         .parse(apod.date)
-                        .format(DateTimeFormatter.ofPattern("MMM dd", Locale.ENGLISH)),
+                        .format(DateTimeFormatter.ofPattern("MMM dd", locale)),
                 modifier =
                     Modifier
                         .padding(CosmicSize.smallL)

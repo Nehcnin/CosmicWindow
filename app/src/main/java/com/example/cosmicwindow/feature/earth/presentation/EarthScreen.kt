@@ -19,14 +19,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.CosmicHeader
@@ -44,6 +48,7 @@ import kotlin.math.roundToInt
 fun EarthScreen(date: String, viewModel: EarthViewModel) {
     val scrollBehaviour = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
+    val context = LocalContext.current
 
     LaunchedEffect(scrollBehaviour, density) {
         scrollBehaviour.state.heightOffsetLimit =
@@ -73,8 +78,8 @@ fun EarthScreen(date: String, viewModel: EarthViewModel) {
                     ).clipToBounds(),
         ) {
             CosmicHeader(
-                title = "Earth in Motion",
-                subtitle = "DISCOVER EPIC",
+                title = stringResource(R.string.earth_header_title),
+                subtitle = stringResource(R.string.earth_header_subtitle),
                 firstIcon = R.drawable.ic_header2,
                 lastIcon = R.drawable.ic_header_today,
                 firstIconSize = CosmicSize.iconL,
@@ -103,12 +108,16 @@ fun EarthScreen(date: String, viewModel: EarthViewModel) {
 
             viewModel.error != null -> {
                 Text(
-                    text = viewModel.error ?: "Unknown error",
+                    text = viewModel.error ?: stringResource(R.string.common_unknown_error),
                 )
             }
 
             viewModel.epics.isEmpty() -> {
-                Text("No EPIC images available for this date")
+                Text(
+                    text = stringResource(R.string.earth_no_images),
+                    style = CosmicTheme.typography.bodyMedium,
+                    color = CosmicTheme.colors.whitePrimary,
+                )
             }
 
             else -> {
@@ -146,18 +155,29 @@ fun EarthScreen(date: String, viewModel: EarthViewModel) {
                                 )
 
                                 Text(
-                                    text = "EPIC Feed",
+                                    text = stringResource(R.string.earth_feed),
                                     style = CosmicTheme.typography.bodySmallMedium,
                                     color = CosmicTheme.colors.bodyGray,
                                 )
                             }
                         }
-                        EarthImage(viewModel.epics[viewModel.currentIndex].imageUrl)
+                        val epic = viewModel.epics[viewModel.currentIndex]
+
+                        EarthImage(
+                            image = viewModel.getLoadedImage(viewModel.currentIndex),
+                            epic = epic,
+                            userLocation = viewModel.userLocation,
+                            earthRadiusFraction = viewModel.earthRadiusFraction,
+                            locationEnabled = viewModel.locationEnabled,
+                            onLocationEnabledChange = viewModel::setLocationEnable,
+                        )
                         EarthPlayCard(
-                            viewModel.epics[viewModel.currentIndex].captureTime.format(
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
-                            ) +
-                                " UTC",
+                            stringResource(
+                                R.string.earth_capture_time_utc,
+                                viewModel.epics[viewModel.currentIndex].captureTime.format(
+                                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
+                                ),
+                            ),
                             viewModel.currentIndex,
                             viewModel.epics.size,
                             isPlaying = viewModel.isPlaying,

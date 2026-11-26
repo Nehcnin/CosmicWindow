@@ -5,7 +5,9 @@ import com.example.cosmicwindow.core.di.DetailModule
 import com.example.cosmicwindow.core.di.EarthModule
 import com.example.cosmicwindow.core.di.ExploreModule
 import com.example.cosmicwindow.core.di.NetworkModule
+import com.example.cosmicwindow.core.di.SavedModule
 import com.example.cosmicwindow.core.di.TodayModule
+import com.example.cosmicwindow.core.di.databaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -20,6 +22,8 @@ class CosmicWindowApp : Application() {
                 DetailModule,
                 EarthModule,
                 ExploreModule,
+                SavedModule,
+                databaseModule,
             )
         }
     }

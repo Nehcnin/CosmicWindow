@@ -39,3 +39,5 @@ val CosmicTextFieldBorder = Color(0xFF6B7280)
 val CosmicSurfaceSecondary = Color(0xFF191f2f)
 
 val CosmicDark = Color(0xFF05070D)
+
+val CosmicSurfaceTertiary = Color(0xFF2F3445)

@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -80,7 +81,7 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
             verticalArrangement = Arrangement.spacedBy(CosmicSize.small),
         ) {
             Text(
-                text = "Video Version Available",
+                text = stringResource(R.string.detail_video_available),
                 style = CosmicTheme.typography.bodyMediumSemi,
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 1,
@@ -95,7 +96,7 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
                 color = CosmicTheme.colors.whitePrimary,
             )
             Text(
-                text = "External host",
+                text = stringResource(R.string.detail_external_host),
                 style = CosmicTheme.typography.bodySmall,
                 fontWeight = FontWeight.Normal,
                 maxLines = 1,
@@ -134,9 +135,11 @@ fun DetailVideoCard(loadedApod: Apod, context: Context) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Open video",
+                text = stringResource(R.string.detail_open_video),
                 style = CosmicTheme.typography.bodySmallBold,
                 color = CosmicTheme.colors.selected,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             Icon(
                 painter = painterResource(R.drawable.ic_external),

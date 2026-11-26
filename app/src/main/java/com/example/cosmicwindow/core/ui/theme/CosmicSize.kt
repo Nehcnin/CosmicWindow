@@ -20,7 +20,7 @@ object CosmicSize {
     val cardXS = 96.dp
     val cardSS = 112.dp
     val cardS = 128.dp
-    val card = 160.dp
+    val card = 172.dp
     val cardL = 192.dp
     val cardXL = 256.dp
 
@@ -28,6 +28,8 @@ object CosmicSize {
     val cardXXL = 440.dp
 
     val cardXXXL = 512.dp
+
+    val savedCard = 358.dp
 
     val iconS = 16.dp
     val iconM = 20.dp

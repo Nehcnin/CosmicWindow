@@ -1,6 +1,5 @@
 package com.example.cosmicwindow.core.ui.components
 
-import android.app.DatePickerDialog
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -16,14 +15,19 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import java.time.LocalDate
@@ -33,7 +37,7 @@ fun CosmicHeader(
     title: String,
     subtitle: String,
     @DrawableRes firstIcon: Int,
-    @DrawableRes lastIcon: Int,
+    @DrawableRes lastIcon: Int? = null,
     onLastIconClick: (() -> Unit)? = null,
     showDatePicker: Boolean = false,
     selectedDate: LocalDate = LocalDate.now(),
@@ -44,7 +48,7 @@ fun CosmicHeader(
     tintLast: Color = Color.Unspecified,
     modifier: Modifier = Modifier,
 ) {
-    val context = LocalContext.current
+    var datePickerOpen by remember { mutableStateOf(false) }
 
     Row(
         modifier =
@@ -86,31 +90,30 @@ fun CosmicHeader(
                     .size(48.dp)
                     .clickable {
                         if (showDatePicker) {
-                            DatePickerDialog(
-                                context,
-                                { _, year, month, day ->
-                                    onDateSelected?.invoke(
-                                        LocalDate.of(year, month + 1, day),
-                                    )
-                                },
-                                selectedDate.year,
-                                selectedDate.monthValue - 1,
-                                selectedDate.dayOfMonth,
-                            ).apply {
-                                datePicker.maxDate = System.currentTimeMillis()
-                            }.show()
+                            datePickerOpen = true
                         } else {
                             onLastIconClick?.invoke()
                         }
                     },
             contentAlignment = Alignment.Center,
         ) {
-            Icon(
-                painter = painterResource(lastIcon),
-                contentDescription = "Header action",
-                modifier = Modifier.size(lastIconSize),
-                tint = tintLast,
-            )
+            if (lastIcon != null) {
+                Icon(
+                    painter = painterResource(lastIcon),
+                    contentDescription = stringResource(R.string.common_header_action),
+                    modifier = Modifier.size(lastIconSize),
+                    tint = tintLast,
+                )
+            }
         }
+    }
+
+    if (datePickerOpen) {
+        CosmicDatePickerDialog(
+            changeDatePickerOpen = { datePickerOpen = it },
+            datePickerOpen = datePickerOpen,
+            selectedDate = selectedDate,
+            onDateSelected = onDateSelected,
+        )
     }
 }

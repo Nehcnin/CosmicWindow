@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
@@ -52,13 +53,13 @@ fun TodayCopyrightCard(
                 tint = CosmicTheme.colors.selected,
             )
             Text(
-                text = "Public NASA Data • APOD Archive",
+                text = stringResource(R.string.today_public_nasa_data),
                 style = CosmicTheme.typography.bodyMediumS,
                 color = CosmicTheme.colors.whitePrimary,
             )
         }
         Text(
-            text = "Image Credit: $credit, NASA • Copyright $copyright",
+            text = stringResource(R.string.today_image_credit, credit, copyright),
             style = CosmicTheme.typography.bodySmall,
             modifier =
                 Modifier
@@ -71,7 +72,7 @@ fun TodayCopyrightCard(
         )
 
         Text(
-            text = "Independent educational explorer • Not affiliated with NASA",
+            text = stringResource(R.string.today_disclaimer),
             style = CosmicTheme.typography.bodySmall,
             textAlign = TextAlign.Center,
             modifier =

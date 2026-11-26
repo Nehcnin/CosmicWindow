@@ -35,7 +35,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
@@ -46,12 +48,12 @@ import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 import com.example.cosmicwindow.feature.explore.domain.model.ExploreItem
 import com.example.cosmicwindow.feature.explore.presentation.components.ExploreCard
 import com.example.cosmicwindow.feature.explore.presentation.components.ExploreSearchBar
-import java.util.Locale
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Unit) {
+    val locale = LocalConfiguration.current.locales[0]
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val density = LocalDensity.current
     val gridState = rememberLazyStaggeredGridState()
@@ -91,8 +93,8 @@ fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Uni
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM,
             )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH.toLanguageTag())
-            putExtra(RecognizerIntent.EXTRA_PROMPT, "Search NASA images")
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, locale.toLanguageTag())
+            putExtra(RecognizerIntent.EXTRA_PROMPT, stringResource(R.string.explore_voice_prompt))
         }
 
     val headerHeight = (CosmicTheme.sizes.largeXL + CosmicTheme.sizes.cardS)
@@ -143,8 +145,8 @@ fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Uni
                         },
             ) {
                 CosmicHeader(
-                    title = "Explore NASA",
-                    subtitle = "IMAGE LIBRARY",
+                    title = stringResource(R.string.explore_header_title),
+                    subtitle = stringResource(R.string.explore_header_subtitle),
                     firstIcon = R.drawable.ic_header2,
                     lastIcon = R.drawable.ic_header_today,
                     firstIconSize = CosmicSize.iconL,
@@ -176,12 +178,16 @@ fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Uni
 
             viewModel.error != null -> {
                 Text(
-                    text = viewModel.error ?: "Unknown error",
+                    text = viewModel.error ?: stringResource(R.string.common_unknown_error),
                 )
             }
 
             viewModel.items.isEmpty() -> {
-                Text("No EPIC images available for this date")
+                Text(
+                    text = stringResource(R.string.earth_no_images),
+                    style = CosmicTheme.typography.bodyMedium,
+                    color = CosmicTheme.colors.whitePrimary,
+                )
             }
 
             else -> {
@@ -222,7 +228,7 @@ fun ExploreScreen(viewModel: ExploreViewModel, onItemClick: (ExploreItem) -> Uni
                                         ),
                                 )
                                 Text(
-                                    text = "Loading more NASA archive images...",
+                                    text = stringResource(R.string.explore_loading_more),
                                     style = CosmicTheme.typography.bodySmall,
                                     color = CosmicTheme.colors.bodyGray,
                                     modifier = Modifier.padding(start = CosmicTheme.sizes.smallL),

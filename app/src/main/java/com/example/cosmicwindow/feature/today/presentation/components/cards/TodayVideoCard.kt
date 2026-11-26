@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
@@ -66,7 +67,7 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
             )
 
             Text(
-                text = "Featured APOD Video",
+                text = stringResource(R.string.today_featured_video),
                 style = CosmicTheme.typography.titleSmall,
                 color = CosmicTheme.colors.whitePrimary,
             )
@@ -80,7 +81,7 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
                             color = CosmicTheme.colors.yellowBackground,
                             shape = RoundedCornerShape(size = CosmicSize.radiusRound),
                         ).padding(CosmicSize.mediumS),
-                text = "External Media",
+                text = stringResource(R.string.today_external_media),
                 color = CosmicTheme.colors.yellowPrimary,
                 style = CosmicTheme.typography.bodySmallMedium,
             )
@@ -137,7 +138,7 @@ fun TodayVideoCard(apod: Apod, modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "Open video in browser",
+                    text = stringResource(R.string.today_open_video_browser),
                     style = CosmicTheme.typography.bodyMedium,
                     color = CosmicTheme.colors.primary,
                 )

@@ -1,3 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cosmic Window</string>
+
+    <!-- ==================== COMMON ==================== -->
+
+    <string name="app_name">CosmicWindow</string>
+    <string name="common_nasa">NASA</string>
+    <string name="common_unknown_error">Unknown error</string>
+    <string name="common_public_domain">Public Domain</string>
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_close">Close</string>
+    <string name="common_undo">Undo</string>
+    <string name="common_share_apod">Share APOD</string>
+    <string name="common_read_cosmic_story">Read Cosmic Story</string>
+    <string name="common_header_action">Header action</string>
+    <string name="common_select_date">Select date</string>
+    <string name="common_bullet">•</string>
+    <string name="common_save_story">Save story</string>
+    <string name="common_remove_saved_story">Remove saved story</string>
+    <string name="common_share_story">Share story</string>
+
+
+    <!-- ==================== NAVIGATION ==================== -->
+
+    <string name="nav_today">Today</string>
+    <string name="nav_earth">Earth</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_saved">Saved</string>
+
+    <string name="nav_today_description">Today tab</string>
+    <string name="nav_earth_description">Earth tab</string>
+    <string name="nav_explore_description">Explore tab</string>
+    <string name="nav_saved_description">Saved tab</string>
+
+
+    <!-- ==================== TODAY ==================== -->
+
+    <!-- Header -->
+    <string name="today_header_title">Cosmic Window</string>
+    <string name="today_header_subtitle">ASTRONOMY PICTURE OF THE DAY</string>
+    <string name="today_date_label">Today in Space • %1$s</string>
+
+    <!-- Previous days -->
+    <string name="today_previous_days">Previous 7 Days</string>
+    <string name="today_past_entries">Past APOD Entries</string>
+    <string name="today_yesterday">Yesterday</string>
+    <string name="today_days_ago">%1$d days ago</string>
+
+    <!-- APOD card -->
+    <string name="today_image_description">Astronomy Picture of the Day</string>
+
+    <!-- Video -->
+    <string name="today_featured_video">Featured APOD Video</string>
+    <string name="today_external_media">External Media</string>
+    <string name="today_open_video_browser">Open video in browser</string>
+    <string name="today_video_thumbnail">Video thumbnail</string>
+    <string name="today_play_video">Play video</string>
+
+    <!-- Copyright -->
+    <string name="today_public_nasa_data">Public NASA Data • APOD Archive</string>
+    <string name="today_image_credit">Image Credit: %1$s, NASA • Copyright %2$s</string>
+    <string name="today_disclaimer">Independent educational explorer • Not affiliated with NASA</string>
+
+
+    <!-- ==================== DETAIL ==================== -->
+
+    <!-- Header -->
+    <string name="detail_header_title">APOD Story Detail</string>
+    <string name="detail_back_button">Back</string>
+
+    <!-- Image -->
+    <string name="detail_fullscreen">Fullscreen</string>
+    <string name="detail_fullscreen_image">Fullscreen Image</string>
+
+    <!-- Explanation -->
+    <string name="detail_explanation">Explanation</string>
+
+    <!-- Share -->
+    <string name="detail_share_story">Share Story</string>
+
+    <!-- Attribution -->
+    <string name="detail_attribution_title">ATTRIBUTION &amp; SOURCE</string>
+    <string name="detail_source">Source</string>
+    <string name="detail_source_name">NASA APOD API</string>
+    <string name="detail_credit">Credit</string>
+    <string name="detail_copyright">Copyright</string>
+    <string name="detail_view_original">View original APOD entry</string>
+
+    <!-- Video -->
+    <string name="detail_video_available">Video Version Available</string>
+    <string name="detail_external_host">External host</string>
+    <string name="detail_open_video">Open video</string>
+
+
+    <!-- ==================== EARTH ==================== -->
+
+    <!-- Header -->
+    <string name="earth_header_title">Earth in Motion</string>
+    <string name="earth_header_subtitle">DISCOVER EPIC</string>
+
+    <!-- Feed -->
+    <string name="earth_feed">EPIC Feed</string>
+    <string name="earth_no_images">No EPIC images available for this date</string>
+    <string name="earth_image_description">Earth</string>
+
+    <!-- Information -->
+    <string name="earth_info_description">Images captured by NASA\'s Earth Polychromatic Imaging Camera (EPIC) aboard the NOAA DSCVR spacecraft at Lagrange point 1</string>
+
+    <!-- Playback -->
+    <string name="earth_capture_time">CAPTURE TIME</string>
+    <string name="earth_capture_time_utc">%1$s UTC</string>
+    <string name="earth_frame_count">Frame %1$d of %2$d</string>
+    <string name="earth_frame_number">Frame %1$d</string>
+    <string name="earth_sequence">Sequence: 24h</string>
+
+    <!-- Playback accessibility -->
+    <string name="earth_previous_frame">Previous frame</string>
+    <string name="earth_next_frame">Next frame</string>
+    <string name="earth_play">Play</string>
+    <string name="earth_pause">Pause</string>
+    <string name="earth_user_location">Your location</string>
+
+
+    <!-- ==================== EXPLORE ==================== -->
+
+    <!-- Header -->
+    <string name="explore_header_title">Explore NASA</string>
+    <string name="explore_header_subtitle">IMAGE LIBRARY</string>
+
+    <!-- Search -->
+    <string name="explore_search_hint">Search NASA images (e.g. Mars)</string>
+    <string name="explore_voice_prompt">Search NASA images</string>
+    <string name="explore_voice_search">Search by voice</string>
+    <string name="explore_search_description">Search images</string>
+
+    <!-- Keywords -->
+    <string name="explore_keyword_james_webb" translatable="false">James Webb</string>
+    <string name="explore_keyword_mars" translatable="false">Mars</string>
+    <string name="explore_keyword_moon" translatable="false">Moon</string>
+    <string name="explore_keyword_nebula" translatable="false">Nebula</string>
+    <string name="explore_keyword_earth" translatable="false">Earth</string>
+    <string name="explore_keyword_galaxy" translatable="false">Galaxy</string>
+    <string name="explore_keyword_apollo" translatable="false">Apollo</string>
+
+    <!-- Loading and empty state -->
+    <string name="explore_loading_more">Loading more NASA archive images...</string>
+    <string name="explore_no_images">No NASA images found</string>
+
+    <!-- Detail -->
+    <string name="explore_observation_date">Observation Date</string>
+    <string name="explore_center">Center</string>
+    <string name="explore_nasa_id">NASA ID</string>
+
+
+    <!-- ==================== SAVED ==================== -->
+
+    <!-- Header -->
+    <string name="saved_header_title">Saved</string>
+    <string name="saved_header_subtitle">COSMIC WINDOW</string>
+
+    <!-- Snackbar -->
+    <string name="saved_delete_success">Saved APOD deleted successfully</string>
+
+    <!-- Offline size card -->
+    <string name="saved_offline_ready">Offline Ready</string>
+    <string name="saved_discoveries_synced">%1$d discoveries synced to device</string>
+    <string name="saved_storage_size">%1$s MB</string>
+
+    <!-- Saved APOD card -->
+    <string name="saved_apod_story">APOD Story</string>
+    <string name="saved_offline_date">Saved Offline · %1$s</string>
+
 </resources>

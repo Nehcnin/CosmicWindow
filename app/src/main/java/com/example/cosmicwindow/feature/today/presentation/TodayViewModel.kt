@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cosmicwindow.feature.saved.domain.repository.SavedRepository
 import com.example.cosmicwindow.feature.today.domain.model.Apod
 import com.example.cosmicwindow.feature.today.domain.repository.ApodRepository
 import kotlinx.coroutines.CancellationException
@@ -16,6 +17,7 @@ import java.time.format.DateTimeFormatter
 
 class TodayViewModel(
     private val repository: ApodRepository,
+    private val savedRepository: SavedRepository,
 ) : ViewModel() {
     var date by mutableStateOf(LocalDate.now())
         private set
@@ -29,6 +31,9 @@ class TodayViewModel(
         private set
 
     var error by mutableStateOf<String?>(null)
+        private set
+
+    var isFirstSaved by mutableStateOf(false)
         private set
 
     private var loadJob: Job? = null
@@ -77,6 +82,8 @@ class TodayViewModel(
                             it.date == date.toString()
                         }
 
+                    isFirstSaved = savedRepository.isSaved(apod!!)
+
                     Log.d("NASA_API", "SUCCESS: ${apod?.title}")
                     Log.d("NASA_API", "VIDEO URL: ${apod?.videoUrl}")
                 } catch (e: CancellationException) {
@@ -89,5 +96,39 @@ class TodayViewModel(
                     isLoading = false
                 }
             }
+    }
+
+    fun onToggleSaveApod(apod: Apod) {
+        isFirstSaved = !isFirstSaved
+
+        saveOrDeleteApod(apod)
+    }
+
+    fun saveOrDeleteApod(apod: Apod) {
+        viewModelScope.launch {
+            try {
+                val isSaved = savedRepository.isSaved(apod)
+
+                if (isSaved && !isFirstSaved) {
+                    savedRepository.deleteApod(apod.date)
+                    Log.d("SAVED", "DELETING APOD")
+                } else if (!isSaved && isFirstSaved) {
+                    Log.d("SAVED", "SAVING APOD")
+                    savedRepository.saveApod(apod)
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Log.e("SAVED", "Failed to toggle saved APOD")
+            }
+        }
+    }
+
+    fun refreshSavedState() {
+        val currApod = apod ?: return
+
+        viewModelScope.launch {
+            isFirstSaved = savedRepository.isSaved(currApod)
+        }
     }
 }

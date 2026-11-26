@@ -16,14 +16,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.theme.CosmicSize
 import com.example.cosmicwindow.core.ui.theme.CosmicTheme
 
 @Composable
 fun DetailShareButton(context: Context, url: String) {
+    val intentTitle = stringResource(R.string.common_share_apod)
     Box(
         modifier =
             Modifier
@@ -48,7 +51,7 @@ fun DetailShareButton(context: Context, url: String) {
                             }
 
                         context.startActivity(
-                            Intent.createChooser(shareIntent, "Share APOD"),
+                            Intent.createChooser(shareIntent, intentTitle),
                         )
                     },
                 ),
@@ -63,7 +66,7 @@ fun DetailShareButton(context: Context, url: String) {
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = "Share Story",
+                text = stringResource(R.string.common_share_story),
                 style = CosmicTheme.typography.bodyMedium,
                 color = CosmicTheme.colors.onPrimary,
                 fontWeight = FontWeight.SemiBold,

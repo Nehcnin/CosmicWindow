@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
@@ -108,7 +109,7 @@ fun TodayVideoPlayer(
         } else {
             AsyncImage(
                 model = thumbnailUrl,
-                contentDescription = "Video thumbnail",
+                contentDescription = stringResource(R.string.today_video_thumbnail),
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
             )
@@ -127,7 +128,7 @@ fun TodayVideoPlayer(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_play),
-                    contentDescription = "Play video",
+                    contentDescription = stringResource(R.string.today_play_video),
                     modifier = Modifier.size(CosmicSize.iconM),
                     tint = CosmicTheme.colors.onPrimary,
                 )

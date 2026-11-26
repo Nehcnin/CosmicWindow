@@ -17,7 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.example.cosmicwindow.R
 import com.example.cosmicwindow.core.ui.components.CosmicErrorCard
 import com.example.cosmicwindow.core.ui.components.CosmicHeader
@@ -38,6 +40,12 @@ fun TodayScreen(viewModel: TodayViewModel = koinViewModel(), onReadStory: (Strin
     LaunchedEffect(scrollBehaviour, density, headerHeight) {
         scrollBehaviour.state.heightOffsetLimit =
             with(density) { -headerHeight.toPx() }
+    }
+
+    LifecycleResumeEffect(Unit) {
+        viewModel.refreshSavedState()
+
+        onPauseOrDispose { }
     }
 
     Column(
@@ -72,8 +80,8 @@ fun TodayScreen(viewModel: TodayViewModel = koinViewModel(), onReadStory: (Strin
                         },
             ) {
                 CosmicHeader(
-                    title = "Cosmic Window",
-                    subtitle = "ASTRONOMY PICTURE OF THE DAY",
+                    title = stringResource(R.string.today_header_title),
+                    subtitle = stringResource(R.string.today_header_subtitle),
                     firstIcon = R.drawable.ic_header_today,
                     lastIcon = R.drawable.ic_header_calendar,
                     showDatePicker = true,

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ==================== COMMON ==================== -->
+
+    <string name="app_name">CosmicWindow</string>
+    <string name="common_nasa">NASA</string>
+    <string name="common_unknown_error">Eroare necunoscută</string>
+    <string name="common_public_domain">Domeniu public</string>
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Anulează</string>
+    <string name="common_close">Închide</string>
+    <string name="common_undo">Anulează acțiunea</string>
+    <string name="common_share_apod">Distribuie APOD</string>
+    <string name="common_read_cosmic_story">Citește povestea cosmică</string>
+    <string name="common_header_action">Acțiune din antet</string>
+    <string name="common_select_date">Selectează data</string>
+    <string name="common_bullet">•</string>
+    <string name="common_save_story">Salvează povestea</string>
+    <string name="common_remove_saved_story">Elimină povestea salvată</string>
+    <string name="common_share_story">Distribuie povestea</string>
+
+
+    <!-- ==================== NAVIGATION ==================== -->
+
+    <string name="nav_today">Astăzi</string>
+    <string name="nav_earth">Pământ</string>
+    <string name="nav_explore">Explorează</string>
+    <string name="nav_saved">Salvate</string>
+
+    <string name="nav_today_description">Fila Astăzi</string>
+    <string name="nav_earth_description">Fila Pământ</string>
+    <string name="nav_explore_description">Fila Explorează</string>
+    <string name="nav_saved_description">Fila Salvate</string>
+
+
+    <!-- ==================== TODAY ==================== -->
+
+    <!-- Header -->
+    <string name="today_header_title">Cosmic Window</string>
+    <string name="today_header_subtitle">IMAGINEA ASTRONOMICĂ A ZILEI</string>
+    <string name="today_date_label">Astăzi în spațiu • %1$s</string>
+
+    <!-- Previous days -->
+    <string name="today_previous_days">Ultimele 7 zile</string>
+    <string name="today_past_entries">Înregistrări APOD anterioare</string>
+    <string name="today_yesterday">Ieri</string>
+    <string name="today_days_ago">Acum %1$d zile</string>
+
+    <!-- APOD card -->
+    <string name="today_image_description">Imaginea astronomică a zilei</string>
+
+    <!-- Video -->
+    <string name="today_featured_video">Videoclip APOD recomandat</string>
+    <string name="today_external_media">Conținut media extern</string>
+    <string name="today_open_video_browser">Deschide videoclipul în browser</string>
+    <string name="today_video_thumbnail">Miniatura videoclipului</string>
+    <string name="today_play_video">Redă videoclipul</string>
+
+    <!-- Copyright -->
+    <string name="today_public_nasa_data">Date publice NASA • Arhiva APOD</string>
+    <string name="today_image_credit">Credit imagine: %1$s, NASA • Drepturi de autor: %2$s</string>
+    <string name="today_disclaimer">Aplicație educațională independentă • Nu este afiliată cu NASA</string>
+
+
+    <!-- ==================== DETAIL ==================== -->
+
+    <!-- Header -->
+    <string name="detail_header_title">Detaliile poveștii APOD</string>
+    <string name="detail_back_button">Înapoi</string>
+
+    <!-- Image -->
+    <string name="detail_fullscreen">Ecran complet</string>
+    <string name="detail_fullscreen_image">Imagine pe ecran complet</string>
+
+    <!-- Explanation -->
+    <string name="detail_explanation">Explicație</string>
+
+    <!-- Share -->
+    <string name="detail_share_story">Distribuie povestea</string>
+
+    <!-- Attribution -->
+    <string name="detail_attribution_title">ATRIBUIRE ȘI SURSĂ</string>
+    <string name="detail_source">Sursă</string>
+    <string name="detail_source_name">NASA APOD API</string>
+    <string name="detail_credit">Autor</string>
+    <string name="detail_copyright">Drepturi de autor</string>
+    <string name="detail_view_original">Vezi înregistrarea APOD originală</string>
+
+    <!-- Video -->
+    <string name="detail_video_available">Versiune video disponibilă</string>
+    <string name="detail_external_host">Platformă externă</string>
+    <string name="detail_open_video">Deschide videoclipul</string>
+
+
+    <!-- ==================== EARTH ==================== -->
+
+    <!-- Header -->
+    <string name="earth_header_title">Pământul în mișcare</string>
+    <string name="earth_header_subtitle">DESCOPERĂ EPIC</string>
+
+    <!-- Feed -->
+    <string name="earth_feed">Imagini EPIC</string>
+    <string name="earth_no_images">Nu sunt disponibile imagini EPIC pentru această dată</string>
+    <string name="earth_image_description">Pământul</string>
+
+    <!-- Information -->
+    <string name="earth_info_description">Imagini capturate de camera Earth Polychromatic Imaging Camera (EPIC) a NASA, aflată la bordul sondei spațiale NOAA DSCVR, în punctul Lagrange L1</string>
+
+    <!-- Playback -->
+    <string name="earth_capture_time">ORA CAPTURII</string>
+    <string name="earth_capture_time_utc">%1$s UTC</string>
+    <string name="earth_frame_count">Cadrul %1$d din %2$d</string>
+    <string name="earth_frame_number">Cadrul %1$d</string>
+    <string name="earth_sequence">Secvență: 24 h</string>
+
+    <!-- Playback accessibility -->
+    <string name="earth_previous_frame">Cadrul anterior</string>
+    <string name="earth_next_frame">Cadrul următor</string>
+    <string name="earth_play">Redă</string>
+    <string name="earth_pause">Pauză</string>
+    <string name="earth_user_location">Locația ta</string>
+
+
+    <!-- ==================== EXPLORE ==================== -->
+
+    <!-- Header -->
+    <string name="explore_header_title">Explorează NASA</string>
+    <string name="explore_header_subtitle">BIBLIOTECĂ DE IMAGINI</string>
+
+    <!-- Search -->
+    <string name="explore_search_hint">Caută imagini NASA (de ex. Mars)</string>
+    <string name="explore_voice_prompt">Caută imagini NASA</string>
+    <string name="explore_voice_search">Căutare vocală</string>
+    <string name="explore_search_description">Caută imagini</string>
+
+    <!-- Keywords -->
+    <string name="explore_keyword_james_webb" translatable="false">James Webb</string>
+    <string name="explore_keyword_mars" translatable="false">Mars</string>
+    <string name="explore_keyword_moon" translatable="false">Moon</string>
+    <string name="explore_keyword_nebula" translatable="false">Nebula</string>
+    <string name="explore_keyword_earth" translatable="false">Earth</string>
+    <string name="explore_keyword_galaxy" translatable="false">Galaxy</string>
+    <string name="explore_keyword_apollo" translatable="false">Apollo</string>
+
+    <!-- Loading and empty state -->
+    <string name="explore_loading_more">Se încarcă mai multe imagini din arhiva NASA...</string>
+    <string name="explore_no_images">Nu au fost găsite imagini NASA</string>
+
+    <!-- Detail -->
+    <string name="explore_observation_date">Data observației</string>
+    <string name="explore_center">Centru</string>
+    <string name="explore_nasa_id">Identificator NASA</string>
+
+
+    <!-- ==================== SAVED ==================== -->
+
+    <!-- Header -->
+    <string name="saved_header_title">Salvate</string>
+    <string name="saved_header_subtitle">COSMIC WINDOW</string>
+
+    <!-- Snackbar -->
+    <string name="saved_delete_success">Imaginea APOD salvată a fost ștearsă cu succes</string>
+
+    <!-- Offline size card -->
+    <string name="saved_offline_ready">Disponibil offline</string>
+    <string name="saved_discoveries_synced">%1$d descoperiri sincronizate pe dispozitiv</string>
+    <string name="saved_storage_size">%1$s MB</string>
+
+    <!-- Saved APOD card -->
+    <string name="saved_apod_story">Poveste APOD</string>
+    <string name="saved_offline_date">Salvat offline · %1$s</string>
+
+</resources>
